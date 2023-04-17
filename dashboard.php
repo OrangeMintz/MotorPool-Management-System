@@ -1,119 +1,14 @@
 <?php include "header.php" ?>
-<link href="css/vehicle.css" rel="Stylesheet">
 
-<script> 
-
-$(document).ready(function (){
-
-    $('#add-btn').click(function (){
-
-        alert('Vehicle Added Successfully');
-
-    })
-
-
-})
-
-</script>
-
-
-
-<style>
-
-#add-btn{
-    color: green;
-    background-color: #fff;
-    border-radius: 5px;
-    
-    
-}
-#add-btn:hover{
-    color: #fff;
-    background-color: #00B261;
-    transition: 0.5s;
-    
-}
-
-#cancel-btn{
-    color: #fff;
-    background-color: #CD0000;
-    border-radius: 5px;
-
-}
-
-#cancel-btn:hover{
-    color: #fff;
-    background-color: red;
-    transition: 0.5s;
-
-}
-
-</style>
-        <!-- Add Student MODAL START-->
-        <div class="modal fade " id="addDriver" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">ADD VEHICLE</h5>
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-sm">
-                                            <div class="form-group">
-                                                <label for="vehicle-number" class="col-form-label">Vehicle Number:</label>
-                                                <input type="number" class="form-control" id="vehicle-number">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm">
-                                            <div class="form-group">
-                                                <label for="vehicle-brand" class="col-form-label">Vehicle Brand</label>
-                                                <input type="text" class="form-control" id="vehicle-brand">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm">
-                                            <div class="form-group">
-                                                <label for="vehicle-model" class="col-form-label">Vehicle Model</label>
-                                                <input type="text" class="form-control" id="vehicle-model">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm">
-                                            <div class="form-group">
-                                                <label for="vehicle-seat" class="col-form-label">Passenger Seat</label>
-                                                <input type="text" class="form-control" id="vehicle-seat">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" id="cancel-btn" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            <button type="button" id="add-btn" class="btn btn-success">Add Driver</button>
-                        </div>
-                </div>
-            </div>
-        </div>
-        <!-- Add Student MODAL END -->
-
-     
-        <!-- Left Sidebar  -->
-        <aside class="left-sidebar" data-sidebarbg="skin6">
+<!-- Left Sidebar  -->
+<aside class="left-sidebar" data-sidebarbg="skin6">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="sidebar-item pt-2">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="dashboard.php"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
                                 aria-expanded="false">
                                 <i class="far fa-clock" aria-hidden="true"></i>
                                 <span class="hide-menu">Dashboard</span>
@@ -134,7 +29,7 @@ $(document).ready(function (){
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="vehicle.php"
                                 aria-expanded="false">
                                 <i class="fa fa-car" aria-hidden="true"></i>
                                 <span class="hide-menu">Vehicle Management</span>
@@ -167,6 +62,7 @@ $(document).ready(function (){
             </div>
         </aside>
 
+
         <!-- Page wrapper  -->
         <div class="page-wrapper" style="min-height: 250px;">
 
@@ -174,15 +70,7 @@ $(document).ready(function (){
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Vehicle Management</h4>
-                    </div>
-                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                        <div class="d-md-flex">
-                            <ol class="breadcrumb ms-auto">
-                            <li><button type="button" class="btn btn-primary" data-bs-toggle="modal" 
-                                data-bs-target="#addDriver" >ADD VEHICLE</button></li>
-                            </ol>
-                        </div>
+                        <h4 class="page-title">Dashboard</h4>
                     </div>
                 </div>
             </div>
@@ -190,6 +78,87 @@ $(document).ready(function (){
 
 
             <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Three charts -->
+                <!-- ============================================================== -->
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-12">
+                        <div class="white-box analytics-info">
+                            <h3 class="box-title">Total Schedule</h3>
+                            <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                <li>
+                                    <div id="sparklinedash"><canvas width="67" height="30"
+                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                                    </div>
+                                </li>
+                                <li class="ms-auto"><span class="counter text-success">659</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="white-box analytics-info">
+                            <h3 class="box-title">Total Trips</h3>
+                            <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                <li>
+                                    <div id="sparklinedash2"><canvas width="67" height="30"
+                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                                    </div>
+                                </li>
+                                <li class="ms-auto"><span class="counter text-purple">869</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="white-box analytics-info">
+                            <h3 class="box-title">Total Available Vehicle </h3>
+                            <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                <li>
+                                    <div id="sparklinedash3"><canvas width="67" height="30"
+                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                                    </div>
+                                </li>
+                                <li class="ms-auto"><span class="counter text-info">5</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title">Driver</h3>
+                            <div class="table-responsive">
+                                <table class="table text-center">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-top-0">ID</th>
+                                            <th class="border-top-0">Name</th>
+                                            <th class="border-top-0">Address</th>
+                                            <th class="border-top-0">Birthday</th>
+                                            <th class="border-top-0">Phone #</th>
+                                            <th class="border-top-0">Email</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1000</td>
+                                            <td>Oshino Shinobu Jr</td>
+                                            <td>Valencia City</td>
+                                            <td>September 10, 2002</td>
+                                            <td>09350050225</td>
+                                            <td>oshino@gmail.com</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
@@ -216,6 +185,7 @@ $(document).ready(function (){
                                             <td>Honda</td>
                                             <td>2010 Honda Pilot</td>
                                             <td>7</td>
+
                                         </tr>
                                     </tbody>
                                 </table>
@@ -224,5 +194,7 @@ $(document).ready(function (){
                     </div>
                 </div>
             </div>
+        </div>
+        
 
 <?php include "footer.php" ?>

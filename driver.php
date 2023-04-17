@@ -1,81 +1,158 @@
-<!DOCTYPE html>
-<html dir="ltr" lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<?php include "header.php" ?>
+<link href="css/driver.css" rel="stylesheet">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DrivePool Solutions - Driver Management</title>
-    <link rel="icon" type="image/png" sizes="16x16" href="icon/light(1).png">
+<script> 
 
-   <link href="css/style.min.css" rel="stylesheet">
-   <link href="bootstrap/css/boostrap.css">
+$(document).ready(function (){
 
-</head>
+    $('#add-btn').click(function (){
 
-<body>
-  
-    <div class="preloader">
-        <div class="lds-ripple">
-            <div class="lds-pos"></div>
-            <div class="lds-pos"></div>
-        </div>
-    </div>
-  
-    <!-- Main Wrapper -->
-    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
-        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
-       
-        <header class="topbar" data-navbarbg="skin5">
-            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                <div class="navbar-header" data-logobg="skin6">
-        <!-- Logo -->
-                    <a class="navbar-brand" href="dashboard.html">
-                        <b class="logo-icon">
-                            <img src="icon/logo1.png" alt="homepage" />
-                        </b>
-                      
-                        <span class="logo-text">
-                            <img src="icon/logo.png" alt="homepage" />
-                        </span>
-                    </a>
+        alert('Driver Added Successfully');
+
+    })
+
+
+})
+
+</script>
+
+<style>
+#add-btn{
+    color: green;
+    background-color: #fff;
+    border-radius: 5px;
+    
+    
+}
+
+#add-btn:hover{
+    color: #fff;
+    background-color: green;
+    transition: 0.5s;
+    
+}
+
+#cancel-btn{
+    color: #fff;
+    background-color: #CD0000;
+    border-radius: 5px;
+
+}
+
+#cancel-btn:hover{
+    color: #fff;
+    background-color: red;
+    transition: 0.5s;
+
+}
+
+</style>
+        <!-- Add Student MODAL START-->
+        <div class="modal fade " id="addDriver" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
                     
-                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
-                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-                </div>
-                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-                    <ul class="navbar-nav d-none d-md-block d-lg-none">
-                        <li class="nav-item">
-                            <a class="nav-toggler nav-link waves-effect waves-light text-white"
-                                href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-                        </li>
-                    </ul>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">ADD DRIVER</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="first-name" class="col-form-label">First Name:</label>
+                                                <input type="text" class="form-control" id="driver-first-name">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="middle-name" class="col-form-label">Middle Name:</label>
+                                                <input type="text" class="form-control" id="driver-middle-name">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="last-name" class="col-form-label">Last Name:</label>
+                                                <input type="text" class="form-control" id="driver-last-name">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="suffix-name" class="col-form-label">Suffix:</label>
+                                                <input type="text" class="form-control" id="driver-suffix-name">
+                                            </div>
+                                        </div>
+                                    </div>
 
-        <!-- Right side toggle and nav items -->
-                    <ul class="navbar-nav ms-auto d-flex align-items-center">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="birthday" class="col-form-label">Birthday</label>
+                                                <input type="date" class="form-control" id="driver-birthday">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="id" class="col-form-label">Driver ID</label>
+                                                <input type="text" class="form-control" id="driver-id">
+                                            </div>
+                                        </div>
+                                    </div>
 
-                    <!-- Search -->
-                        <li class=" in">
-                            <form role="search" class="app-search d-none d-md-block me-3">
-                                <input type="text" placeholder="Search..." class="form-control mt-0">
-                                <a href="" class="active">
-                                    <i class="fa fa-search"></i>
-                                </a>
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="province" class="col-form-label">Province:</label>
+                                                <input type="text" class="form-control" id="driver-province">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="city" class="col-form-label">City:</label>
+                                                <input type="text" class="form-control" id="driver-city">
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="barangay" class="col-form-label">Barangay:</label>
+                                                <input type="text" class="form-control" id="driver-barangay">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="phone" class="col-form-label">Phone #:</label>
+                                                <input type="number" class="form-control" id="driver-phone">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="email" class="col-form-label">Email Address:</label>
+                                                <input type="text" class="form-control" id="driver-email">
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
-                        </li>
-
-                    <!-- User profile -->
-                        <li>
-                            <a class="profile-pic" href="#">
-                                <img src="icon/users/d1.jpg" alt="user-img" width="36"
-                                    class="img-circle"><span class="text-white font-medium">Steave</span></a>
-                        </li>
-                    
-                    </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="cancel-btn" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            <button type="button" id="add-btn" class="btn btn-success">Add Driver</button>
+                        </div>
                 </div>
-            </nav>
-        </header>
-     
+            </div>
+        </div>
+        <!-- Add Student MODAL END -->
+
+
         <!-- Left Sidebar  -->
         <aside class="left-sidebar" data-sidebarbg="skin6">
             <!-- Sidebar scroll-->
@@ -133,7 +210,6 @@
                             </a>
                         </li>
                     </ul>
-
                 </nav>
             </div>
         </aside>
@@ -145,18 +221,18 @@
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Vehicle Management</h4>
+                        <h4 class="page-title">Driver Management</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
                             <ol class="breadcrumb ms-auto">
-                                <li><a href="#" class="fw-normal">Dashboard</a></li>
+                                <li><button type="button" class="btn btn-primary" data-bs-toggle="modal" 
+                                data-bs-target="#addDriver" >ADD DRIVER</button></li>
                             </ol>
                         </div>
                     </div>
                 </div>
             </div>
-          
 
 
             <div class="container-fluid">
@@ -166,7 +242,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
-                            <h3 class="box-title">Basic Table</h3>
+                            <h3 class="box-title">Driver</h3>
                             <div class="table-responsive">
                                 <table class="table text-center">
                                     <thead>
@@ -175,7 +251,7 @@
                                             <th class="border-top-0">Name</th>
                                             <th class="border-top-0">Address</th>
                                             <th class="border-top-0">Birthday</th>
-                                            <th class="border-top-0">Phone#</th>
+                                            <th class="border-top-0">Phone #</th>
                                             <th class="border-top-0">Email</th>
                                         </tr>
                                     </thead>
@@ -189,50 +265,11 @@
                                             <td>oshino@gmail.com</td>
                                         </tr>
                                     </tbody>
-                                </table>
-                            </div>
+                            </table>
                         </div>
                     </div>
                 </div>
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
             </div>
-
-        <!-- footer -->
-            <footer class="footer text-center"> 2023 © DrivePool Solutions - Efficiently Manage Your Fleet <br>
-                <a href="https://www.DrivePoolSolutions.com/">DrivePoolSolutions.com</a>
-                    
-            </footer>
         </div>
 
-
-
-
-
-
-    </div>
-    <!-- End Wrapper -->
-    
-
-    <!-- All Jquery -->
-    <script src="plugins/bower_components/jquery/jquery.min.js"></script> 
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="bootstrap/js/boostrap.js"></script> 
-    <script src="js/jsall/app-style-switcher.js"></script> 
-    <!--Wave Effects -->
-    <script src="js/jsall/waves.js"></script> 
-    <!--Menu sidebar -->
-    <script src="js/jsall/sidebarmenu.js"></script> 
-    <!--Custom JavaScript -->
-    <script src="js/jsall/custom.js"></script> 
-</body>
-
-</html>
+<?php include "footer.php" ?>

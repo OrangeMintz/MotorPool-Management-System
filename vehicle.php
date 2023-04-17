@@ -1,4 +1,108 @@
 <?php include "header.php" ?>
+<link href="css/vehicle.css" rel="Stylesheet">
+
+<script> 
+
+$(document).ready(function (){
+
+    $('#add-btn').click(function (){
+
+        alert('Vehicle Added Successfully');
+
+    })
+
+
+})
+
+</script>
+
+
+
+<style>
+
+#add-btn{
+    color: green;
+    background-color: #fff;
+    border-radius: 5px;
+    
+    
+}
+#add-btn:hover{
+    color: #fff;
+    background-color: #00B261;
+    transition: 0.5s;
+    
+}
+
+#cancel-btn{
+    color: #fff;
+    background-color: #CD0000;
+    border-radius: 5px;
+
+}
+
+#cancel-btn:hover{
+    color: #fff;
+    background-color: red;
+    transition: 0.5s;
+
+}
+
+</style>
+        <!-- Add Student MODAL START-->
+        <div class="modal fade " id="addDriver" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">ADD VEHICLE</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="vehicle-number" class="col-form-label">Vehicle Number:</label>
+                                                <input type="number" class="form-control" id="vehicle-number">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="vehicle-brand" class="col-form-label">Vehicle Brand</label>
+                                                <input type="text" class="form-control" id="vehicle-brand">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="vehicle-model" class="col-form-label">Vehicle Model</label>
+                                                <input type="text" class="form-control" id="vehicle-model">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="vehicle-seat" class="col-form-label">Passenger Seat</label>
+                                                <input type="text" class="form-control" id="vehicle-seat">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="cancel-btn" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            <button type="button" id="add-btn" class="btn btn-success">Add Driver</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <!-- Add Student MODAL END -->
 
      
         <!-- Left Sidebar  -->
@@ -75,7 +179,8 @@
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
                             <ol class="breadcrumb ms-auto">
-                                <li><button type="button" id="button-add" class="btn btn-primary">ADD VEHICLE</button></li>
+                            <li><button type="button" class="btn btn-primary" data-bs-toggle="modal" 
+                                data-bs-target="#addDriver" >ADD VEHICLE</button></li>
                             </ol>
                         </div>
                     </div>
@@ -111,7 +216,6 @@
                                             <td>Honda</td>
                                             <td>2010 Honda Pilot</td>
                                             <td>7</td>
-
                                         </tr>
                                     </tbody>
                                 </table>

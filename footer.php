@@ -1,6 +1,6 @@
          <!-- footer -->
         <footer class="footer text-center"> 2023 © DrivePool Solutions - Efficiently Manage Your Fleet <br>
-                <a href="https://www.DrivePoolSolutions.com/">DrivePoolSolutions.com</a>
+                <a href="dashboard.php">DrivePoolSolutions.com</a>
             </footer>
         </div>
     </div>

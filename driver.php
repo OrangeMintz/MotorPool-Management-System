@@ -1,23 +1,10 @@
 <?php include "header.php" ?>
 <link href="css/driver.css" rel="stylesheet">
 
-<script> 
-
-$(document).ready(function (){
-
-    $('#add-btn').click(function (){
-
-        alert('Driver Added Successfully');
-
-    })
-
-
-})
-
-</script>
 
 <style>
-#add-btn{
+
+#add-btn, #edit-btn{
     color: green;
     background-color: #fff;
     border-radius: 5px;
@@ -25,21 +12,21 @@ $(document).ready(function (){
     
 }
 
-#add-btn:hover{
+#add-btn:hover, #edit-btn:hover{
     color: #fff;
     background-color: green;
     transition: 0.5s;
     
 }
 
-#cancel-btn{
+#cancel-btn, #delete-btn{
     color: #fff;
     background-color: #CD0000;
     border-radius: 5px;
 
 }
 
-#cancel-btn:hover{
+#cancel-btn:hover, #delete-btn:hover{
     color: #fff;
     background-color: red;
     transition: 0.5s;
@@ -98,7 +85,8 @@ $(document).ready(function (){
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="id" class="col-form-label">Driver ID</label>
-                                                <input type="text" class="form-control" id="driver-id">
+                                                <input type="text" class="form-control" id="driver-id" 
+                                                onKeyDown="if(this.value.length==4 && event.keyCode>47 && event.keyCode < 58) return false;">
                                             </div>
                                         </div>
                                     </div>
@@ -129,13 +117,14 @@ $(document).ready(function (){
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="phone" class="col-form-label">Phone #:</label>
-                                                <input type="number" class="form-control" id="driver-phone">
+                                                <input type="number" class="form-control" id="driver-phone" 
+                                                onKeyDown="if(this.value.length==11 && event.keyCode>47 && event.keyCode < 58) return false;">
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="email" class="col-form-label">Email Address:</label>
-                                                <input type="text" class="form-control" id="driver-email">
+                                                <input type="email" class="form-control" id="driver-email">
                                             </div>
                                             
                                         </div>
@@ -253,6 +242,7 @@ $(document).ready(function (){
                                             <th class="border-top-0">Birthday</th>
                                             <th class="border-top-0">Phone #</th>
                                             <th class="border-top-0">Email</th>
+                                            <th>Options</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -263,6 +253,9 @@ $(document).ready(function (){
                                             <td>September 10, 2002</td>
                                             <td>09350050225</td>
                                             <td>oshino@gmail.com</td>
+                                            <td><button type="button" id="edit-btn" class="btn btn-success" data-bs-dismiss="modal">EDIT</button>
+                                                <button type="button" id="delete-btn" class="btn btn-danger">DELETE</button>
+                                            </td> 
                                         </tr>
                                     </tbody>
                             </table>
@@ -272,4 +265,6 @@ $(document).ready(function (){
             </div>
         </div>
 
+
+<script src="js/driver.js"></script>
 <?php include "footer.php" ?>

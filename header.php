@@ -30,12 +30,12 @@
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header" data-logobg="skin6">
         <!-- Logo -->
-                    <a class="navbar-brand" href="dashboard.html">
+                    <a class="navbar-brand" href="dashboard.php">
                         <b class="logo-icon">
-                            <img src="icon/logo1.png" alt="homepage" />
+                            <img src="icon/logo1.png" alt="homepage">
                         </b>
                         <span class="logo-text">
-                            <img src="icon/Logo.png" alt="homepage" />
+                            <img src="icon/Logo.png" alt="homepage">
                         </span>
                     </a>
                     

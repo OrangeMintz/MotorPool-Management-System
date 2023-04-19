@@ -20,33 +20,33 @@ $(document).ready(function (){
 
 <style>
 
-#add-btn{
+#add-btn, #edit-btn{
     color: green;
     background-color: #fff;
     border-radius: 5px;
     
     
 }
-#add-btn:hover{
+#add-btn:hover, #edit-btn:hover{
     color: #fff;
     background-color: #00B261;
     transition: 0.5s;
     
 }
 
-#cancel-btn{
+#cancel-btn, #delete-btn{
     color: #fff;
     background-color: #CD0000;
     border-radius: 5px;
 
 }
 
-#cancel-btn:hover{
+#cancel-btn:hover, #delete-btn:hover{
     color: #fff;
     background-color: red;
     transition: 0.5s;
-
 }
+
 
 </style>
         <!-- Add Student MODAL START-->
@@ -88,7 +88,7 @@ $(document).ready(function (){
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="vehicle-seat" class="col-form-label">Passenger Seat</label>
-                                                <input type="text" class="form-control" id="vehicle-seat">
+                                                <input type="number" class="form-control" id="vehicle-seat">
                                             </div>
                                         </div>
                                     </div>
@@ -206,6 +206,7 @@ $(document).ready(function (){
                                             <th class="border-top-0">Vehicle Brand</th>
                                             <th class="border-top-0">Vehicle Model</th>
                                             <th class="border-top-0">Passenger Seat</th>
+                                            <th class="border-top-0">Options</th>
 
                                         </tr>
                                     </thead>
@@ -216,6 +217,9 @@ $(document).ready(function (){
                                             <td>Honda</td>
                                             <td>2010 Honda Pilot</td>
                                             <td>7</td>
+                                            <td><button type="button" id="edit-btn" class="btn btn-success" data-bs-dismiss="modal">EDIT</button>
+                                                <button type="button" id="delete-btn" class="btn btn-danger">DELETE</button>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

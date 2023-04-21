@@ -1,50 +1,31 @@
 <?php include "header.php" ?>
 <link href="css/driver.css" rel="stylesheet">
 
-<script> 
-
-$(document).ready(function (){
-
-    $('#add-btn').click(function (){
-
-        alert('Driver Added Successfully');
-
-    })
-
-
-})
-
-</script>
-
 <style>
-#add-btn{
+
+#add-btn, #edit-btn{
     color: green;
     background-color: #fff;
-    border-radius: 5px;
-    
-    
-}
+    border-radius: 5px;}
 
-#add-btn:hover{
+#add-btn:hover, #edit-btn:hover{
     color: #fff;
     background-color: green;
-    transition: 0.5s;
-    
-}
+    transition: 0.5s;}
 
-#cancel-btn{
+#cancel-btn, #delete-btn{
     color: #fff;
     background-color: #CD0000;
-    border-radius: 5px;
+    border-radius: 5px;}
 
-}
-
-#cancel-btn:hover{
+#cancel-btn:hover, #delete-btn:hover{
     color: #fff;
     background-color: red;
-    transition: 0.5s;
+    transition: 0.5s;}
 
-}
+i.mandate {
+    color: orange;
+    font-size: 11px;}
 
 </style>
         <!-- Add Student MODAL START-->
@@ -65,25 +46,29 @@ $(document).ready(function (){
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="first-name" class="col-form-label">First Name:</label>
-                                                <input type="text" class="form-control" id="driver-first-name">
+                                                <input type="text" class="form-control" id="driver-first-name"
+                                                onKeyDown="if(this.value.length==25 && event.keyCode>47 && event.keyCode < 58) return false;">
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="middle-name" class="col-form-label">Middle Name:</label>
-                                                <input type="text" class="form-control" id="driver-middle-name">
+                                                <input type="text" class="form-control" id="driver-middle-name"
+                                                onKeyDown="if(this.value.length==20 && event.keyCode>47 && event.keyCode < 58) return false;">
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="last-name" class="col-form-label">Last Name:</label>
-                                                <input type="text" class="form-control" id="driver-last-name">
+                                                <input type="text" class="form-control" id="driver-last-name"
+                                                onKeyDown="if(this.value.length==20 && event.keyCode>47 && event.keyCode < 58) return false;">
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="suffix-name" class="col-form-label">Suffix:</label>
-                                                <input type="text" class="form-control" id="driver-suffix-name">
+                                                <input type="text" class="form-control" id="driver-suffix-name"
+                                                onKeyDown="if(this.value.length==2 && event.keyCode>47 && event.keyCode < 58) return false;">
                                             </div>
                                         </div>
                                     </div>
@@ -98,7 +83,9 @@ $(document).ready(function (){
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="id" class="col-form-label">Driver ID</label>
-                                                <input type="text" class="form-control" id="driver-id">
+                                                <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
+                                                <input type="text" class="form-control" id="driver-id" 
+                                                onKeyDown="if(this.value.length==4 && event.keyCode>47 && event.keyCode < 58) return false;">
                                             </div>
                                         </div>
                                     </div>
@@ -107,20 +94,29 @@ $(document).ready(function (){
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="province" class="col-form-label">Province:</label>
-                                                <input type="text" class="form-control" id="driver-province">
+                                                <select class="form-control" id="driver-province" size="1">
+                                                <option  value="" selected="selected" selected disabled value> -- Select Province -- </option>
+                                                <!-- <option>Agusan del Norte</option><option>Bukidnon</option>
+                                                <option>Camiguin</option><option>Davao de Oro</option>
+                                                <option>Misamis Occidental</option> -->
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="city" class="col-form-label">City:</label>
-                                                <input type="text" class="form-control" id="driver-city">
+                                                 <select class="form-control" id="driver-city" size="1">
+                                                <option value="" selected="selected" selected disabled value> -- Select City -- </option>
+                                                </select>
                                             </div>
                                             
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="barangay" class="col-form-label">Barangay:</label>
-                                                <input type="text" class="form-control" id="driver-barangay">
+                                                <select class="form-control" id="driver-barangay" size="1">
+                                                <option value="" selected="selected" selected disabled value> -- Select Barangay -- </option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -128,14 +124,17 @@ $(document).ready(function (){
                                     <div class="row">
                                         <div class="col-sm">
                                             <div class="form-group">
-                                                <label for="phone" class="col-form-label">Phone #:</label>
-                                                <input type="number" class="form-control" id="driver-phone">
+                                                <label for="phone" class="col-form-label">Phone #:</label> 
+                                                <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
+                                                <input type="number" class="form-control" id="driver-phone" 
+                                                onKeyDown="if(this.value.length==11 && event.keyCode>47 && event.keyCode < 58) return false;">
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="email" class="col-form-label">Email Address:</label>
-                                                <input type="text" class="form-control" id="driver-email">
+                                                <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
+                                                <input type="email" class="form-control" id="driver-email">
                                             </div>
                                             
                                         </div>
@@ -253,6 +252,7 @@ $(document).ready(function (){
                                             <th class="border-top-0">Birthday</th>
                                             <th class="border-top-0">Phone #</th>
                                             <th class="border-top-0">Email</th>
+                                            <th>Options</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -263,6 +263,9 @@ $(document).ready(function (){
                                             <td>September 10, 2002</td>
                                             <td>09350050225</td>
                                             <td>oshino@gmail.com</td>
+                                            <td><button type="button" id="edit-btn" class="btn btn-success" data-bs-dismiss="modal">EDIT</button>
+                                                <button type="button" id="delete-btn" class="btn btn-danger">DELETE</button>
+                                            </td> 
                                         </tr>
                                     </tbody>
                             </table>
@@ -272,4 +275,6 @@ $(document).ready(function (){
             </div>
         </div>
 
+
+<script src="js/drivers.js"></script>
 <?php include "footer.php" ?>

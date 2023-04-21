@@ -16,10 +16,12 @@ $('input').each(function (index, elem){
         elem.placeholder = "example@gmail.com";
 
     }
+})
+    
 // validations
 
 
-})
+
 
 
 // Create a function that loads the Province, City, Barangay
@@ -30,8 +32,8 @@ var locationSelector = {
       },
 
       Bukidnon: {
-        Bukid: ["Bukid", "Non"],
-        Non: ["Bukid","Non"]
+        Valencia: ["Poblacion", "Bagontaas"],
+        Malaybalay: ["Aglayan","Casisang"]
       },
 
       Camiguin: {
@@ -88,6 +90,6 @@ var locationSelector = {
 
 $('#add-btn').click(function (){
 
-        alert(document.getElementById('driver-city').value)
+        alert('Successfully Added Driver')
 
 })

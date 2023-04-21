@@ -40,35 +40,31 @@ i.mandate {
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form>
+                            <form action ="includes/db_driver_add.php" method="POST">
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="first-name" class="col-form-label">First Name:</label>
-                                                <input type="text" class="form-control" id="driver-first-name"
-                                                onKeyDown="if(this.value.length==25 && event.keyCode>47 && event.keyCode < 58) return false;">
+                                                <input type="text" class="form-control" id="driver-first-name" maxlength = "25" name ="fname">
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="middle-name" class="col-form-label">Middle Name:</label>
-                                                <input type="text" class="form-control" id="driver-middle-name"
-                                                onKeyDown="if(this.value.length==20 && event.keyCode>47 && event.keyCode < 58) return false;">
+                                                <input type="text" class="form-control" id="driver-middle-name" maxlength = "15" name ="mname">
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="last-name" class="col-form-label">Last Name:</label>
-                                                <input type="text" class="form-control" id="driver-last-name"
-                                                onKeyDown="if(this.value.length==20 && event.keyCode>47 && event.keyCode < 58) return false;">
+                                                <input type="text" class="form-control" id="driver-last-name" maxlength = "15" name ="lname">
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="suffix-name" class="col-form-label">Suffix:</label>
-                                                <input type="text" class="form-control" id="driver-suffix-name"
-                                                onKeyDown="if(this.value.length==2 && event.keyCode>47 && event.keyCode < 58) return false;">
+                                                <input type="text" class="form-control" id="driver-suffix-name" maxlength = "2" name ="sname">
                                             </div>
                                         </div>
                                     </div>
@@ -77,7 +73,7 @@ i.mandate {
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="birthday" class="col-form-label">Birthday</label>
-                                                <input type="date" class="form-control" id="driver-birthday">
+                                                <input type="date" class="form-control" id="driver-birthday" name ="birthday">
                                             </div>
                                         </div>
                                         <div class="col-sm">
@@ -85,7 +81,7 @@ i.mandate {
                                                 <label for="id" class="col-form-label">Driver ID</label>
                                                 <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
                                                 <input type="text" class="form-control" id="driver-id" 
-                                                onKeyDown="if(this.value.length==4 && event.keyCode>47 && event.keyCode < 58) return false;">
+                                                onKeyDown="if(this.value.length==4 && event.keyCode>47 && event.keyCode < 58) return false;" name ="id">
                                             </div>
                                         </div>
                                     </div>
@@ -94,18 +90,15 @@ i.mandate {
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="province" class="col-form-label">Province:</label>
-                                                <select class="form-control" id="driver-province" size="1">
+                                                <select class="form-control" id="driver-province" size="1" name ="province">
                                                 <option  value="" selected="selected" selected disabled value> -- Select Province -- </option>
-                                                <!-- <option>Agusan del Norte</option><option>Bukidnon</option>
-                                                <option>Camiguin</option><option>Davao de Oro</option>
-                                                <option>Misamis Occidental</option> -->
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="city" class="col-form-label">City:</label>
-                                                 <select class="form-control" id="driver-city" size="1">
+                                                 <select class="form-control" id="driver-city" size="1" name ="city">
                                                 <option value="" selected="selected" selected disabled value> -- Select City -- </option>
                                                 </select>
                                             </div>
@@ -114,7 +107,7 @@ i.mandate {
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="barangay" class="col-form-label">Barangay:</label>
-                                                <select class="form-control" id="driver-barangay" size="1">
+                                                <select class="form-control" id="driver-barangay" size="1" name ="barangay">
                                                 <option value="" selected="selected" selected disabled value> -- Select Barangay -- </option>
                                                 </select>
                                             </div>
@@ -127,28 +120,27 @@ i.mandate {
                                                 <label for="phone" class="col-form-label">Phone #:</label> 
                                                 <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
                                                 <input type="number" class="form-control" id="driver-phone" 
-                                                onKeyDown="if(this.value.length==11 && event.keyCode>47 && event.keyCode < 58) return false;">
+                                                onKeyDown="if(this.value.length==11 && event.keyCode>47 && event.keyCode < 58) return false;" name ="pnumber">
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="email" class="col-form-label">Email Address:</label>
                                                 <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
-                                                <input type="email" class="form-control" id="driver-email">
+                                                <input type="email" class="form-control" id="driver-email" name ="email">
                                             </div>
-                                            
                                         </div>
                                     </div>
                                 </div>
+                                    <div class="modal-footer">
+                                    <button type="button" id="cancel-btn" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" id="add-btn" class="btn btn-success" name ="submit">Add Driver</button>
+                                </div>
                             </form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" id="cancel-btn" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            <button type="button" id="add-btn" class="btn btn-success">Add Driver</button>
-                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
         <!-- Add Student MODAL END -->
 
 

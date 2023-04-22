@@ -2,11 +2,14 @@
 // validations
 $('input').each(function (index, elem){
 
+   
+
     if(elem.id == 'driver-phone'){
-        elem.placeholder = "09*********";
+        elem.placeholder = "9*********";
         elem.maxlength = "6";
 
     }
+
     if(elem.id == 'driver-id'){
         elem.placeholder = "1000";
 
@@ -45,7 +48,6 @@ var locationSelector = {
         Davao: ["Davao","de Oro"],
         "de Oro": ["Davao","de Oro"],
       },
-
 
     };
  

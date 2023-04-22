@@ -1,38 +1,10 @@
 <?php include "header.php" ?>
-<link href="css/driver.css" rel="stylesheet">
+<?php include "css/customcss.php" ?>
 
-<style>
-
-#add-btn, #edit-btn{
-    color: green;
-    background-color: #fff;
-    border-radius: 5px;}
-
-#add-btn:hover, #edit-btn:hover{
-    color: #fff;
-    background-color: green;
-    transition: 0.5s;}
-
-#cancel-btn, #delete-btn{
-    color: #fff;
-    background-color: #CD0000;
-    border-radius: 5px;}
-
-#cancel-btn:hover, #delete-btn:hover{
-    color: #fff;
-    background-color: red;
-    transition: 0.5s;}
-
-i.mandate {
-    color: orange;
-    font-size: 11px;}
-
-</style>
-        <!-- Add Student MODAL START-->
+        <!-- ADD DRIVER MODAL START -->
         <div class="modal fade " id="addDriver" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">ADD DRIVER</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -46,7 +18,7 @@ i.mandate {
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="first-name" class="col-form-label">First Name:</label>
-                                                <input type="text" class="form-control" id="driver-first-name" maxlength = "25" name ="fname">
+                                                <input type="text" class="form-control" id="driver-first-name"  name ="fname">
                                             </div>
                                         </div>
                                         <div class="col-sm">
@@ -64,7 +36,9 @@ i.mandate {
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="suffix-name" class="col-form-label">Suffix:</label>
-                                                <input type="text" class="form-control" id="driver-suffix-name" maxlength = "2" name ="sname">
+                                                <select class="form-control" id="driver-suffix-name" size="1" name ="sname" value="" >
+                                                <option selected value></option> <option>Jr.</option><option>Sr.</option></select>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -98,7 +72,7 @@ i.mandate {
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="city" class="col-form-label">City:</label>
-                                                 <select class="form-control" id="driver-city" size="1" name ="city">
+                                                <select class="form-control" id="driver-city" size="1" name ="city">
                                                 <option value="" selected="selected" selected disabled value> -- Select City -- </option>
                                                 </select>
                                             </div>
@@ -117,10 +91,14 @@ i.mandate {
                                     <div class="row">
                                         <div class="col-sm">
                                             <div class="form-group">
-                                                <label for="phone" class="col-form-label">Phone #:</label> 
+                                                <label class="col-form-label" for="phone">Phone #:</label>
                                                 <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
-                                                <input type="number" class="form-control" id="driver-phone" 
-                                                onKeyDown="if(this.value.length==11 && event.keyCode>47 && event.keyCode < 58) return false;" name ="pnumber">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                    <div class="input-group-text">+63</div>
+                                                    </div>
+                                                    <input type="number" class="form-control" id="driver-phone" onKeyDown="if(this.value.length==10 && event.keyCode>47 && event.keyCode < 58) return false;" name ="pnumber">
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-sm">
@@ -141,7 +119,8 @@ i.mandate {
                     </div>
                 </div>
             </div>
-        <!-- Add Student MODAL END -->
+        <!-- ADD DRIVER MODAL END -->
+
 
 
         <!-- Left Sidebar  -->
@@ -250,9 +229,9 @@ i.mandate {
                                     <tbody>
                                         <tr>
                                             <td>1000</td>
-                                            <td>Oshino Shinobu Jr</td>
-                                            <td>Valencia City</td>
-                                            <td>September 10, 2002</td>
+                                            <td>Oshino Shinobu</td>
+                                            <td>Valencia City, Bukidnon</td>
+                                            <td>2002-09-10</td>
                                             <td>09350050225</td>
                                             <td>oshino@gmail.com</td>
                                             <td><button type="button" id="edit-btn" class="btn btn-success" data-bs-dismiss="modal">EDIT</button>

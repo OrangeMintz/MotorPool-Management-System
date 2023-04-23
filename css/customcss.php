@@ -49,6 +49,11 @@ i.mandate {
     color: orange;
     font-size: 11px;}
 
+i.delete {
+    color: #CD0000;
+    display:inline-block;
+    font-size: 14px;}
+
 
 #errormsg{
     font-family: "Nunito Sans",sans-serif;

@@ -113,7 +113,6 @@
                     </div>
                 </div>
         <!-- EDIT VEHICLE MODAL END -->
-
      
         <!-- Left Sidebar  -->
         <aside class="left-sidebar" data-sidebarbg="skin6">
@@ -162,13 +161,6 @@
                                 aria-expanded="false">
                                 <i class="fa fa-map" aria-hidden="true"></i>
                                 <span class="hide-menu">Trips</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="blank.php"
-                                aria-expanded="false">
-                                <i class="fa fa-columns" aria-hidden="true"></i>
-                                <span class="hide-menu">Blank Page</span>
                             </a>
                         </li>
                     </ul>

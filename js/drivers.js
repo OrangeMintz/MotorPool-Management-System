@@ -134,9 +134,6 @@ var locationSelector = {
     }
   })
 
-
-
-  
   let fname2 = document.getElementById('driver-first-name2');
   let lname2 = document.getElementById('driver-last-name2');
   let id2 = document.getElementById('driver-id2');

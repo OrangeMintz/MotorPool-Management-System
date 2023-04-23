@@ -19,13 +19,13 @@
                                     <div class="row">
                                         <div class="col-sm">
                                             <div class="form-group">
-                                                <label for="vehicle-number" class="col-form-label">Vehicle Number:</label>
+                                                <label for="vehicle-number" class="col-form-label">Driver:</label>
                                                 <input type="number" class="form-control" id="vehicle-number">
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
-                                                <label for="vehicle-brand" class="col-form-label">Vehicle Brand</label>
+                                                <label for="vehicle-brand" class="col-form-label">Vehicle Number</label>
                                                 <input type="text" class="form-control" id="vehicle-brand">
                                             </div>
                                         </div>

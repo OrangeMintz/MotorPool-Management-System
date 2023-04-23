@@ -236,7 +236,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" id="cancel-btn" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" id="add-btn" class="btn btn-success" name ="submit">Add Driver</button>
+                                    <button type="submit" id="add-btn" class="btn btn-success" name ="submit">Edit Driver</button>
                                 </div>
                             </form>
                         </div>

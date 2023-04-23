@@ -1,5 +1,4 @@
 <?php include "header.php" ?>
-<link href="css/trips.css" rel="Stylesheet">
 
 <!-- Left Sidebar  -->
 <aside class="left-sidebar" data-sidebarbg="skin6">

@@ -59,6 +59,41 @@ var locationSelector = {
         barangaySelection.options[barangaySelection.options.length] = new Option(barangay[i],barangay[i])
       }
     };
+
+    //EDIT DRIVER LOCATION
+
+    const provinceSelection2 = document.querySelector("#driver-province2")
+    const citySelection2 = document.querySelector("#driver-city2")
+    const barangaySelection2 = document.querySelector("#driver-barangay2")
+
+
+    // Province Selection
+    for (let province2 in locationSelector) {
+      provinceSelection2.options[provinceSelection2.options.length] = new Option(province2,province2);
+    }
+
+    // City Selection
+    provinceSelection2.onchange = (e) => {
+      citySelection2.length = 1;
+      barangaySelection2.length = 1;
+  
+      for (let city2 in locationSelector[e.target.value]) {
+        citySelection2.options[citySelection2.options.length] = new Option(city2,city2);
+      }
+    };
+
+
+    // Barangay Selection
+    citySelection2.onchange = (e) => {barangaySelection2.disabled = false;
+      barangaySelection2.length = 1;
+
+      let barangay2 = locationSelector[provinceSelection2.value][e.target.value];
+
+      for (let i = 0; i < barangay2.length; i++){
+        barangaySelection2.options[barangaySelection2.options.length] = new Option(barangay2[i],barangay2[i])
+      }
+    };
+
   }//onload
 
 
@@ -99,6 +134,11 @@ var locationSelector = {
   })
 
 
+  $('#delete-btn').click(function (){
+    if(confirm('Proceed to delete Driver?') == true){
+      alert('Deleted Successfully');
+    }
+  })
 
 
   

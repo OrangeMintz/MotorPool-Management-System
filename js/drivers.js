@@ -132,16 +132,3 @@ var locationSelector = {
       errormsg.innerText = messages.join(', ')
     }
   })
-
-
-  $('#delete-btn').click(function (){
-    if(confirm('Proceed to delete Driver?') == true){
-      alert('Deleted Successfully');
-    }
-  })
-
-
-  
-
-
-

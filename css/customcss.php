@@ -31,6 +31,7 @@ input[type=number] {
     color: #fff;
     background-color: red;
     transition: 0.5s;}
+    
 
 #view-btn{
     background-color: #fff;

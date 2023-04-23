@@ -1,8 +1,10 @@
 <?php include "header.php" ?>
 <?php include "css/customcss.php" ?>
+<?php include "remove.php" ?>
+
 
         <!-- ADD DRIVER MODAL START -->
-        <div class="modal fade " id="addDriver" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade " id="addDriver" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                         <div class="modal-header">
@@ -123,9 +125,8 @@
             </div>
         <!-- ADD DRIVER MODAL END -->
 
-
         <!-- EDIT DRIVER MODAL START -->
-        <div class="modal fade " id="editDriver" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade " id="editDriver" tabindex="-1" role="dialog"  aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                         <div class="modal-header">
@@ -361,7 +362,7 @@
                                             <td>oshino@gmail.com</td>
                                             <td>
                                                 <button type="button" id="edit-btn" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editDriver">EDIT</button>
-                                                <button type="button" id="delete-btn"  class="btn btn-danger">DELETE</button>
+                                                <button type="button" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">DELETE</button>
                                             </td> 
                                         </tr>
                                     </tbody>

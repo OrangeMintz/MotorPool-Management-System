@@ -42,7 +42,6 @@
                                                 <label for="suffix-name" class="col-form-label">Suffix:</label>
                                                 <select class="form-control" id="driver-suffix-name" size="1" name ="sname" value="" >
                                                 <option selected value></option> <option>Jr.</option><option>Sr.</option></select>
-                                                
                                             </div>
                                         </div>
                                     </div>
@@ -126,7 +125,7 @@
         <!-- ADD DRIVER MODAL END -->
 
         <!-- EDIT DRIVER MODAL START -->
-        <div class="modal fade " id="editDriver" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal fade " id="editDriver" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                         <div class="modal-header">
@@ -136,35 +135,34 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="driver-edit" action ="" method="POST">
-                            <div class="alert alert-warning error" role="alert">
-                            <div id="errormsg"></div></div>
+                            <form id="driver-edit" action ="#" method="POST">
+                            <div class="alert alert-warning error2" role="alert">
+                            <div id="errormsg2"></div></div>
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="first-name" class="col-form-label">First Name:</label>
-                                                <input type="text" class="form-control" id="driver-first-name"  name ="fname" required>
+                                                <input type="text" class="form-control" id="driver-first-name2"  name ="fname" required>
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="middle-name" class="col-form-label">Middle Name:</label>
-                                                <input type="text" class="form-control" id="driver-middle-name" maxlength = "15" name ="mname">
+                                                <input type="text" class="form-control" id="driver-middle-name2" maxlength = "15" name ="mname">
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="last-name" class="col-form-label">Last Name:</label>
-                                                <input type="text" class="form-control" id="driver-last-name" maxlength = "15" name ="lname" required>
+                                                <input type="text" class="form-control" id="driver-last-name2" maxlength = "15" name ="lname" required>
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="suffix-name" class="col-form-label">Suffix:</label>
-                                                <select class="form-control" id="driver-suffix-name" size="1" name ="sname" value="" >
+                                                <select class="form-control" id="driver-suffix-name2" size="1" name ="sname" value="" >
                                                 <option selected value></option> <option>Jr.</option><option>Sr.</option></select>
-                                                
                                             </div>
                                         </div>
                                     </div>
@@ -173,15 +171,15 @@
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="birthday" class="col-form-label">Birthday</label>
-                                                <input type="date" class="form-control" id="driver-birthday" name ="birthday" required>
+                                                <input type="date" class="form-control" id="driver-birthday2" name ="birthday" required>
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="id" class="col-form-label">Driver ID</label>
                                                 <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
-                                                <input type="text" class="form-control" id="driver-id" placeholder="1000" 
-                                                onKeyDown="if(this.value.length==4 && event.keyCode>47 && event.keyCode < 58) return false;" name ="id" required readonly>
+                                                <input type="text" class="form-control" id="driver-id2" placeholder="1000" 
+                                                onKeyDown="if(this.value.length==4 && event.keyCode>47 && event.keyCode < 58) return false;" name ="id" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -223,7 +221,7 @@
                                                     <div class="input-group-prepend">
                                                     <div class="input-group-text">+63</div>
                                                     </div>
-                                                    <input type="number" class="form-control" id="driver-phone" required placeholder="9*********" onKeyDown="if(this.value.length==10 && event.keyCode>47 && event.keyCode < 58) return false;" name ="pnumber">
+                                                    <input type="number" class="form-control" id="driver-phone2" required placeholder="9*********" onKeyDown="if(this.value.length==10 && event.keyCode>47 && event.keyCode < 58) return false;" name ="pnumber">
                                                 </div>
                                             </div>
                                         </div>
@@ -231,14 +229,14 @@
                                             <div class="form-group">
                                                 <label for="email" class="col-form-label">Email Address:</label>
                                                 <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
-                                                <input type="email" class="form-control" id="driver-email" name ="email" placeholder="example@gmail.com" required>
+                                                <input type="email" class="form-control" id="driver-email2" name ="email" placeholder="example@gmail.com" required>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" id="cancel-btn" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" id="add-btn" class="btn btn-success" name ="submit">Add Driver</button>
+                                    <button type="submit" id="add-btn" class="btn btn-success" name ="submit">Edit Driver</button>
                                 </div>
                             </form>
                         </div>

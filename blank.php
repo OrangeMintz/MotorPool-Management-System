@@ -1,5 +1,4 @@
 <?php include "header.php" ?>
-<link href="css/blank.css" rel="stylesheet">
      
         <!-- Left Sidebar  -->
         <aside class="left-sidebar" data-sidebarbg="skin6">

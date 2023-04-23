@@ -12,13 +12,15 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action ="includes/db_driver_add.php" method="POST">
+                            <form id="driver-add" action ="includes/db_driver_add.php" method="POST">
+                            <div class="alert alert-warning error" role="alert">
+                            <div id="errormsg"></div></div>
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="first-name" class="col-form-label">First Name:</label>
-                                                <input type="text" class="form-control" id="driver-first-name"  name ="fname">
+                                                <input type="text" class="form-control" id="driver-first-name"  name ="fname" required>
                                             </div>
                                         </div>
                                         <div class="col-sm">
@@ -30,7 +32,7 @@
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="last-name" class="col-form-label">Last Name:</label>
-                                                <input type="text" class="form-control" id="driver-last-name" maxlength = "15" name ="lname">
+                                                <input type="text" class="form-control" id="driver-last-name" maxlength = "15" name ="lname" required>
                                             </div>
                                         </div>
                                         <div class="col-sm">
@@ -47,15 +49,15 @@
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="birthday" class="col-form-label">Birthday</label>
-                                                <input type="date" class="form-control" id="driver-birthday" name ="birthday">
+                                                <input type="date" class="form-control" id="driver-birthday" name ="birthday" required>
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="id" class="col-form-label">Driver ID</label>
                                                 <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
-                                                <input type="text" class="form-control" id="driver-id" 
-                                                onKeyDown="if(this.value.length==4 && event.keyCode>47 && event.keyCode < 58) return false;" name ="id">
+                                                <input type="text" class="form-control" id="driver-id" placeholder="1000" 
+                                                onKeyDown="if(this.value.length==4 && event.keyCode>47 && event.keyCode < 58) return false;" name ="id" required>
                                             </div>
                                         </div>
                                     </div>
@@ -64,7 +66,7 @@
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="province" class="col-form-label">Province:</label>
-                                                <select class="form-control" id="driver-province" size="1" name ="province">
+                                                <select class="form-control" id="driver-province" size="1" name ="province" required>
                                                 <option  value="" selected="selected" selected disabled value> -- Select Province -- </option>
                                                 </select>
                                             </div>
@@ -72,7 +74,7 @@
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="city" class="col-form-label">City:</label>
-                                                <select class="form-control" id="driver-city" size="1" name ="city">
+                                                <select class="form-control" id="driver-city" size="1" name ="city" required>
                                                 <option value="" selected="selected" selected disabled value> -- Select City -- </option>
                                                 </select>
                                             </div>
@@ -81,7 +83,7 @@
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="barangay" class="col-form-label">Barangay:</label>
-                                                <select class="form-control" id="driver-barangay" size="1" name ="barangay">
+                                                <select class="form-control" id="driver-barangay" size="1" name ="barangay" required>
                                                 <option value="" selected="selected" selected disabled value> -- Select Barangay -- </option>
                                                 </select>
                                             </div>
@@ -97,7 +99,7 @@
                                                     <div class="input-group-prepend">
                                                     <div class="input-group-text">+63</div>
                                                     </div>
-                                                    <input type="number" class="form-control" id="driver-phone" onKeyDown="if(this.value.length==10 && event.keyCode>47 && event.keyCode < 58) return false;" name ="pnumber">
+                                                    <input type="number" class="form-control" id="driver-phone" required placeholder="9*********" onKeyDown="if(this.value.length==10 && event.keyCode>47 && event.keyCode < 58) return false;" name ="pnumber">
                                                 </div>
                                             </div>
                                         </div>
@@ -105,14 +107,14 @@
                                             <div class="form-group">
                                                 <label for="email" class="col-form-label">Email Address:</label>
                                                 <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
-                                                <input type="email" class="form-control" id="driver-email" name ="email">
+                                                <input type="email" class="form-control" id="driver-email" name ="email" placeholder="example@gmail.com" required>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                    <div class="modal-footer">
+                                <div class="modal-footer">
                                     <button type="button" id="cancel-btn" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" id="add-btn" class="btn btn-success" name ="submit">Add Driver</button>
+                                    <button type="submit"  class="btn btn-success" name ="submit">Add Driver</button>
                                 </div>
                             </form>
                         </div>

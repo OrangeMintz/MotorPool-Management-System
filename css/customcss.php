@@ -48,4 +48,10 @@ i.mandate {
     color: orange;
     font-size: 11px;}
 
+
+#errormsg{
+    font-family: "Nunito Sans",sans-serif;
+    font-size: 15px;
+
+}
 </style>

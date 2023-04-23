@@ -1,12 +1,10 @@
 <?php include "header.php" ?>
 <?php include "css/customcss.php" ?>
 
-
         <!-- ADD VEHICLE MODAL START-->
         <div class="modal fade " id="addVehicle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">ADD VEHICLE</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -14,53 +12,49 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form>
+                            <form id="vehicle-add" action ="includes/db_vehicle_add.php" method="POST">
+                            <div class="alert alert-warning error" role="alert">
+                            <div id="errormsg"></div></div>
                                 <div class="container">
                                     <div class="row">
-                                        <div class="col-sm">
+                                        <div class="col-lg">
                                             <div class="form-group">
                                                 <label for="vehicle-number" class="col-form-label">Vehicle Number:</label>
                                                 <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
-                                                <input type="number" class="form-control" id="vehicle-number" placeholder ="50021"
-                                                onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" name ="id">
+                                                <input type="number" class="form-control" id="vehicle-number" placeholder ="10000"
+                                                onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" name ="id" required>
                                             </div>
                                         </div>
-                                        <div class="col-sm">
+                                    </div>
+                                    <div class="row">
+
+                                    <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="vehicle-model" class="col-form-label">Vehicle Brand</label>
-                                                <select class="form-control" id="vehicle-brand" size="1" name ="brand">
+                                                <select class="form-control" id="vehicle-brand" size="1" name ="brand" required>
                                                 <option value="" selected="selected" selected disabled value> -- Vehicle Brand  -- </option>
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="row">
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="vehicle-brand" class="col-form-label">Vehicle Model</label>
-                                                <select class="form-control" id="vehicle-model" size="1" name ="brand">
+                                                <select class="form-control" id="vehicle-model" size="1" name ="brand" required>
                                                 <option value="" selected="selected" selected disabled value> -- Vehicle Model  -- </option>
                                                 </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm">
-                                            <div class="form-group">
-                                                <label for="vehicle-seat" class="col-form-label">Passenger Seats</label>
-                                                <input type="number" class="form-control" id="vehicle-seat" onKeyDown="if(this.value.length==2 && event.keyCode>47 && event.keyCode < 58) return false;">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                     <div class="modal-footer">
                                     <button type="button" id="cancel-btn" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" id="add-btn" class="btn btn-success">Add Driver</button>
+                                    <button type="submit" id="add-btn" class="btn btn-success">Add Driver</button>
                                     </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
         <!-- ADD VEHICLE MODAL END -->
 
      
@@ -164,9 +158,7 @@
                                             <th class="border-top-0">Vehicle Number</th>
                                             <th class="border-top-0">Vehicle Brand</th>
                                             <th class="border-top-0">Vehicle Model</th>
-                                            <th class="border-top-0">Passenger Seat</th>
                                             <th class="border-top-0">Options</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -175,7 +167,6 @@
                                             <td>10253</td>
                                             <td>Honda</td>
                                             <td>2010 Honda Pilot</td>
-                                            <td>7</td>
                                             <td><button type="button" id="edit-btn" class="btn btn-success" data-bs-dismiss="modal">EDIT</button>
                                                 <button type="button" id="delete-btn" class="btn btn-danger">DELETE</button>
                                             </td>
@@ -188,5 +179,5 @@
                 </div>
             </div>
 
-<script src="js/vehicle.js"></script>
+<script src="js/vehicles.js"></script>
 <?php include "footer.php" ?>

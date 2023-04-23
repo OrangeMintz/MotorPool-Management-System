@@ -1,32 +1,4 @@
 
-// validations
-$('input').each(function (index, elem){
-
-   
-
-    if(elem.id == 'driver-phone'){
-        elem.placeholder = "9*********";
-        elem.maxlength = "6";
-
-    }
-
-    if(elem.id == 'driver-id'){
-        elem.placeholder = "1000";
-
-    }
-
-    if(elem.id == 'driver-email'){
-        elem.placeholder = "example@gmail.com";
-
-    }
-})
-    
-// validations
-
-
-
-
-
 // Create a function that loads the Province, City, Barangay
 var locationSelector = {
     "Agusan del Norte": {
@@ -90,8 +62,46 @@ var locationSelector = {
   }//onload
 
 
-$('#add-btn').click(function (){
+  let fname = document.getElementById('driver-first-name');
+  let lname = document.getElementById('driver-last-name');
+  let id = document.getElementById('driver-id');
+  let phonenumber = document.getElementById('driver-phone');
+  let addform = document.getElementById('driver-add');
+  let errormsg = document.getElementById('errormsg');
 
-        alert('Successfully Added Driver')
+  $(".error").hide();
 
-})
+
+  addform.addEventListener('submit', (e) =>{
+    let messages = [];
+
+    if(fname.value.length < 2){
+      messages.push('First name should be longer than 2 characters');
+    }
+
+    else if(lname.value.length < 2){
+      messages.push('Last name should be longer than 2 characters');
+    }
+
+    else if(id.value.length != 4){
+      messages.push('ID should be equal to 4 numbers');
+    }
+
+    else if(phonenumber.value.length != 10){
+      messages.push('Phone number should be equal to 10 numbers');
+    }
+
+    if(messages.length > 0){
+      e.preventDefault()
+      $(".error").show();
+      errormsg.innerText = messages.join(', ')
+    }
+  })
+
+
+
+
+  
+
+
+

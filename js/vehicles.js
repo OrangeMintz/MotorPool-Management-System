@@ -47,9 +47,22 @@ var vehiclesselector = {
     };
   }//onload
 
-  $('#add-btn').click(function (){
+  let vehicle_number = document.getElementById('vehicle-number');
+  let addform = document.getElementById('vehicle-add');
+  let errormsg = document.getElementById('errormsg');
 
-    alert('WORKING')
+  $(".error").hide();
 
-})
+  addform.addEventListener('submit', (e) =>{
+    let messages = [];
 
+    if(vehicle_number.value.length != 5){
+      messages.push('Vehicle number should be equal to 5 numbers');
+    }
+
+    if(messages.length > 0){
+      e.preventDefault()
+      $(".error").show();
+      errormsg.innerText = messages.join(', ')
+    }
+  })

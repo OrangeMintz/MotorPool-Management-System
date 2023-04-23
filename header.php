@@ -3,12 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DrivePool Solutions</title>
     <link rel="icon" type="image/png" sizes="16x16" href="icon/light(1).png">
-   <link href="css/style.min.css" rel="stylesheet">
-   <link href="bootstrap/css/boostrap.css">
+    <link href="css/style.min.css" rel="stylesheet">
    <script src="js/jquery/jquery.js"></script>
 
 </head>
@@ -66,10 +64,9 @@
                     <!-- User profile -->
                         <li>
                             <a class="profile-pic" href="#">
-                                <img src="icon/users/d1.jpg" alt="user-img" width="36"
-                                    class="img-circle"><span class="text-white font-medium">Steave</span></a>
+                            <img src="icon/users/d1.jpg" alt="user-img" width="36"
+                            class="img-circle"><span class="text-white font-medium">Steave</span></a>
                         </li>
-                    
                     </ul>
                 </div>
             </nav>

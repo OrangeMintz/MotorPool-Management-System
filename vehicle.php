@@ -1,59 +1,11 @@
 <?php include "header.php" ?>
-<link href="css/vehicle.css" rel="Stylesheet">
+<?php include "css/customcss.php" ?>
+<?php include "remove.php" ?>
 
-<script> 
-
-$(document).ready(function (){
-
-    $('#add-btn').click(function (){
-
-        alert('Vehicle Added Successfully');
-
-    })
-
-
-})
-
-</script>
-
-
-
-<style>
-
-#add-btn, #edit-btn{
-    color: green;
-    background-color: #fff;
-    border-radius: 5px;
-    
-    
-}
-#add-btn:hover, #edit-btn:hover{
-    color: #fff;
-    background-color: #00B261;
-    transition: 0.5s;
-    
-}
-
-#cancel-btn, #delete-btn{
-    color: #fff;
-    background-color: #CD0000;
-    border-radius: 5px;
-
-}
-
-#cancel-btn:hover, #delete-btn:hover{
-    color: #fff;
-    background-color: red;
-    transition: 0.5s;
-}
-
-
-</style>
-        <!-- Add Student MODAL START-->
-        <div class="modal fade " id="addDriver" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- ADD VEHICLE MODAL START-->
+        <div class="modal fade " id="addVehicle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">ADD VEHICLE</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -61,49 +13,106 @@ $(document).ready(function (){
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form>
+                            <form id="vehicle-add" action ="#" method="POST">
+                            <div class="alert alert-warning error" role="alert">
+                            <div id="errormsg"></div></div>
                                 <div class="container">
                                     <div class="row">
-                                        <div class="col-sm">
+                                        <div class="col-lg">
                                             <div class="form-group">
                                                 <label for="vehicle-number" class="col-form-label">Vehicle Number:</label>
-                                                <input type="number" class="form-control" id="vehicle-number">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm">
-                                            <div class="form-group">
-                                                <label for="vehicle-brand" class="col-form-label">Vehicle Brand</label>
-                                                <input type="text" class="form-control" id="vehicle-brand">
+                                                <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
+                                                <input type="number" class="form-control" id="vehicle-number" placeholder ="10000"
+                                                onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" name ="id" required>
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="row">
-                                        <div class="col-sm">
+
+                                    <div class="col-sm">
                                             <div class="form-group">
-                                                <label for="vehicle-model" class="col-form-label">Vehicle Model</label>
-                                                <input type="text" class="form-control" id="vehicle-model">
+                                                <label for="vehicle-model" class="col-form-label">Vehicle Brand</label>
+                                                <select class="form-control" id="vehicle-brand" size="1" name ="brand" required>
+                                                <option value="" selected="selected" selected disabled value> -- Vehicle Brand  -- </option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
-                                                <label for="vehicle-seat" class="col-form-label">Passenger Seat</label>
-                                                <input type="number" class="form-control" id="vehicle-seat">
+                                                <label for="vehicle-brand" class="col-form-label">Vehicle Model</label>
+                                                <select class="form-control" id="vehicle-model" size="1" name ="brand" required>
+                                                <option value="" selected="selected" selected disabled value> -- Vehicle Model  -- </option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                                    <div class="modal-footer">
+                                    <button type="button" id="cancel-btn" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" id="add-btn" class="btn btn-success">Add Driver</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" id="cancel-btn" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            <button type="button" id="add-btn" class="btn btn-success">Add Driver</button>
-                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <!-- Add Student MODAL END -->
+        <!-- ADD VEHICLE MODAL END -->
 
+        <!-- EDIT VEHICLE MODAL START-->
+        <div class="modal fade " id="editVehicle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">EDIT VEHICLE</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="vehicle-edit" action ="#" method="POST">
+                            <div class="alert alert-warning error2" role="alert">
+                            <div id="errormsg2"></div></div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg">
+                                            <div class="form-group">
+                                                <label for="vehicle-number" class="col-form-label">Vehicle Number:</label>
+                                                <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
+                                                <input type="number" class="form-control" id="vehicle-number2" placeholder ="10000"
+                                                onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" name ="id" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+                                    <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="vehicle-model" class="col-form-label">Vehicle Brand</label>
+                                                <select class="form-control" id="vehicle-brand2" size="1" name ="brand" required>
+                                                <option value="" selected="selected" selected disabled value> -- Vehicle Brand  -- </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="vehicle-brand" class="col-form-label">Vehicle Model</label>
+                                                <select class="form-control" id="vehicle-model2" size="1" name ="brand" required>
+                                                <option value="" selected="selected" selected disabled value> -- Vehicle Model  -- </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="modal-footer">
+                                    <button type="button" id="cancel-btn" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" id="add-btn" class="btn btn-success">Edit Driver</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <!-- EDIT VEHICLE MODAL END -->
      
         <!-- Left Sidebar  -->
         <aside class="left-sidebar" data-sidebarbg="skin6">
@@ -154,15 +163,7 @@ $(document).ready(function (){
                                 <span class="hide-menu">Trips</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="blank.php"
-                                aria-expanded="false">
-                                <i class="fa fa-columns" aria-hidden="true"></i>
-                                <span class="hide-menu">Blank Page</span>
-                            </a>
-                        </li>
                     </ul>
-
                 </nav>
             </div>
         </aside>
@@ -180,7 +181,7 @@ $(document).ready(function (){
                         <div class="d-md-flex">
                             <ol class="breadcrumb ms-auto">
                             <li><button type="button" class="btn btn-primary" data-bs-toggle="modal" 
-                                data-bs-target="#addDriver" >ADD VEHICLE</button></li>
+                                data-bs-target="#addVehicle" >ADD VEHICLE</button></li>
                             </ol>
                         </div>
                     </div>
@@ -205,9 +206,7 @@ $(document).ready(function (){
                                             <th class="border-top-0">Vehicle Number</th>
                                             <th class="border-top-0">Vehicle Brand</th>
                                             <th class="border-top-0">Vehicle Model</th>
-                                            <th class="border-top-0">Passenger Seat</th>
                                             <th class="border-top-0">Options</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -216,9 +215,9 @@ $(document).ready(function (){
                                             <td>10253</td>
                                             <td>Honda</td>
                                             <td>2010 Honda Pilot</td>
-                                            <td>7</td>
-                                            <td><button type="button" id="edit-btn" class="btn btn-success" data-bs-dismiss="modal">EDIT</button>
-                                                <button type="button" id="delete-btn" class="btn btn-danger">DELETE</button>
+                                            <td>
+                                                <button type="button" id="edit-btn" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editVehicle">EDIT</button>
+                                                <button type="button" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">DELETE</button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -229,4 +228,5 @@ $(document).ready(function (){
                 </div>
             </div>
 
+<script src="js/vehicles.js"></script>
 <?php include "footer.php" ?>

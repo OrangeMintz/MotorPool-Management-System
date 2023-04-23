@@ -49,15 +49,7 @@
                                 <span class="hide-menu">Trips</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="blank.php"
-                                aria-expanded="false">
-                                <i class="fa fa-columns" aria-hidden="true"></i>
-                                <span class="hide-menu">Blank Page</span>
-                            </a>
-                        </li>
                     </ul>
-
                 </nav>
             </div>
         </aside>
@@ -74,9 +66,6 @@
                     </div>
                 </div>
             </div>
-          
-
-
             <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Three charts -->
@@ -84,48 +73,47 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-4 col-md-12">
                         <div class="white-box analytics-info">
-                            <h3 class="box-title">Total Schedule</h3>
+                            <h3 class="box-title">Current Schedule</h3>
                             <ul class="list-inline two-part d-flex align-items-center mb-0">
                                 <li>
                                     <div id="sparklinedash"><canvas width="67" height="30"
                                             style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                                     </div>
                                 </li>
-                                <li class="ms-auto"><span class="counter text-success">659</span></li>
+                                <li class="ms-auto"><span class="counter text-success">18</span></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12">
                         <div class="white-box analytics-info">
-                            <h3 class="box-title">Total Trips</h3>
+                            <h3 class="box-title">Current Trips</h3>
                             <ul class="list-inline two-part d-flex align-items-center mb-0">
                                 <li>
                                     <div id="sparklinedash2"><canvas width="67" height="30"
                                             style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                                     </div>
                                 </li>
-                                <li class="ms-auto"><span class="counter text-purple">869</span></li>
+                                <li class="ms-auto"><span class="counter text-purple">16</span></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12">
                         <div class="white-box analytics-info">
-                            <h3 class="box-title">Total Available Vehicle </h3>
+                            <h3 class="box-title">Total Available Vehicle</h3>
                             <ul class="list-inline two-part d-flex align-items-center mb-0">
                                 <li>
                                     <div id="sparklinedash3"><canvas width="67" height="30"
                                             style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                                     </div>
                                 </li>
-                                <li class="ms-auto"><span class="counter text-info">5</span>
+                                <li class="ms-auto"><span class="counter text-info">2</span>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
+
+                <!-- DRIVER -->
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
@@ -158,10 +146,7 @@
                     </div>
                 </div>
 
-
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
+                <!-- VEHICLE -->
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
@@ -174,7 +159,6 @@
                                             <th class="border-top-0">Vehicle Number</th>
                                             <th class="border-top-0">Vehicle Brand</th>
                                             <th class="border-top-0">Vehicle Model</th>
-                                            <th class="border-top-0">Passenger Seat</th>
 
                                         </tr>
                                     </thead>
@@ -184,8 +168,6 @@
                                             <td>10253</td>
                                             <td>Honda</td>
                                             <td>2010 Honda Pilot</td>
-                                            <td>7</td>
-
                                         </tr>
                                     </tbody>
                                 </table>
@@ -193,6 +175,73 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- SCHEDULES -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title">Schedules</h3>
+                            <div class="table-responsive">
+                                <table class="table text-center">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-top-0">No.</th>
+                                            <th class="border-top-0">Driver</th>
+                                            <th class="border-top-0">Vehicle Number</th>
+                                            <th class="border-top-0">Departure Datetime</th>
+                                            <th class="border-top-0">Arrival Datetime</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Oshino Shinobu</td>
+                                            <td>10253</td>
+                                            <td>04/23/2023, 11:37 AM</td>
+                                            <td>04/23/2023, 01:15 PM</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TRIPS -->
+                <div class="row">
+                <div class="col-sm-12">
+                    <div class="white-box">
+                        <h3 class="box-title">Trips</h3>
+                        <div class="table-responsive">
+                            <table class="table text-center">
+                                <thead>
+                                    <tr>
+                                        <th class="border-top-0">No.</th>
+                                        <th class="border-top-0">Driver</th>
+                                        <th class="border-top-0">Vehicle Number</th>
+                                        <th class="border-top-0">Origin</th>
+                                        <th class="border-top-0">Destination</th>
+                                        <th class="border-top-0">Departure</th>
+                                        <th class="border-top-0">Arrival</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Oshino Shinobu</td>
+                                        <td>10253</td>
+                                        <td>Valencia</td>
+                                        <td>Malaybalay</td>
+                                        <td>04/23/2023, 11:37 AM</td>
+                                        <td>04/23/2023, 01:15 PM</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
 
 <?php include "footer.php" ?>

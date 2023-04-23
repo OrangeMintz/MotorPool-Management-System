@@ -75,7 +75,8 @@ let errormsg = document.getElementById('errormsg');
     let messages = [];
 
     if(vnumber.value.length < 5){
-      messages.push('First name should be longer than 5 characters');
+      messages.push('Vehicle Number should be equal to 5 numbers');
+
     }
 
     if(messages.length > 0){
@@ -87,7 +88,7 @@ let errormsg = document.getElementById('errormsg');
   })
 
 let vnumber2 = document.getElementById('vehicle-number2');
-let addform2 = document.getElementById('vehicle-edit2');
+let addform2 = document.getElementById('vehicle-edit');
 let errormsg2 = document.getElementById('errormsg2');
 
   $(".error2").hide();
@@ -96,7 +97,7 @@ let errormsg2 = document.getElementById('errormsg2');
     let messages = [];
 
     if(vnumber2.value.length < 5){
-      messages.push('First name should be longer than 5 characters');
+      messages.push('Vehicle Number should be equal to 5 numbers');
     }
 
     if(messages.length > 0){

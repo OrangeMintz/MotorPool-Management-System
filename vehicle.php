@@ -1,6 +1,12 @@
-<?php include "header.php" ?>
-<?php include "css/customcss.php" ?>
-<?php include "remove.php" ?>
+<?php include "header.php";
+include "css/customcss.php";
+include "remove.php";
+include_once "includes/db_conn.php";
+$display = "SELECT * FROM vehicle";
+$result = $conn->query($display); 
+?>
+   
+ 
 
         <!-- ADD VEHICLE MODAL START-->
         <div class="modal fade " id="addVehicle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -13,7 +19,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="vehicle-add" action ="#" method="POST">
+                            <form id="vehicle-add" action ="includes/db_vehicle_add.php" method="POST">
                             <div class="alert alert-warning error" role="alert">
                             <div id="errormsg"></div></div>
                                 <div class="container">
@@ -23,7 +29,7 @@
                                                 <label for="vehicle-number" class="col-form-label">Vehicle Number:</label>
                                                 <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
                                                 <input type="number" class="form-control" id="vehicle-number" placeholder ="10000"
-                                                onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" name ="id" required>
+                                                onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" name ="vehicle-number" required>
                                             </div>
                                         </div>
                                     </div>
@@ -32,7 +38,7 @@
                                     <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="vehicle-model" class="col-form-label">Vehicle Brand</label>
-                                                <select class="form-control" id="vehicle-brand" size="1" name ="brand" required>
+                                                <select class="form-control" id="vehicle-brand" size="1" name ="vehicle-brand" required>
                                                 <option value="" selected="selected" selected disabled value> -- Vehicle Brand  -- </option>
                                                 </select>
                                             </div>
@@ -40,7 +46,7 @@
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="vehicle-brand" class="col-form-label">Vehicle Model</label>
-                                                <select class="form-control" id="vehicle-model" size="1" name ="brand" required>
+                                                <select class="form-control" id="vehicle-model" size="1" name ="vehicle-model" required>
                                                 <option value="" selected="selected" selected disabled value> -- Vehicle Model  -- </option>
                                                 </select>
                                             </div>
@@ -96,7 +102,7 @@
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="vehicle-brand" class="col-form-label">Vehicle Model</label>
-                                                <select class="form-control" id="vehicle-model2" size="1" name ="brand" required>
+                                                <select class="form-control" id="vehicle-model2" size="1" name ="model" required>
                                                 <option value="" selected="selected" selected disabled value> -- Vehicle Model  -- </option>
                                                 </select>
                                             </div>
@@ -202,7 +208,6 @@
                                 <table class="table text-center">
                                     <thead>
                                         <tr>
-                                            <th class="border-top-0">No.</th>
                                             <th class="border-top-0">Vehicle Number</th>
                                             <th class="border-top-0">Vehicle Brand</th>
                                             <th class="border-top-0">Vehicle Model</th>
@@ -210,16 +215,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>10253</td>
-                                            <td>Honda</td>
-                                            <td>2010 Honda Pilot</td>
-                                            <td>
-                                                <button type="button" id="edit-btn" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editVehicle">EDIT</button>
-                                                <button type="button" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">DELETE</button>
-                                            </td>
-                                        </tr>
+                                        
+                                            <?php 
+                                            if ($result->num_rows > 0) {
+                                                // output data of each row
+                                                while($row = $result->fetch_assoc()) {
+                                                  echo '<tr>
+                                                  <td>'. $row['vehicle_number'].'</td>
+                                                  <td>'. $row['vehicle_brand'].'</td>
+                                                  <td>'. $row['vehicle_model'].'</td>
+                                                  <td>
+                                                      <button type="button" id="edit-btn" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editVehicle">EDIT</button>
+                                                      <button type="button" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">DELETE</button>
+                                                  </td></tr>';
+                                                }
+                                            }
+                                            else{
+                                                echo '<tr><td colspan="5"> <div class="p-3 mb-2 bg-warning text-dark"> **** NO DATA AVAILABLE ****</div></td></tr>';
+                                            }
+                                            $conn->close();
+                                            ?>
+                                        
                                     </tbody>
                                 </table>
                             </div>

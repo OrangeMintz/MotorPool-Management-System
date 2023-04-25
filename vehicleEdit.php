@@ -31,7 +31,7 @@ include "includes/db_vehicle_edit.php"
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="vehicle-add" action ="#" method="POST">
+                            <form id="vehicle-add" action ="includes/db_vehicle_update.php" method="POST">
                             <div class="alert alert-warning error" role="alert">
                             <div id="errormsg"></div></div>
                                 <div class="container">
@@ -40,8 +40,8 @@ include "includes/db_vehicle_edit.php"
                                             <div class="form-group">
                                                 <label for="vehicle-number" class="col-form-label">Vehicle Number:</label>
                                                 <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
-                                                <input type="number" class="form-control" id="vehicle-number" value="<?php echo $row['vehicle_number']?>" 
-                                                onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" name ="id" required readonly>
+                                                <input type="number" class="form-control" name="vehicle-number" id="vehicle-number" value="<?php echo $row['vehicle_number']?>" 
+                                                onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" required readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -50,16 +50,16 @@ include "includes/db_vehicle_edit.php"
                                     <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="vehicle-model" class="col-form-label">Vehicle Brand</label>
-                                                <select class="form-control" id="vehicle-brand" size="1" name ="brand" required>
-                                                <option selected="selected" selected disabled><?php echo $row['vehicle_brand']?></option>
+                                                <select class="form-control" id="vehicle-brand" size="1" name="vehicle-brand" required>
+                                                <option value="" selected="selected" selected disabled><?php echo $row['vehicle_brand']?></option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="vehicle-brand" class="col-form-label">Vehicle Model</label>
-                                                <select class="form-control" id="vehicle-model" size="1" name ="model" required>
-                                                <option selected="selected" selected disabled><?php echo $row['vehicle_model']?></option>
+                                                <select class="form-control" id="vehicle-model" size="1" name="vehicle-model" required>
+                                                <option value="" selected="selected" selected disabled><?php echo $row['vehicle_model']?></option>
                                                 </select>
                                             </div>
                                         </div>

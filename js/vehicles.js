@@ -4,19 +4,19 @@ var vehiclesselector = {
         "Vios", "Hiace"
     ],
     Honda: [
-        "Vios", "Hiace"
+        "ViosH", "HiaceH"
     ],
     Nissan: [
-        "Vios", "Hiace"
+        "ViosN", "HiaceN"
     ],
     Ford: [
-        "Vios", "Hiace"
+        "ViosF", "HiaceF"
     ],
     Hyundai: [
-        "Vios", "Hiace"
+        "ViosH", "HiaceH"
     ],
     Suburban: [
-        "Vios", "Hiace"
+        "ViosS", "HiaceS"
     ],
     
     };
@@ -68,8 +68,20 @@ let errormsg = document.getElementById('errormsg');
     }
   })
 
-
   //EDIT VEHICLE
   function editVehicle(num){
     window.location="vehicleEdit.php?vehiclenumber=" + num;
+  }
+
+  //DELETE VEHICLE
+
+  function deleteVehicle(num){
+    $.post("includes/db_vehicle_delete.php",{num:num},function(data, status){
+      if(status == "success"){
+        $('.vehicletable').load("vehicle.php .vehicletable" );
+      }
+      else{
+        alert("Cannot delete student");
+      }
+    });
   }

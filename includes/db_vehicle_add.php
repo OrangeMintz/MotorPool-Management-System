@@ -1,6 +1,5 @@
-<?php include_once "db_conn.php"; ?>
-
-<?php
+<?php 
+include_once "db_conn.php"; 
 
 // ADD DATABASE INPUTS
 $vehicle_number = $_POST['vehicle-number'];

@@ -153,7 +153,7 @@ $dis = $conn->query($display);
                         <div class="white-box">
                             <h3 class="box-title">Vehicle Table</h3>
                             <div class="table-responsive">
-                                <table class="table text-center">
+                                <table class="table text-center vehicletable">
                                     <thead>
                                         <tr>
                                             <th class="border-top-0">Vehicle Number</th>
@@ -174,10 +174,12 @@ $dis = $conn->query($display);
                                                   <td>
                                                       <button type="button" id="edit-btn" class="btn btn-success" data-bs-toggle="modal" 
                                                       data-bs-target="#editVehicle" onclick="editVehicle('. $row['vehicle_number'].')">EDIT</button>
-                                                      <button type="button" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">DELETE</button>
+                                                      <button type="button" id="delete-btn" class="btn btn-danger" 
+                                                      onclick="deleteVehicle('. $row['vehicle_number'].')">DELETE</button>
                                                   </td></tr>';
                                                 }
                                             }
+                                            // data-bs-toggle="modal" data-bs-target="#delete"
                                             else{
                                                 echo '<tr><td colspan="5"> <div class="p-3 mb-2 bg-warning text-dark"> **** NO DATA AVAILABLE ****</div></td></tr>';
                                             }

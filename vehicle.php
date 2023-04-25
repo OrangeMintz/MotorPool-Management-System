@@ -5,8 +5,18 @@ include "remove.php";
 include_once "includes/db_conn.php";
 
 //DISPLAY
-$display = "SELECT * FROM vehicle";
-$dis = $conn->query($display); 
+// $display = "SELECT * FROM vehicle";
+// $dis = $conn->query($display); 
+//$display2 = "SELECT vehicle_bm.vehicle_brand, vehicle_bm.vehicle_model FROM vehicle_bm INNER JOIN vehicle ON vehicle_bm.vehicle_bm_id = vehicle.vehicle_number";
+
+$brand = "SELECT * FROM  vehicle_brand INNER JOIN vehicle_bm ON vehicle_brand.vehicle_brand_id = vehicle_bm.vehicle_brand_idFK";
+$model = "SELECT * FROM  vehicle_model INNER JOIN vehicle_bm ON vehicle_model.vehicle_model_id = vehicle_bm.vehicle_model_idFK";
+$brandresult = mysqli_query($conn, $brand); 
+$modelresult = mysqli_query($conn, $model); 
+
+
+$display = "SELECT * FROM  vehicle_bm INNER JOIN vehicle ON vehicle_bm.vehicle_bm_id = vehicle.vehicle_bm_idFK";
+$result = mysqli_query($conn, $display); 
 
 ?>
 
@@ -40,8 +50,10 @@ $dis = $conn->query($display);
                                     <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="vehicle-model" class="col-form-label">Vehicle Brand</label>
-                                                <select class="form-control" id="vehicle-brand" size="1" name ="vehicle-brand" required>
+                                                <select class="form-control" id="vehicle-brand" size="1" name ="vehicle_brand" required>
                                                 <option value="" selected="selected" selected disabled value> -- Vehicle Brand  -- </option>
+                                                <option value="1" >Toyota</option>
+                                                <option value="2" >Honda</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -50,6 +62,8 @@ $dis = $conn->query($display);
                                                 <label for="vehicle-brand" class="col-form-label">Vehicle Model</label>
                                                 <select class="form-control" id="vehicle-model" size="1" name ="vehicle-model" required>
                                                 <option value="" selected="selected" selected disabled value> -- Vehicle Model  -- </option>
+                                                <option value="1" >Vios</option>
+                                                <option value="2" >Hiace</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -161,16 +175,18 @@ $dis = $conn->query($display);
                                             <th class="border-top-0">Vehicle Model</th>
                                             <th class="border-top-0">Options</th>
                                         </tr>
-                                    </thead>
+                                    </thead> 
                                     <tbody>
                                             <?php 
-                                            if ($dis->num_rows > 0) {
+                                            if (mysqli_num_rows($result) > 0) {
                                                 // output data of each row
-                                                while($row = $dis->fetch_assoc()) {
+                                                while($row = mysqli_fetch_array($result)){
+                                                    $brandfetch = mysqli_fetch_array($brandresult);
+                                                    $modelfetch = mysqli_fetch_array($modelresult);
                                                   echo '<tr>
                                                   <td>'. $row['vehicle_number'].'</td>
-                                                  <td>'. $row['vehicle_brand'].'</td>
-                                                  <td>'. $row['vehicle_model'].'</td>
+                                                  <td>'. $brandfetch['vehicle_brand'].'</td>
+                                                  <td>'. $modelfetch['vehicle_model'] .'</td>
                                                   <td>
                                                       <button type="button" id="edit-btn" class="btn btn-success" data-bs-toggle="modal" 
                                                       data-bs-target="#editVehicle" onclick="editVehicle('. $row['vehicle_number'].')">EDIT</button>
@@ -191,5 +207,5 @@ $dis = $conn->query($display);
                 </div>
             </div>
 
-<script src="js/vehicles.js"></script>
+<script src="js/vehicle.js"></script>
 <?php include "footer.php" ?>

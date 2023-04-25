@@ -14,14 +14,15 @@ $stmt = $conn->prepare($add);
 $stmt -> bind_param("iss",$vehicle_number, $vehicle_brand, $vehicle_model);
 
 if($stmt->execute()){
-    echo("Vehicle was inserted successfully.");
+    header("Location: ../vehicle.php?added=successfully");
+
 }
 else{
-    echo("Vehicle insert failed");
+    header("Location: ../vehicle.php?added=unsucessfully");
+
 }
 
 $conn->close();
-header("Location: ../vehicle.php?added=successfully");
 
 
 ?>

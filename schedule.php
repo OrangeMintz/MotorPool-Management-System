@@ -197,8 +197,6 @@ include "remove.php";
             </div>
         </div>
 
-
-
         <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->

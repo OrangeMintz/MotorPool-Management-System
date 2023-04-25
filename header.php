@@ -7,18 +7,17 @@
     <title>DrivePool Solutions</title>
     <link rel="icon" type="image/png" sizes="16x16" href="icon/light(1).png">
     <link href="css/style.min.css" rel="stylesheet">
-   <script src="js/jquery/jquery.js"></script>
-
+    <script src="js/jquery/jquery.js"></script>
 </head>
 
 <body>
   
-    <!-- <div class="preloader">
+    <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
             <div class="lds-pos"></div>
         </div>
-    </div> -->
+    </div>
   
     <!-- Main Wrapper -->
     <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"

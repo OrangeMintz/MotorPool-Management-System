@@ -44,25 +44,6 @@ var vehiclesselector = {
         vmodel_selection.options[vmodel_selection.options.length] = new Option(model[i],model[i])
       }
     };
-
-    const vbrand_selection2 = document.querySelector("#vehicle-brand2")
-    const vmodel_selection2 = document.querySelector("#vehicle-model2")
-
-    // Brand Selection
-    for (let brand2 in vehiclesselector) {
-        vbrand_selection2.options[vbrand_selection2.options.length] = new Option(brand2,brand2);
-    }
-
-    // Model Selection
-    vbrand_selection2.onchange = (e) => {
-      vmodel_selection2.length = 1;
-
-      let model2 = vehiclesselector[e.target.value];
-
-      for (let i = 0; i < model2.length; i++){
-        vmodel_selection2.options[vmodel_selection2.options.length] = new Option(model2[i],model2[i])
-      }
-    };
   }//onload
   
 let vnumber = document.getElementById('vehicle-number');
@@ -87,23 +68,8 @@ let errormsg = document.getElementById('errormsg');
     }
   })
 
-let vnumber2 = document.getElementById('vehicle-number2');
-let addform2 = document.getElementById('vehicle-edit');
-let errormsg2 = document.getElementById('errormsg2');
 
-  $(".error2").hide();
-
-  addform2.addEventListener('submit', (e) =>{
-    let messages = [];
-
-    if(vnumber2.value.length < 5){
-      messages.push('Vehicle Number should be equal to 5 numbers');
-    }
-
-    if(messages.length > 0){
-      e.preventDefault()
-      $(".error2").show();
-      errormsg2.innerText = messages.join(', ')
-
-    }
-  })
+  //EDIT VEHICLE
+  function editVehicle(num){
+    window.location="vehicleEdit.php?vehiclenumber=" + num;
+  }

@@ -1,32 +1,4 @@
 
-// validations
-$('input').each(function (index, elem){
-
-   
-
-    if(elem.id == 'driver-phone'){
-        elem.placeholder = "9*********";
-        elem.maxlength = "6";
-
-    }
-
-    if(elem.id == 'driver-id'){
-        elem.placeholder = "1000";
-
-    }
-
-    if(elem.id == 'driver-email'){
-        elem.placeholder = "example@gmail.com";
-
-    }
-})
-    
-// validations
-
-
-
-
-
 // Create a function that loads the Province, City, Barangay
 var locationSelector = {
     "Agusan del Norte": {
@@ -87,11 +59,114 @@ var locationSelector = {
         barangaySelection.options[barangaySelection.options.length] = new Option(barangay[i],barangay[i])
       }
     };
+
+    //EDIT DRIVER LOCATION
+
+    const provinceSelection2 = document.querySelector("#driver-province2")
+    const citySelection2 = document.querySelector("#driver-city2")
+    const barangaySelection2 = document.querySelector("#driver-barangay2")
+
+
+    // Province Selection
+    for (let province2 in locationSelector) {
+      provinceSelection2.options[provinceSelection2.options.length] = new Option(province2,province2);
+    }
+
+    // City Selection
+    provinceSelection2.onchange = (e) => {
+      citySelection2.length = 1;
+      barangaySelection2.length = 1;
+  
+      for (let city2 in locationSelector[e.target.value]) {
+        citySelection2.options[citySelection2.options.length] = new Option(city2,city2);
+      }
+    };
+
+
+    // Barangay Selection
+    citySelection2.onchange = (e) => {barangaySelection2.disabled = false;
+      barangaySelection2.length = 1;
+
+      let barangay2 = locationSelector[provinceSelection2.value][e.target.value];
+
+      for (let i = 0; i < barangay2.length; i++){
+        barangaySelection2.options[barangaySelection2.options.length] = new Option(barangay2[i],barangay2[i])
+      }
+    };
+
   }//onload
 
 
-$('#add-btn').click(function (){
+  let fname = document.getElementById('driver-first-name');
+  let lname = document.getElementById('driver-last-name');
+  let id = document.getElementById('driver-id');
+  let phonenumber = document.getElementById('driver-phone');
+  let addform = document.getElementById('driver-add');
+  let errormsg = document.getElementById('errormsg');
 
-        alert('Successfully Added Driver')
+  $(".error").hide();
 
-})
+
+  addform.addEventListener('submit', (e) =>{
+    let messages = [];
+
+    if(fname.value.length < 2){
+      messages.push('First name should be longer than 2 characters');
+    }
+
+    else if(lname.value.length < 2){
+      messages.push('Last name should be longer than 2 characters');
+    }
+
+    else if(id.value.length != 4){
+      messages.push('ID should be equal to 4 numbers');
+    }
+
+    else if(phonenumber.value.length != 10){
+      messages.push('Phone number should be equal to 10 numbers');
+    }
+
+    if(messages.length > 0){
+      e.preventDefault()
+      $(".error").show();
+      errormsg.innerText = messages.join(', ')
+
+    }
+  })
+
+  let fname2 = document.getElementById('driver-first-name2');
+  let lname2 = document.getElementById('driver-last-name2');
+  let id2 = document.getElementById('driver-id2');
+  let phonenumber2 = document.getElementById('driver-phone2');
+  let addform2 = document.getElementById('driver-edit');
+  let errormsg2 = document.getElementById('errormsg2');
+
+  $(".error2").hide();
+
+
+  addform2.addEventListener('submit', (e) =>{
+    let messages = [];
+
+    if(fname2.value.length < 2){
+      messages.push('First name should be longer than 2 characters');
+    }
+
+    else if(lname2.value.length < 2){
+      messages.push('Last name should be longer than 2 characters');
+    }
+
+    else if(id2.value.length != 4){
+      messages.push('ID should be equal to 4 numbers');
+    }
+
+    else if(phonenumber2.value.length != 10){
+      messages.push('Phone number should be equal to 10 numbers');
+    }
+
+    if(messages.length > 0){
+      e.preventDefault()
+      $(".error2").show();
+      errormsg2.innerText = messages.join(', ')
+
+    }
+  })

@@ -31,6 +31,7 @@ input[type=number] {
     color: #fff;
     background-color: red;
     transition: 0.5s;}
+    
 
 #view-btn{
     background-color: #fff;
@@ -48,4 +49,15 @@ i.mandate {
     color: orange;
     font-size: 11px;}
 
+i.delete {
+    color: #CD0000;
+    display:inline-block;
+    font-size: 14px;}
+
+
+#errormsg{
+    font-family: "Nunito Sans",sans-serif;
+    font-size: 15px;
+
+}
 </style>

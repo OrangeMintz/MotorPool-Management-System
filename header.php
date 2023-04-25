@@ -7,8 +7,7 @@
     <title>DrivePool Solutions</title>
     <link rel="icon" type="image/png" sizes="16x16" href="icon/light(1).png">
     <link href="css/style.min.css" rel="stylesheet">
-   <script src="js/jquery/jquery.js"></script>
-
+    <script src="js/jquery/jquery.js"></script>
 </head>
 
 <body>

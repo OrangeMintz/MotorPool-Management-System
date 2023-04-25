@@ -8,7 +8,6 @@
     
 
     <!-- All Jquery -->
-    <script src="plugins/bower_components/jquery/jquery.min.js"></script> 
     <!-- Bootstrap tether Core JavaScript -->
     <script src="bootstrap/js/boostrap.js"></script>
     <script src="js/jsall/app-style-switcher.js"></script> 

@@ -1,8 +1,10 @@
-<?php include "header.php" ?>
-<?php include "css/customcss.php" ?>
+<?php include "header.php";
+include "css/customcss.php";
+include "remove.php"; ?>
+
 
         <!-- ADD DRIVER MODAL START -->
-        <div class="modal fade " id="addDriver" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade " id="addDriver" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                         <div class="modal-header">
@@ -12,13 +14,15 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action ="includes/db_driver_add.php" method="POST">
+                            <form id="driver-add" action ="includes/db_driver_add.php" method="POST">
+                            <div class="alert alert-warning error" role="alert">
+                            <div id="errormsg"></div></div>
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="first-name" class="col-form-label">First Name:</label>
-                                                <input type="text" class="form-control" id="driver-first-name"  name ="fname">
+                                                <input type="text" class="form-control" id="driver-first-name"  name ="fname" required>
                                             </div>
                                         </div>
                                         <div class="col-sm">
@@ -30,7 +34,7 @@
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="last-name" class="col-form-label">Last Name:</label>
-                                                <input type="text" class="form-control" id="driver-last-name" maxlength = "15" name ="lname">
+                                                <input type="text" class="form-control" id="driver-last-name" maxlength = "15" name ="lname" required>
                                             </div>
                                         </div>
                                         <div class="col-sm">
@@ -38,7 +42,6 @@
                                                 <label for="suffix-name" class="col-form-label">Suffix:</label>
                                                 <select class="form-control" id="driver-suffix-name" size="1" name ="sname" value="" >
                                                 <option selected value></option> <option>Jr.</option><option>Sr.</option></select>
-                                                
                                             </div>
                                         </div>
                                     </div>
@@ -47,15 +50,15 @@
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="birthday" class="col-form-label">Birthday</label>
-                                                <input type="date" class="form-control" id="driver-birthday" name ="birthday">
+                                                <input type="date" class="form-control" id="driver-birthday" name ="birthday" required>
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="id" class="col-form-label">Driver ID</label>
                                                 <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
-                                                <input type="text" class="form-control" id="driver-id" 
-                                                onKeyDown="if(this.value.length==4 && event.keyCode>47 && event.keyCode < 58) return false;" name ="id">
+                                                <input type="text" class="form-control" id="driver-id" placeholder="1000" 
+                                                onKeyDown="if(this.value.length==4 && event.keyCode>47 && event.keyCode < 58) return false;" name ="id" required>
                                             </div>
                                         </div>
                                     </div>
@@ -64,7 +67,7 @@
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="province" class="col-form-label">Province:</label>
-                                                <select class="form-control" id="driver-province" size="1" name ="province">
+                                                <select class="form-control" id="driver-province" size="1" name ="province" required>
                                                 <option  value="" selected="selected" selected disabled value> -- Select Province -- </option>
                                                 </select>
                                             </div>
@@ -72,7 +75,7 @@
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="city" class="col-form-label">City:</label>
-                                                <select class="form-control" id="driver-city" size="1" name ="city">
+                                                <select class="form-control" id="driver-city" size="1" name ="city" required>
                                                 <option value="" selected="selected" selected disabled value> -- Select City -- </option>
                                                 </select>
                                             </div>
@@ -81,7 +84,7 @@
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="barangay" class="col-form-label">Barangay:</label>
-                                                <select class="form-control" id="driver-barangay" size="1" name ="barangay">
+                                                <select class="form-control" id="driver-barangay" size="1" name ="barangay" required>
                                                 <option value="" selected="selected" selected disabled value> -- Select Barangay -- </option>
                                                 </select>
                                             </div>
@@ -97,7 +100,7 @@
                                                     <div class="input-group-prepend">
                                                     <div class="input-group-text">+63</div>
                                                     </div>
-                                                    <input type="number" class="form-control" id="driver-phone" onKeyDown="if(this.value.length==10 && event.keyCode>47 && event.keyCode < 58) return false;" name ="pnumber">
+                                                    <input type="number" class="form-control" id="driver-phone" required placeholder="9*********" onKeyDown="if(this.value.length==10 && event.keyCode>47 && event.keyCode < 58) return false;" name ="pnumber">
                                                 </div>
                                             </div>
                                         </div>
@@ -105,12 +108,12 @@
                                             <div class="form-group">
                                                 <label for="email" class="col-form-label">Email Address:</label>
                                                 <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
-                                                <input type="email" class="form-control" id="driver-email" name ="email">
+                                                <input type="email" class="form-control" id="driver-email" name ="email" placeholder="example@gmail.com" required>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                    <div class="modal-footer">
+                                <div class="modal-footer">
                                     <button type="button" id="cancel-btn" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                     <button type="submit" id="add-btn" class="btn btn-success" name ="submit">Add Driver</button>
                                 </div>
@@ -120,6 +123,127 @@
                 </div>
             </div>
         <!-- ADD DRIVER MODAL END -->
+
+        <!-- EDIT DRIVER MODAL START -->
+        <div class="modal fade " id="editDriver" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">EDIT DRIVER</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="driver-edit" action ="#" method="POST">
+                            <div class="alert alert-warning error2" role="alert">
+                            <div id="errormsg2"></div></div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="first-name" class="col-form-label">First Name:</label>
+                                                <input type="text" class="form-control" id="driver-first-name2"  name ="fname" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="middle-name" class="col-form-label">Middle Name:</label>
+                                                <input type="text" class="form-control" id="driver-middle-name2" maxlength = "15" name ="mname">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="last-name" class="col-form-label">Last Name:</label>
+                                                <input type="text" class="form-control" id="driver-last-name2" maxlength = "15" name ="lname" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="suffix-name" class="col-form-label">Suffix:</label>
+                                                <select class="form-control" id="driver-suffix-name2" size="1" name ="sname" value="" >
+                                                <option selected value></option> <option>Jr.</option><option>Sr.</option></select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="birthday" class="col-form-label">Birthday</label>
+                                                <input type="date" class="form-control" id="driver-birthday2" name ="birthday" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="id" class="col-form-label">Driver ID</label>
+                                                <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
+                                                <input type="text" class="form-control" id="driver-id2" placeholder="1000" 
+                                                onKeyDown="if(this.value.length==4 && event.keyCode>47 && event.keyCode < 58) return false;" name ="id" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="province" class="col-form-label">Province:</label>
+                                                <select class="form-control" id="driver-province2" size="1" name ="province" required>
+                                                <option  value="" selected="selected" selected disabled value> -- Select Province -- </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="city" class="col-form-label">City:</label>
+                                                <select class="form-control" id="driver-city2" size="1" name ="city" required>
+                                                <option value="" selected="selected" selected disabled value> -- Select City -- </option>
+                                                </select>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="barangay" class="col-form-label">Barangay:</label>
+                                                <select class="form-control" id="driver-barangay2" size="1" name ="barangay" required>
+                                                <option value="" selected="selected" selected disabled value> -- Select Barangay -- </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label class="col-form-label" for="phone">Phone #:</label>
+                                                <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                    <div class="input-group-text">+63</div>
+                                                    </div>
+                                                    <input type="number" class="form-control" id="driver-phone2" required placeholder="9*********" onKeyDown="if(this.value.length==10 && event.keyCode>47 && event.keyCode < 58) return false;" name ="pnumber">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-group">
+                                                <label for="email" class="col-form-label">Email Address:</label>
+                                                <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
+                                                <input type="email" class="form-control" id="driver-email2" name ="email" placeholder="example@gmail.com" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="cancel-btn" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" id="add-btn" class="btn btn-success" name ="submit">Edit Driver</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- EDIT DRIVER MODAL END -->
 
 
 
@@ -170,13 +294,6 @@
                                 aria-expanded="false">
                                 <i class="fa fa-map" aria-hidden="true"></i>
                                 <span class="hide-menu">Trips</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="blank.php"
-                                aria-expanded="false">
-                                <i class="fa fa-columns" aria-hidden="true"></i>
-                                <span class="hide-menu">Blank Page</span>
                             </a>
                         </li>
                     </ul>
@@ -234,8 +351,9 @@
                                             <td>2002-09-10</td>
                                             <td>09350050225</td>
                                             <td>oshino@gmail.com</td>
-                                            <td><button type="button" id="edit-btn" class="btn btn-success" data-bs-dismiss="modal">EDIT</button>
-                                                <button type="button" id="delete-btn" class="btn btn-danger">DELETE</button>
+                                            <td>
+                                                <button type="button" id="edit-btn" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editDriver">EDIT</button>
+                                                <button type="button" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">DELETE</button>
                                             </td> 
                                         </tr>
                                     </tbody>

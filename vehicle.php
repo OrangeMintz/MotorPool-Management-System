@@ -5,11 +5,19 @@ include "remove.php";
 include_once "includes/db_conn.php";
 
 //DISPLAY
-$display = "SELECT * FROM vehicle";
+//SEARCH
+if(isset($_GET['vehiclenumber'])){
+    $display = "SELECT * FROM `vehicle` WHERE vehicle_number = " . $_GET['vehiclenumber'];
+}
+else{
+    $display = "SELECT * FROM vehicle";
+}
+
 $dis = $conn->query($display); 
 
-?>
+//SEARCH
 
+?>
         <!-- ADD VEHICLE MODAL START-->
         <div class="modal fade " id="addVehicle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
@@ -174,12 +182,12 @@ $dis = $conn->query($display);
                                                   <td>
                                                       <button type="button" id="edit-btn" class="btn btn-success" data-bs-toggle="modal" 
                                                       data-bs-target="#editVehicle" onclick="editVehicle('. $row['vehicle_number'].')">EDIT</button>
-                                                      <button type="button" id="delete-btn" class="btn btn-danger" 
+                                                      <button type="button" id="delete-btn" class="btn btn-danger data-bs-toggle="modal" data-bs-target="#delete"  
                                                       onclick="deleteVehicle('. $row['vehicle_number'].')">DELETE</button>
                                                   </td></tr>';
                                                 }
                                             }
-                                            // data-bs-toggle="modal" data-bs-target="#delete"
+                                            // 
                                             else{
                                                 echo '<tr><td colspan="5"> <div class="p-3 mb-2 bg-warning text-dark"> **** NO DATA AVAILABLE ****</div></td></tr>';
                                             }

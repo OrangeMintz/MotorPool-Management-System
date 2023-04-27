@@ -76,12 +76,39 @@ let errormsg = document.getElementById('errormsg');
   //DELETE VEHICLE
 
   function deleteVehicle(num){
-    $.post("includes/db_vehicle_delete.php",{num:num},function(data, status){
-      if(status == "success"){
-        $('.vehicletable').load("vehicle.php .vehicletable" );
-      }
-      else{
-        alert("Cannot delete student");
-      }
-    });
+
+    if (confirm("Confirm Delete?") == true) {
+      $.post("includes/db_vehicle_delete.php",{num:num},function(data, status){
+        if(status == "success"){
+          $('.vehicletable').load("vehicle.php .vehicletable" );
+        }
+        else{
+          alert("Cannot delete Vehicle");
+        }
+      });
+    } 
+    else {
+
+
+    }
+    
+  }
+
+ 
+
+  function searchVehicle(num){
+    window.location="vehicle.php?vehiclenumber=" + num;
+  }
+
+
+  function search(){
+    $('#search').on('submit', function(event){
+      event.preventDefault(); // prevent the default form submission behavior
+      var searchKey = $('#searchKey').val(); // get the search keyword
+      // perform any desired action with the search keyword
+      alert('lol')
+
+
+    })
+    
   }

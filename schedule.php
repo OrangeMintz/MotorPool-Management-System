@@ -1,6 +1,7 @@
-<?php include "header.php" ?>
-<?php include "css/customcss.php" ?>
-<?php include "remove.php"?>
+<?php include "header.php";
+include "css/customcss.php";
+include "remove.php";
+?>
 
 
         <!-- ADD SCHEDULE MODAL START-->
@@ -196,8 +197,6 @@
             </div>
         </div>
 
-
-
         <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
@@ -210,7 +209,7 @@
                                 <table class="table text-center">
                                     <thead>
                                         <tr>
-                                            <th class="border-top-0">No.</th>
+                                            <th class="border-top-0">ID</th>
                                             <th class="border-top-0">Driver</th>
                                             <th class="border-top-0">Vehicle Number</th>
                                             <th class="border-top-0">Departure Datetime</th>

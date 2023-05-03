@@ -14,8 +14,8 @@
                 <h6>Confirm Delete Existing Data?</h6>
             </div>
             <div class="modal-footer">
-            <button type="button" id="cancel-btn" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-            <button type="submit" id="add-btn" class="btn btn-success" name ="submit">Confirm</button>
+            <button type="button" id="cancel-delete-btn" class="btn btn-info" data-bs-dismiss="modal">Close</button>
+            <button type="submit" id="delete-btn" class="btn btn-danger" name ="submit">Confirm</button>
             </div>
         </div>
     </div>

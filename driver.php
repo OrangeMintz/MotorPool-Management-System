@@ -1,6 +1,6 @@
-<?php include "header.php" ?>
-<?php include "css/customcss.php" ?>
-<?php include "remove.php" ?>
+<?php include "header.php";
+include "css/customcss.php";
+include "remove.php"; ?>
 
 
         <!-- ADD DRIVER MODAL START -->

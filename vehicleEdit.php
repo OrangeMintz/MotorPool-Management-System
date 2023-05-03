@@ -49,25 +49,27 @@ include "includes/db_vehicle_edit.php"
                                             <div class="form-group">
                                                 <label for="vehicle-number" class="col-form-label">Vehicle Plate</label>
                                                 <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
-                                                <input type="text" class="form-control" id="vehicle-plate" placeholder ="A4M5D" maxlength="5" name ="vehicle-plate" value="<?php echo $row['vehicle_plate']?>" required>
+                                                <input type="text" class="form-control" id="vehicle-plate" placeholder ="A4M5D" maxlength="5" name ="vehicle-plate" value="<?php echo $row['vehicle_plate']?>">
                                             </div>
                                         </div>
                                     </div>
+
+                                    
                                     <div class="row">
 
                                     <div class="col-sm">
                                             <div class="form-group">
-                                                <label for="vehicle-model" class="col-form-label">Vehicle Brand</label>
+                                                <label for="vehicle-brand" class="col-form-label">Vehicle Brand</label>
                                                 <select class="form-control" id="vehicle-brand" size="1" name="vehicle-brand" required>
-                                                <option value="" selected="selected" selected disabled><?php echo $row['vehicle_brand']?></option>
+                                                <option value="<?php echo $row['vehicle_brand'];?>" selected readonly><?php echo $row['vehicle_brand']?></option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
-                                                <label for="vehicle-brand" class="col-form-label">Vehicle Model</label>
+                                                <label for="vehicle-model" class="col-form-label">Vehicle Model</label>
                                                 <select class="form-control" id="vehicle-model" size="1" name="vehicle-model" required>
-                                                <option value="" selected="selected" selected disabled><?php echo $row['vehicle_model']?></option>
+                                                <option value="<?php echo $row['vehicle_model']?>" selected readonly><?php echo $row['vehicle_model']?></option>
                                                 </select>
                                             </div>
                                         </div>

@@ -8,6 +8,12 @@
     <link rel="icon" type="image/png" sizes="16x16" href="icon/light(1).png">
     <link href="css/style.min.css" rel="stylesheet">
     <script src="js/jquery/jquery.js"></script>
+    <script src="DataTables/datatables.min.js"></script>
+    <link href="DataTables/datatables.min.css" rel="stylesheet">
+
+
+
+
     
 
     

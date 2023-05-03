@@ -27,7 +27,7 @@ var vehiclesselector = {
     const vmodel_selection = document.querySelector("#vehicle-model")
 
     // disable all options 
-    vmodel_selection.disabled = true; // remove all options bar first
+    vmodel_selection.readonly = true; // remove all options bar first
 
     // Brand Selection
     for (let brand in vehiclesselector) {
@@ -35,7 +35,7 @@ var vehiclesselector = {
     }
 
     // Model Selection
-    vbrand_selection.onchange = (e) => {vmodel_selection.disabled = false;
+    vbrand_selection.onchange = (e) => {vmodel_selection.readonly = false;
       vmodel_selection.length = 1;
 
       let model = vehiclesselector[e.target.value];
@@ -101,10 +101,6 @@ let errormsg = document.getElementById('errormsg');
     });
   }
 
-   
- 
-
-
   function search(){
     $('#searchSubmit').on('submit', function(){
      
@@ -127,5 +123,5 @@ $('#searchButton').click(function (){
   }
 
 
- 
+  $('.vehicletable').DataTable();
 

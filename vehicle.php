@@ -190,10 +190,6 @@ $dis = $conn->query($display);
                                                   </td></tr>';
                                                 }
                                             }
-                                            // data-bs-toggle="modal" data-bs-target="#delete"
-                                            else{
-                                                echo '<tr><td colspan="5"> <div class="p-3 mb-2 bg-warning text-dark"> **** NO DATA AVAILABLE ****</div></td></tr>';
-                                            }
                                             $conn->close();
                                             ?>
                                     </tbody>

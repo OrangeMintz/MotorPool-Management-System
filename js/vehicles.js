@@ -89,7 +89,7 @@ let errormsg = document.getElementById('errormsg');
       // Send the POST request to delete the vehicle
       $.post("includes/db_vehicle_delete.php",{num:num},function(data, status){
         if(status == "success"){
-          $('.vehicletable').load("vehicle.php .vehicletable" );
+          window.location="vehicle.php?vehicle_deleted_successfully";
           // Hide the modal
           $('#delete').modal('hide');
         }
@@ -100,28 +100,5 @@ let errormsg = document.getElementById('errormsg');
       
     });
   }
-
-  function search(){
-    $('#searchSubmit').on('submit', function(){
-     
-      alert('lol');
-
-
-    })
-    
-  }
-
-$('#searchButton').click(function (){
-  alert('lol');
-})
-
-
-
-
-  function searchVehicle(num){
-    window.location="vehicle.php?vehiclenumber=" + num;
-  }
-
-
   $('.vehicletable').DataTable();
 

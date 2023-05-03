@@ -1,6 +1,6 @@
-<?php include_once "db_conn.php"; ?>
+<?php 
+include_once "db_conn.php"; 
 
-<?php
 
 // ADD DATABASE INPUTS
 $id = $_POST['id'];

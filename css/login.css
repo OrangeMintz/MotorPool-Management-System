@@ -1,0 +1,82 @@
+#mainBgn {
+    background : url('../images/login/HAHAz.png') no-repeat;
+    background-size: cover;
+    background-position: center bottom;
+    box-shadow: 0 0 10px rgba(10, 10, 10, 1);
+    
+  }
+
+.form{
+    background-color: #f7fafc;
+    box-shadow: 10px 10px 30px rgba(10, 10, 10, 1);
+}
+
+.smallContainer {
+    max-width:1080px;
+    margin:0 auto;
+  }
+  .inputGroup i {
+    line-height: 48px;
+  }
+
+  .inputGroup input{
+    padding-left : 32px;
+    height:48px;
+    outline: none;
+  }
+  #leftCol img{
+    width:100%;
+    object-fit: cover;
+  }
+  .customBtn {
+    color:#fff;
+    padding:12px 32px;
+    border-radius:32px 0px 0px 32px;
+    display:inline-block;
+    transform : translateY(120px);
+    text-decoration: none;
+    margin-right:-15px;
+  }
+  .linkFlare {
+    color: #f33155;
+    font-size: 18px;
+    text-decoration: none;
+
+  }
+  .btn-accent:hover{
+    background: rgb(241, 82, 115);
+    transition: 0.3s;
+    color:#fff;
+  }
+ 
+  .btn-accent {
+    background: #f33155;
+    color:#fff;
+  }
+  ::placeholder {
+    color : rgb(170, 170, 170)
+  }
+ 
+  .customBtn:hover,
+  .activeBtn {
+    color: rgb(241, 82, 115);
+    background:#fff;
+    box-shadow: -18px -1px  4px rgba(0,0,0,0.1);
+  }
+  #lsHeading {
+    letter-spacing:4px;
+    background: #2f323e;
+    color : #fff;
+    margin-left: -1px;
+
+  }
+  .bg-accent-2 {
+    background : #2f323e;
+  }
+  
+
+  #errormsg{
+    font-family: "Nunito Sans",sans-serif;
+    font-size: 15px;
+
+}

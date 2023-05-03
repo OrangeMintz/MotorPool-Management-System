@@ -47,6 +47,7 @@ var vehiclesselector = {
   }//onload
   
 let vnumber = document.getElementById('vehicle-number');
+let vplate = document.getElementById('vehicle-plate');
 let addform = document.getElementById('vehicle-add');
 let errormsg = document.getElementById('errormsg');
 
@@ -57,6 +58,11 @@ let errormsg = document.getElementById('errormsg');
 
     if(vnumber.value.length < 5){
       messages.push('Vehicle Number should be equal to 5 numbers');
+
+    }
+
+    else if(vplate.value.length < 5){
+      messages.push('Vehicle Plate should contain 5 characters');
 
     }
 
@@ -77,38 +83,49 @@ let errormsg = document.getElementById('errormsg');
 
   function deleteVehicle(num){
 
-    if (confirm("Confirm Delete?") == true) {
+    $('#delete').modal('show');
+
+    $('#delete-btn').click(function() {
+      // Send the POST request to delete the vehicle
       $.post("includes/db_vehicle_delete.php",{num:num},function(data, status){
         if(status == "success"){
           $('.vehicletable').load("vehicle.php .vehicletable" );
+          // Hide the modal
+          $('#delete').modal('hide');
         }
         else{
           alert("Cannot delete Vehicle");
         }
       });
-    } 
-    else {
+      
+    });
+  }
+
+   
+ 
 
 
-    }
+  function search(){
+    $('#searchSubmit').on('submit', function(){
+     
+      alert('lol');
+
+
+    })
     
   }
 
- 
+$('#searchButton').click(function (){
+  alert('lol');
+})
+
+
+
 
   function searchVehicle(num){
     window.location="vehicle.php?vehiclenumber=" + num;
   }
 
 
-  function search(){
-    $('#search').on('submit', function(event){
-      event.preventDefault(); // prevent the default form submission behavior
-      var searchKey = $('#searchKey').val(); // get the search keyword
-      // perform any desired action with the search keyword
-      alert('lol')
+ 
 
-
-    })
-    
-  }

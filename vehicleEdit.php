@@ -44,6 +44,14 @@ include "includes/db_vehicle_edit.php"
                                                 onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" required readonly>
                                             </div>
                                         </div>
+
+                                        <div class="col-lg">
+                                            <div class="form-group">
+                                                <label for="vehicle-number" class="col-form-label">Vehicle Plate</label>
+                                                <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
+                                                <input type="text" class="form-control" id="vehicle-plate" placeholder ="A4M5D" maxlength="5" name ="vehicle-plate" value="<?php echo $row['vehicle_plate']?>" required>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row">
 
@@ -193,6 +201,6 @@ window.location="Vehicle.php";
 }
 </script>
 
-<script src="js/vehicles.js"></script>
+<script src="js/vehicle.js"></script>
 <?php include "footer.php" ?>
 

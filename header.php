@@ -8,6 +8,10 @@
     <link rel="icon" type="image/png" sizes="16x16" href="icon/light(1).png">
     <link href="css/style.min.css" rel="stylesheet">
     <script src="js/jquery/jquery.js"></script>
+    
+
+    
+
 </head>
 
 <body>
@@ -52,9 +56,9 @@
 
                     <!-- Search -->
                         <li class=" in">
-                            <form role="search" class="app-search d-none d-md-block me-3">
-                                <input type="text" placeholder="Search..." class="form-control mt-0">
-                                <a href="" class="active">
+                            <form role="search" class="app-search d-none d-md-block me-3" id="searchSubmit">
+                                <input type="text" placeholder="Search..." class="form-control mt-0" id="searchKey">
+                                <a href="#" class="active" id="searchButton" >
                                     <i class="fa fa-search"></i>
                                 </a>
                             </form>
@@ -64,9 +68,10 @@
                         <li>
                             <a class="profile-pic" href="#">
                             <img src="icon/users/d1.jpg" alt="user-img" width="36"
-                            class="img-circle"><span class="text-white font-medium">Steave</span></a>
+                            class="img-circle"><span class="text-white font-medium">ADMIN</span></a>
                         </li>
                     </ul>
                 </div>
             </nav>
+
         </header>

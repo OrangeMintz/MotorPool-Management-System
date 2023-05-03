@@ -5,12 +5,14 @@ include_once "db_conn.php";
 $vehicle_number = $_POST['vehicle-number'];
 $vehicle_brand = $_POST['vehicle-brand'];
 $vehicle_model = $_POST['vehicle-model'];
+$vehicle_plate = $_POST['vehicle-plate'];
 
-$add = "INSERT INTO `vehicle`(`vehicle_number`, `vehicle_brand`, `vehicle_model`) VALUES 
-(?,?,?);";
+
+$add = "INSERT INTO `vehicle`(`vehicle_number`, `vehicle_brand`, `vehicle_model`, `vehicle_plate`) VALUES 
+(?,?,?,?);";
 
 $stmt = $conn->prepare($add);
-$stmt -> bind_param("iss",$vehicle_number, $vehicle_brand, $vehicle_model);
+$stmt -> bind_param("ssss",$vehicle_number, $vehicle_brand, $vehicle_model, $vehicle_plate);
 
 if($stmt->execute()){
     header("Location: ../vehicle.php?added=successfully");

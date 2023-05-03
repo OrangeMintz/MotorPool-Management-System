@@ -8,6 +8,12 @@ include_once "includes/db_conn.php";
 $display = "SELECT * FROM vehicle";
 $dis = $conn->query($display); 
 
+//error for duplication
+$error_message = "";
+if(isset($_GET['error'])){
+    $error_message = "<div class='alert alert-danger'>".$_GET['error']."</div>";
+}
+
 ?>
 
         <!-- ADD VEHICLE MODAL START-->
@@ -149,10 +155,8 @@ $dis = $conn->query($display);
                 </div>
             </div>
 
-
             
-
-
+            <div id="error-message"><?php echo $error_message; ?></div>
             <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
@@ -162,8 +166,8 @@ $dis = $conn->query($display);
                         <div class="white-box">
                             <h3 class="box-title">Vehicle Table</h3>
                             <div class="table-responsive">
-                                <table class="table text-center vehicletable">
-                                    <thead>
+                                <table class="table text-center vehicletable load table-bordered table-hover">
+                                    <thead class="thead-dark">
                                         <tr>
                                             <th class="border-top-0">Vehicle Number</th>
                                             <th class="border-top-0">Vehicle Plate</th>
@@ -190,10 +194,6 @@ $dis = $conn->query($display);
                                                   </td></tr>';
                                                 }
                                             }
-                                            // data-bs-toggle="modal" data-bs-target="#delete"
-                                            else{
-                                                echo '<tr><td colspan="5"> <div class="p-3 mb-2 bg-warning text-dark"> **** NO DATA AVAILABLE ****</div></td></tr>';
-                                            }
                                             $conn->close();
                                             ?>
                                     </tbody>
@@ -204,5 +204,5 @@ $dis = $conn->query($display);
                 </div>
             </div>
 
-<script src="js/vehicle.js"></script>
+<script src="js/vehicles.js"></script>
 <?php include "footer.php" ?>

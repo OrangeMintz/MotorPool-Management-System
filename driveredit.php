@@ -1,32 +1,38 @@
 <?php 
 include "header.php";
 include "css/customcss.php";
-include "remove.php"; 
+include "remove.php";
 include_once "includes/db_conn.php";
+
 
 //DISPLAY
 $display = "SELECT * FROM driver";
 $dis = $conn->query($display); 
 
-//error for duplication
-$error_message = "";
-if(isset($_GET['error'])){
-    $error_message = "<div class='alert alert-danger'>".$_GET['error']."</div>";
-}
+//EDIT 
+include "includes/db_driver_edit.php"
 ?>
 
-        <!-- ADD DRIVER MODAL START -->
-        <div class="modal fade " id="addDriver" tabindex="-1" role="dialog" aria-hidden="true">
+<script>
+    $(document).ready(function (){
+        $("#editDriver").modal('show');
+    })
+
+</script>
+
+<!-- EDIT DRIVER MODAL START -->
+        <div class="modal fade " id="editDriver" role="dialog" aria-hidden="true" data-bs-backdrop="static" data-keyboard="false">
+
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">ADD DRIVER</h5>
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <h5 class="modal-title" id="exampleModalLabel">EDIT DRIVER</h5>
+                            <button type="button" class="close" onclick="redirectback()" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="driver-add" action ="includes/db_driver_add.php" method="POST">
+                            <form id="driver-add" action ="includes/db_driver_update.php" method="POST">
                             <div class="alert alert-warning error" role="alert">
                             <div id="errormsg"></div></div>
                                 <div class="container">
@@ -34,26 +40,28 @@ if(isset($_GET['error'])){
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="first-name" class="col-form-label">First Name:</label>
-                                                <input type="text" class="form-control" id="driver-first-name"  name ="fname" required>
+                                                <input type="text" class="form-control" id="driver-first-name" value="<?php echo $row['first_name']?>" name ="fname" required>
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="middle-name" class="col-form-label">Middle Name:</label>
-                                                <input type="text" class="form-control" id="driver-middle-name" maxlength = "15" name ="mname">
+                                                <input type="text" class="form-control" id="driver-middle-name" maxlength = "15" value="<?php echo $row['middle_name']?>" name ="mname">
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="last-name" class="col-form-label">Last Name:</label>
-                                                <input type="text" class="form-control" id="driver-last-name" maxlength = "15" name ="lname" required>
+                                                <input type="text" class="form-control" id="driver-last-name" maxlength = "15" value="<?php echo $row['last_name']?>" name ="lname" required>
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="suffix-name" class="col-form-label">Suffix:</label>
                                                 <select class="form-control" id="driver-suffix-name" size="1" name ="sname" value="" >
-                                                <option selected value></option> <option>Jr.</option><option>Sr.</option></select>
+                                                <option></option>
+                                                <option selected value="<?php echo $row['suffix']?>"> <?php echo $row['suffix']?>  </option> 
+                                                <option>Jr.</option><option>Sr.</option></select>
                                             </div>
                                         </div>
                                     </div>
@@ -62,7 +70,7 @@ if(isset($_GET['error'])){
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="birthday" class="col-form-label">Birthday</label>
-                                                <input type="date" class="form-control" id="driver-birthday" name ="birthday" required>
+                                                <input type="date" class="form-control" id="driver-birthday" value="<?php echo $row['birthday']?>" name ="birthday" required>
                                             </div>
                                         </div>
                                         <div class="col-sm">
@@ -70,7 +78,7 @@ if(isset($_GET['error'])){
                                                 <label for="id" class="col-form-label">Driver ID</label>
                                                 <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
                                                 <input type="text" class="form-control" id="driver-id" placeholder="1000" 
-                                                onKeyDown="if(this.value.length==4 && event.keyCode>47 && event.keyCode < 58) return false;" name ="id" required>
+                                                onKeyDown="if(this.value.length==4 && event.keyCode>47 && event.keyCode < 58) return false;" value="<?php echo $row['driver_id']?>" name ="id" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -79,16 +87,16 @@ if(isset($_GET['error'])){
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="province" class="col-form-label">Province:</label>
-                                                <select class="form-control" id="driver-province" size="1" name ="province" required>
-                                                <option  value="" selected="selected" selected disabled value> -- Select Province -- </option>
+                                                <select class="form-control" id="driver-province" size="1" name="province" required>
+                                                <option value="<?php echo $row['province']?>" selected readonly><?php echo $row['province']?></option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="city" class="col-form-label">City:</label>
-                                                <select class="form-control" id="driver-city" size="1" name ="city" required>
-                                                <option value="" selected="selected" selected disabled value> -- Select City -- </option>
+                                                <select class="form-control" id="driver-city" size="1" name="city" required>
+                                                <option value="<?php echo $row['city']?>" selected readonly><?php echo $row['city']?></option>
                                                 </select>
                                             </div>
                                             
@@ -96,8 +104,8 @@ if(isset($_GET['error'])){
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="barangay" class="col-form-label">Barangay:</label>
-                                                <select class="form-control" id="driver-barangay" size="1" name ="barangay" required>
-                                                <option value="" selected="selected" selected disabled value> -- Select Barangay -- </option>
+                                                <select class="form-control" id="driver-barangay" size="1" name="barangay" required>
+                                                <option value="<?php echo $row['barangay']?>" selected readonly><?php echo $row['barangay']?></option>
                                                 </select>
                                             </div>
                                         </div>
@@ -112,7 +120,7 @@ if(isset($_GET['error'])){
                                                     <div class="input-group-prepend">
                                                     <div class="input-group-text">+63</div>
                                                     </div>
-                                                    <input type="number" class="form-control" id="driver-phone" required placeholder="9*********" onKeyDown="if(this.value.length==10 && event.keyCode>47 && event.keyCode < 58) return false;" name ="pnumber">
+                                                    <input type="number" class="form-control" id="driver-phone" value="<?php echo $row['phone_number']?>" required placeholder="9*********" onKeyDown="if(this.value.length==10 && event.keyCode>47 && event.keyCode < 58) return false;" name ="pnumber">
                                                 </div>
                                             </div>
                                         </div>
@@ -120,25 +128,22 @@ if(isset($_GET['error'])){
                                             <div class="form-group">
                                                 <label for="email" class="col-form-label">Email Address:</label>
                                                 <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
-                                                <input type="email" class="form-control" id="driver-email" name ="email" placeholder="example@gmail.com" required>
+                                                <input type="email" class="form-control" id="driver-email" name ="email" value="<?php echo $row['email_address']?>" placeholder="example@gmail.com" required>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" id="cancel-btn" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" id="add-btn" class="btn btn-success" name ="submit">Add Driver</button>
+                                    <button type="button" id="cancel-btn" class="btn btn-danger"  onclick="redirectback()" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" id="add-btn" class="btn btn-success" name ="submit">Edit Driver</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-        <!-- ADD DRIVER MODAL END -->
-
+        <!-- EDIT DRIVER MODAL END -->
         
-
-
         <!-- Left Sidebar  -->
         <aside class="left-sidebar" data-sidebarbg="skin6">
             <!-- Sidebar scroll-->
@@ -161,14 +166,14 @@ if(isset($_GET['error'])){
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="driver.php"
                                 aria-expanded="false">
                                 <i class="fa fa-users" aria-hidden="true"></i>
                                 <span class="hide-menu">Driver Management</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="vehicle.php"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
                                 aria-expanded="false">
                                 <i class="fa fa-car" aria-hidden="true"></i>
                                 <span class="hide-menu">Vehicle Management</span>
@@ -209,20 +214,10 @@ if(isset($_GET['error'])){
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <h4 class="page-title">Driver Management</h4>
                     </div>
-                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                        <div class="d-md-flex">
-                            <ol class="breadcrumb ms-auto">
-                                <li><button type="button" class="btn btn-primary" data-bs-toggle="modal" 
-                                data-bs-target="#addDriver" >ADD DRIVER</button></li>
-                            </ol>
-                        </div>
-                    </div>
                 </div>
             </div>
-
-            <div id="error-message"><?php echo $error_message; ?></div>
-
-            <div class="container-fluid">
+            
+             <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
@@ -240,7 +235,6 @@ if(isset($_GET['error'])){
                                             <th class="border-top-0">Birthday</th>
                                             <th class="border-top-0">Phone #</th>
                                             <th class="border-top-0">Email</th>
-                                            <th class="">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -255,13 +249,8 @@ if(isset($_GET['error'])){
                                                   <td>'. $row['birthday'].'</td>
                                                   <td>'. $row['phone_number'].'</td>
                                                   <td>'. $row['email_address'].'</td>
-
-                                                  <td>
-                                                      <button type="button" id="edit-btn" class="btn btn-success" data-bs-toggle="modal" 
-                                                      data-bs-target="#editVehicle" onclick="editDriver('. $row['driver_id'].')">EDIT</button>
-                                                      <button type="button" id="delete-btn" class="btn btn-danger" 
-                                                      onclick="deleteDriver('. $row['driver_id'].')">DELETE</button>
-                                                  </td></tr>';
+                                                  
+                                                  </tr>';
                                                 }
                                             }
                                             $conn->close();
@@ -274,6 +263,11 @@ if(isset($_GET['error'])){
             </div>
         </div>
 
-
+<script>
+function redirectback(){
+window.location="driver.php";
+}
+</script>
 <script src="js/drivers.js"></script>
 <?php include "footer.php" ?>
+

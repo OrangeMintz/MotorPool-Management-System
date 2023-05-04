@@ -11,11 +11,5 @@ if($stmt->execute()){
     
 }
 else{
-
-
-
 }
-
-
-
 ?>

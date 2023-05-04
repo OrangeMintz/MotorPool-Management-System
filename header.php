@@ -21,14 +21,14 @@
 </head>
 
 <body>
-  
+<!--   
     <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
             <div class="lds-pos"></div>
         </div>
     </div>
-  
+   -->
     <!-- Main Wrapper -->
     <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
         data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
@@ -59,16 +59,6 @@
 
         <!-- Right side toggle and nav items -->
                     <ul class="navbar-nav ms-auto d-flex align-items-center">
-
-                    <!-- Search -->
-                        <li class=" in">
-                            <form role="search" class="app-search d-none d-md-block me-3" id="searchSubmit">
-                                <input type="text" placeholder="Search..." class="form-control mt-0" id="searchKey">
-                                <a href="#" class="active" id="searchButton" >
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </form>
-                        </li>
 
                     <!-- User profile -->
                         <li>

@@ -14,18 +14,47 @@ $barangay = $_POST['barangay'];
 $pnumber = $_POST['pnumber'];
 $email = $_POST['email'];
 
-// Validate driver inputs
+// Validate driver inputs input
 if (strlen(trim($fname)) === 0) {
     $error = "First name cannot be empty or contain only whitespace characters";
     header("Location: ../driver.php?error=".urlencode($error));
     exit();
 }
 
-if (preg_match('/\s/', $fname)) {
-    $error = "First name cannot contain whitespace characters";
+if (preg_match('/^\s+|\s+$/', $fname)) {
+    $error = "First name cannot start or end with whitespace characters";
     header("Location: ../driver.php?error=".urlencode($error));
     exit();
 }
+
+if (preg_match('/^\s+|\s+$/', $mname)) {
+    $error = "Middle name cannot start or end with whitespace characters";
+    header("Location: ../driver.php?error=".urlencode($error));
+    exit();
+}
+
+if (strlen(trim($lname)) === 0) {
+    $error = "Last name cannot be empty or contain only whitespace characters";
+    header("Location: ../driver.php?error=".urlencode($error));
+    exit();
+}
+
+if (preg_match('/^\s+|\s+$/', $lname)) {
+    $error = "Last name cannot start or end with whitespace characters";
+    header("Location: ../driver.php?error=".urlencode($error));
+    exit();
+}
+
+$query = mysqli_query($conn, "SELECT * FROM `driver` WHERE first_name = '$fname' AND middle_name = '$mname' AND last_name = '$lname'");
+
+
+if(mysqli_num_rows($query)>0){
+    $error = "Driver with the same first name, middle name and last name already exists";
+    header("Location: ../driver.php?error=".urlencode($error));
+    exit();
+}
+
+else{
 
 
 $update = "UPDATE `driver` SET `first_name`= ?,`middle_name`= ?,`last_name`= ?,`suffix`= ?,`birthday`= ?,`barangay`= ?, 
@@ -44,4 +73,5 @@ else{
 }
 $conn->close();
 
+}
 ?>

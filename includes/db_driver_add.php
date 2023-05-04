@@ -15,21 +15,42 @@ $pnumber = $_POST['pnumber'];
 $email = $_POST['email'];
 
 
-// Validate vehicle plate input
+// Validate driver inputs input
 if (strlen(trim($fname)) === 0) {
     $error = "First name cannot be empty or contain only whitespace characters";
     header("Location: ../driver.php?error=".urlencode($error));
     exit();
 }
 
-if (preg_match('/\s/', $fname)) {
-    $error = "First name cannot contain whitespace characters";
+if (preg_match('/^\s+|\s+$/', $fname)) {
+    $error = "First name cannot start or end with whitespace characters";
     header("Location: ../driver.php?error=".urlencode($error));
     exit();
 }
 
+if (preg_match('/^\s+|\s+$/', $mname)) {
+    $error = "Middle name cannot start or end with whitespace characters";
+    header("Location: ../driver.php?error=".urlencode($error));
+    exit();
+}
+
+if (strlen(trim($lname)) === 0) {
+    $error = "Last name cannot be empty or contain only whitespace characters";
+    header("Location: ../driver.php?error=".urlencode($error));
+    exit();
+}
+
+if (preg_match('/^\s+|\s+$/', $lname)) {
+    $error = "Last name cannot start or end with whitespace characters";
+    header("Location: ../driver.php?error=".urlencode($error));
+    exit();
+}
+
+
 $query = mysqli_query($conn, "SELECT * FROM `driver` WHERE driver_id = '$id'");
 $query2 = mysqli_query($conn, "SELECT * FROM `driver` WHERE email_address = '$email'");
+$query3 = mysqli_query($conn, "SELECT * FROM `driver` WHERE phone_number = '$pnumber'");
+$query4 = mysqli_query($conn, "SELECT * FROM `driver` WHERE first_name = '$fname' AND middle_name = '$mname' AND last_name = '$lname'");
 
 
 if(mysqli_num_rows($query)>0){
@@ -40,6 +61,18 @@ if(mysqli_num_rows($query)>0){
 
 else if(mysqli_num_rows($query2)>0){
     $error = "Driver Email already exists";
+    header("Location: ../driver.php?error=".urlencode($error));
+    exit();
+}
+
+else if(mysqli_num_rows($query3)>0){
+    $error = "Driver Phone Number already exists";
+    header("Location: ../driver.php?error=".urlencode($error));
+    exit();
+}
+
+else if(mysqli_num_rows($query4)>0){
+    $error = "Driver with the same first name, middle name and last name already exists";
     header("Location: ../driver.php?error=".urlencode($error));
     exit();
 }

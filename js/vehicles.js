@@ -80,7 +80,6 @@ let errormsg = document.getElementById('errormsg');
   }
 
   //DELETE VEHICLE
-
   function deleteVehicle(num){
 
     $('#delete').modal('show');
@@ -100,5 +99,6 @@ let errormsg = document.getElementById('errormsg');
       
     });
   }
-  $('.vehicletable').DataTable();
+
+  
 

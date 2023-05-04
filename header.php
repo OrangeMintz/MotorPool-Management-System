@@ -60,16 +60,6 @@
         <!-- Right side toggle and nav items -->
                     <ul class="navbar-nav ms-auto d-flex align-items-center">
 
-                    <!-- Search -->
-                        <li class=" in">
-                            <form role="search" class="app-search d-none d-md-block me-3" id="searchSubmit">
-                                <input type="text" placeholder="Search..." class="form-control mt-0" id="searchKey">
-                                <a href="#" class="active" id="searchButton" >
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </form>
-                        </li>
-
                     <!-- User profile -->
                         <li>
                             <a class="profile-pic" href="#">

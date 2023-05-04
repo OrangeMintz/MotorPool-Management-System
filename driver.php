@@ -1,7 +1,19 @@
-<?php include "header.php";
+<?php 
+include "header.php";
 include "css/customcss.php";
-include "remove.php"; ?>
+include "remove.php"; 
+include_once "includes/db_conn.php";
 
+//DISPLAY
+$display = "SELECT * FROM driver";
+$dis = $conn->query($display); 
+
+//error for duplication
+$error_message = "";
+if(isset($_GET['error'])){
+    $error_message = "<div class='alert alert-danger'>".$_GET['error']."</div>";
+}
+?>
 
         <!-- ADD DRIVER MODAL START -->
         <div class="modal fade " id="addDriver" tabindex="-1" role="dialog" aria-hidden="true">
@@ -322,6 +334,11 @@ include "remove.php"; ?>
             </div>
 
 
+
+            
+
+            <div id="error-message"><?php echo $error_message; ?></div>
+
             <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
@@ -331,7 +348,7 @@ include "remove.php"; ?>
                         <div class="white-box">
                             <h3 class="box-title">Driver</h3>
                             <div class="table-responsive">
-                                <table class="table text-center">
+                                <table class="table text-center load table-bordered table-hover  driverTable">
                                     <thead>
                                         <tr>
                                             <th class="border-top-0">ID</th>
@@ -344,18 +361,28 @@ include "remove.php"; ?>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1000</td>
-                                            <td>Oshino Shinobu</td>
-                                            <td>Valencia City, Bukidnon</td>
-                                            <td>2002-09-10</td>
-                                            <td>09350050225</td>
-                                            <td>oshino@gmail.com</td>
-                                            <td>
-                                                <button type="button" id="edit-btn" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editDriver">EDIT</button>
-                                                <button type="button" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">DELETE</button>
-                                            </td> 
-                                        </tr>
+                                            <?php 
+                                            if ($dis->num_rows > 0) {
+                                                // output data of each row
+                                                while($row = $dis->fetch_assoc()) {
+                                                  echo '<tr>
+                                                  <td>'. $row['driver_id'].'</td>
+                                                  <td>'. $row['last_name'].', '. $row['first_name'] .' '. $row['middle_name'] .' '. $row['suffix'] .'</td>
+                                                  <td>'. $row['barangay'].', '. $row['city'].', '. $row['province'].'</td>
+                                                  <td>'. $row['birthday'].'</td>
+                                                  <td>'. $row['phone_number'].'</td>
+                                                  <td>'. $row['email_address'].'</td>
+
+                                                  <td>
+                                                      <button type="button" id="edit-btn" class="btn btn-success" data-bs-toggle="modal" 
+                                                      data-bs-target="#editVehicle" onclick="editVehicle('. $row['driver_id'].')">EDIT</button>
+                                                      <button type="button" id="delete-btn" class="btn btn-danger" 
+                                                      onclick="deleteDriver('. $row['driver_id'].')">DELETE</button>
+                                                  </td></tr>';
+                                                }
+                                            }
+                                            $conn->close();
+                                            ?>
                                     </tbody>
                             </table>
                         </div>
@@ -365,5 +392,5 @@ include "remove.php"; ?>
         </div>
 
 
-<script src="js/drivers.js"></script>
+<script src="js/driver.js"></script>
 <?php include "footer.php" ?>

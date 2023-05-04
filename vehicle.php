@@ -154,9 +154,9 @@ if(isset($_GET['error'])){
                     </div>
                 </div>
             </div>
-
             
             <div id="error-message"><?php echo $error_message; ?></div>
+            
             <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->

@@ -7,8 +7,8 @@ var locationSelector = {
     },
 
     Bukidnon: {
-      Valencia: ["Poblacion", "Bagontaas"],
-      Malaybalay: ["Aglayan","Casisang"]
+      "Valencia City": ["Poblacion", "Bagontaas"],
+      "Malaybalay City": ["Aglayan","Casisang"]
     },
 
     Camiguin: {
@@ -170,3 +170,27 @@ addform2.addEventListener('submit', (e) =>{
 
   }
 })
+
+ //DELETE VEHICLE
+ function deleteDriver(num){
+
+  $('#delete').modal('show');
+
+  $('#delete-btn').click(function() {
+    // Send the POST request to delete the vehicle
+    $.post("includes/db_driver_delete.php",{num:num},function(data, status){
+      if(status == "success"){
+        window.location="driver.php?driver_deleted_successfully";
+        // Hide the modal
+        $('#delete').modal('hide');
+      }
+      else{
+        alert("Cannot delete Vehicle");
+      }
+    });
+    
+  });
+}
+
+
+$('.driverTable').DataTable();

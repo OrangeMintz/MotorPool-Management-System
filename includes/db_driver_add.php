@@ -1,7 +1,6 @@
 <?php 
 include_once "db_conn.php"; 
 
-
 // ADD DATABASE INPUTS
 $id = $_POST['id'];
 $fname = $_POST['fname'];
@@ -16,14 +15,41 @@ $pnumber = $_POST['pnumber'];
 $email = $_POST['email'];
 
 
-$add = "INSERT INTO `driver`(`driver_id`, `first_name`, `middle_name`, `last_name`, `suffix`, 
-`birthday`, `barangay`, `city`, `province`, `phone_number`, `email_address`) VALUES ('$id',
-'$fname','$mname','$lname','$sname','$birthday','$barangay','$city','$province',
-'$pnumber','$email');";
+// Validate vehicle plate input
+
+if (strlen(trim($fname)) === 0) {
+    $error = "First name cannot be empty or contain only whitespace characters";
+    header("Location: ../driver.php?error=".urlencode($error));
+    exit();
+}
+
+$query = mysqli_query($conn, "SELECT * FROM `driver` WHERE driver_id = '$id'");
 
 
-mysqli_query($conn, $add);
+if(mysqli_num_rows($query)>0){
+    $error = "Driver ID already existed";
+    header("Location: ../driver.php?error=".urlencode($error));
+    exit();
+}
 
-header("Location: ../driver.php?added=successfully");
+else{
 
+
+$add = "INSERT INTO `driver`(`driver_id`, `first_name`, `middle_name`, `last_name`, `suffix`, `birthday`, `barangay`, `city`, `province`, `phone_number`, `email_address`, `created_at`) 
+VALUES (?,?,?,?,?,?,?,?,?,?,?,NOW())";
+
+$stmt = $conn->prepare($add);
+$stmt -> bind_param("sssssssssss",$id, $fname, $mname, $lname, $sname, $birthday, $province, $city, $barangay, $pnumber, $email);
+
+if($stmt->execute()){
+    $conn->close();
+    header("Location: ../driver.php?added=successfully");
+    exit();
+
+}
+else{
+    $conn->close();
+    header("Location: ../driver.php?added=unsucessfully");}
+    exit();
+}
 ?>

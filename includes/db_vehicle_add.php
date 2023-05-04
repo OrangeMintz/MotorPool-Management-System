@@ -8,12 +8,28 @@ $vehicle_model = $_POST['vehicle-model'];
 $vehicle_plate = $_POST['vehicle-plate'];
 
 
-$query = mysqli_query($conn, "SELECT * FROM `vehicle` WHERE vehicle_number = '$vehicle_number'");
-if(mysqli_num_rows($query)>0){
-    $error = "Vehicle Number already existed";
+// Validate vehicle plate input
+if (preg_match('/\s/', $vehicle_plate)) {
+    $error = "Vehicle Plate cannot contain whitespace characters";
     header("Location: ../vehicle.php?error=".urlencode($error));
     exit();
-    // echo "<script>document.getElementById('error-message').innerHTML = '$error';</script>";
+}
+
+
+$query = mysqli_query($conn, "SELECT * FROM `vehicle` WHERE vehicle_number = '$vehicle_number'");
+$query2 = mysqli_query($conn, "SELECT * FROM `vehicle` WHERE vehicle_plate = '$vehicle_plate'");
+
+
+if(mysqli_num_rows($query)>0){
+    $error = "Vehicle Number already exists ";
+    header("Location: ../vehicle.php?error=".urlencode($error));
+    exit();
+}
+
+else if(mysqli_num_rows($query2)>0){
+    $error = "Vehicle Plate already exists ";
+    header("Location: ../vehicle.php?error=".urlencode($error));
+    exit();
 }
 
 else{
@@ -23,22 +39,15 @@ $stmt = $conn->prepare($add);
 $stmt -> bind_param("ssss",$vehicle_number, $vehicle_brand, $vehicle_model, $vehicle_plate);
 
 if($stmt->execute()){
+    $conn->close();
     header("Location: ../vehicle.php?added=successfully");
     exit();
 
 }
 else{
+    $conn->close();
     header("Location: ../vehicle.php?added=unsucessfully");}
     exit();
 }
-$conn->close();
+
 ?>
-
-
-<!-- $query = $pdo->prepare("SELECT * FROM `vehicle` WHERE vehicle_number = ?");
-$query-> execute([$vehicle_number]);
-$result = $query->rowCount();
-
-if($result > 0){
-    $error = "<span class='text-danger'>Vehicle Number already existed</span>";
-} -->

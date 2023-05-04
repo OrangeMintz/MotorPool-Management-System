@@ -7,8 +7,8 @@ var locationSelector = {
     },
 
     Bukidnon: {
-      Valencia: ["Poblacion", "Bagontaas"],
-      Malaybalay: ["Aglayan","Casisang"]
+      "Valencia City": ["Poblacion", "Bagontaas"],
+      "Malaybalay City": ["Aglayan","Casisang"]
     },
 
     Camiguin: {
@@ -30,8 +30,8 @@ var locationSelector = {
   const barangaySelection = document.querySelector("#driver-barangay")
 
   // disable all options 
-  citySelection.disabled = true; // remove all options bar first
-  barangaySelection.disabled = true; // remove all options bar first
+  citySelection.readonly = true; // remove all options bar first
+  barangaySelection.readonly = true; // remove all options bar first
 
   // Province Selection
   for (let province in locationSelector) {
@@ -39,7 +39,7 @@ var locationSelector = {
   }
 
   // City Selection
-  provinceSelection.onchange = (e) => {citySelection.disabled = false;
+  provinceSelection.onchange = (e) => {citySelection.readonly = false;
     citySelection.length = 1;
     barangaySelection.length = 1;
 
@@ -50,7 +50,7 @@ var locationSelector = {
 
 
   // Barangay Selection
-  citySelection.onchange = (e) => {barangaySelection.disabled = false;
+  citySelection.onchange = (e) => {barangaySelection.readonly = false;
     barangaySelection.length = 1;
 
     let barangay = locationSelector[provinceSelection.value][e.target.value];
@@ -60,39 +60,6 @@ var locationSelector = {
     }
   };
 
-  //EDIT DRIVER LOCATION
-
-  const provinceSelection2 = document.querySelector("#driver-province2")
-  const citySelection2 = document.querySelector("#driver-city2")
-  const barangaySelection2 = document.querySelector("#driver-barangay2")
-
-
-  // Province Selection
-  for (let province2 in locationSelector) {
-    provinceSelection2.options[provinceSelection2.options.length] = new Option(province2,province2);
-  }
-
-  // City Selection
-  provinceSelection2.onchange = (e) => {
-    citySelection2.length = 1;
-    barangaySelection2.length = 1;
-
-    for (let city2 in locationSelector[e.target.value]) {
-      citySelection2.options[citySelection2.options.length] = new Option(city2,city2);
-    }
-  };
-
-
-  // Barangay Selection
-  citySelection2.onchange = (e) => {barangaySelection2.disabled = false;
-    barangaySelection2.length = 1;
-
-    let barangay2 = locationSelector[provinceSelection2.value][e.target.value];
-
-    for (let i = 0; i < barangay2.length; i++){
-      barangaySelection2.options[barangaySelection2.options.length] = new Option(barangay2[i],barangay2[i])
-    }
-  };
 
 }//onload
 
@@ -134,39 +101,32 @@ addform.addEventListener('submit', (e) =>{
   }
 })
 
-let fname2 = document.getElementById('driver-first-name2');
-let lname2 = document.getElementById('driver-last-name2');
-let id2 = document.getElementById('driver-id2');
-let phonenumber2 = document.getElementById('driver-phone2');
-let addform2 = document.getElementById('driver-edit');
-let errormsg2 = document.getElementById('errormsg2');
 
-$(".error2").hide();
+ //EDIT VEHICLE
+ function editDriver(num){
+  window.location="driveredit.php?driver_id=" + num;
+}
+
+ //DELETE VEHICLE
+ function deleteDriver(num){
+
+  $('#delete').modal('show');
+
+  $('#delete-btn').click(function() {
+    // Send the POST request to delete the vehicle
+    $.post("includes/db_driver_delete.php",{num:num},function(data, status){
+      if(status == "success"){
+        window.location="driver.php?driver_deleted_successfully";
+        // Hide the modal
+        $('#delete').modal('hide');
+      }
+      else{
+        alert("Cannot delete Vehicle");
+      }
+    });
+    
+  });
+}
 
 
-addform2.addEventListener('submit', (e) =>{
-  let messages = [];
-
-  if(fname2.value.length < 2){
-    messages.push('First name should be longer than 2 characters');
-  }
-
-  else if(lname2.value.length < 2){
-    messages.push('Last name should be longer than 2 characters');
-  }
-
-  else if(id2.value.length != 4){
-    messages.push('ID should be equal to 4 numbers');
-  }
-
-  else if(phonenumber2.value.length != 10){
-    messages.push('Phone number should be equal to 10 numbers');
-  }
-
-  if(messages.length > 0){
-    e.preventDefault()
-    $(".error2").show();
-    errormsg2.innerText = messages.join(', ')
-
-  }
-})
+$('.driverTable').DataTable();

@@ -41,7 +41,7 @@ if(isset($_GET['error'])){
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="vehicle-add" action ="includes/db_appoint _add.php" method="POST">
+                            <form id="vehicle-add" action ="includes/db_appoint_add.php" method="POST">
                             <div class="alert alert-warning error" role="alert">
                             <div id="errormsg"></div></div>
                                 <div class="container">

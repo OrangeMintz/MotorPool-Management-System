@@ -1,22 +1,22 @@
 // Create a function that loads the Brand and Model
 var vehiclesselector = {
     Toyota: [
-        "Vios", "Hiace"
+        "Vios","Hiace"
     ],
     Honda: [
-        "ViosH", "HiaceH"
+        "ViosH","HiaceH"
     ],
     Nissan: [
-        "ViosN", "HiaceN"
+        "ViosN","HiaceN"
     ],
     Ford: [
-        "ViosF", "HiaceF"
+        "ViosF","HiaceF"
     ],
     Hyundai: [
-        "ViosH", "HiaceH"
+        "ViosH","HiaceH"
     ],
     Suburban: [
-        "ViosS", "HiaceS"
+        "ViosS","HiaceS"
     ],
     
     };
@@ -27,7 +27,7 @@ var vehiclesselector = {
     const vmodel_selection = document.querySelector("#vehicle-model")
 
     // disable all options 
-    vmodel_selection.disabled = true; // remove all options bar first
+    vmodel_selection.readonly = true; // remove all options bar first
 
     // Brand Selection
     for (let brand in vehiclesselector) {
@@ -35,7 +35,7 @@ var vehiclesselector = {
     }
 
     // Model Selection
-    vbrand_selection.onchange = (e) => {vmodel_selection.disabled = false;
+    vbrand_selection.onchange = (e) => {vmodel_selection.readonly = false;
       vmodel_selection.length = 1;
 
       let model = vehiclesselector[e.target.value];
@@ -47,6 +47,7 @@ var vehiclesselector = {
   }//onload
   
 let vnumber = document.getElementById('vehicle-number');
+let vplate = document.getElementById('vehicle-plate');
 let addform = document.getElementById('vehicle-add');
 let errormsg = document.getElementById('errormsg');
 
@@ -60,6 +61,11 @@ let errormsg = document.getElementById('errormsg');
 
     }
 
+    else if(vplate.value.length < 5){
+        messages.push('Vehicle Plate should contain 5 characters');
+
+      }
+
     if(messages.length > 0){
       e.preventDefault()
       $(".error").show();
@@ -70,45 +76,31 @@ let errormsg = document.getElementById('errormsg');
 
   //EDIT VEHICLE
   function editVehicle(num){
-    window.location="vehicleEdit.php?vehiclenumber=" + num;
+    window.location="vehicleedit.php?vehiclenumber=" + num;
   }
 
   //DELETE VEHICLE
-
   function deleteVehicle(num){
 
-    if (confirm("Confirm Delete?") == true) {
+    $('#delete').modal('show');
+
+    $('#delete-btn').click(function() {
+      // Send the POST request to delete the vehicle
       $.post("includes/db_vehicle_delete.php",{num:num},function(data, status){
         if(status == "success"){
-          $('.vehicletable').load("vehicle.php .vehicletable" );
+          window.location="vehicle.php?vehicle_deleted_successfully";
+          // Hide the modal
+          $('#delete').modal('hide');
         }
         else{
           alert("Cannot delete Vehicle");
         }
       });
-    } 
-    else {
-
-
-    }
-    
+      
+    });
   }
+  
+  $('.vehicletable').DataTable();
 
- 
+  
 
-  function searchVehicle(num){
-    window.location="vehicle.php?vehiclenumber=" + num;
-  }
-
-
-  function search(){
-    $('#search').on('submit', function(event){
-      event.preventDefault(); // prevent the default form submission behavior
-      var searchKey = $('#searchKey').val(); // get the search keyword
-      // perform any desired action with the search keyword
-      alert('lol')
-
-
-    })
-    
-  }

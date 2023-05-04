@@ -12,7 +12,7 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-#add-btn, #edit-btn{
+#add-btn, #edit-btn, #delete-btn{
     color: green;
     background-color: #fff;
     border-radius: 5px;}
@@ -33,13 +33,13 @@ input[type=number] {
     transition: 0.5s;}
     
 
-#view-btn{
+#view-btn, #cancel-delete-btn{
     background-color: #fff;
     color: #2cabe3;
     border-radius: 5px;}
 
 
-#view-btn:hover{
+#view-btn:hover, #cancel-delete-btn:hover{
     background-color: #2cabe3;
     color: #fff;
     transition: 0.5s;}
@@ -59,5 +59,9 @@ i.delete {
     font-family: "Nunito Sans",sans-serif;
     font-size: 15px;
 
+}
+
+#refresh{
+    margin-left: 3px;
 }
 </style>

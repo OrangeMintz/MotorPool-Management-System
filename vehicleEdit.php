@@ -44,22 +44,32 @@ include "includes/db_vehicle_edit.php"
                                                 onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" required readonly>
                                             </div>
                                         </div>
+
+                                        <div class="col-lg">
+                                            <div class="form-group">
+                                                <label for="vehicle-number" class="col-form-label">Vehicle Plate</label>
+                                                <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
+                                                <input type="text" class="form-control" id="vehicle-plate" placeholder ="A4M5D" maxlength="5" name ="vehicle-plate" value="<?php echo $row['vehicle_plate']?>">
+                                            </div>
+                                        </div>
                                     </div>
+
+                                    
                                     <div class="row">
 
                                     <div class="col-sm">
                                             <div class="form-group">
-                                                <label for="vehicle-model" class="col-form-label">Vehicle Brand</label>
+                                                <label for="vehicle-brand" class="col-form-label">Vehicle Brand</label>
                                                 <select class="form-control" id="vehicle-brand" size="1" name="vehicle-brand" required>
-                                                <option value="" selected="selected" selected disabled><?php echo $row['vehicle_brand']?></option>
+                                                <option value="<?php echo $row['vehicle_brand'];?>" selected readonly><?php echo $row['vehicle_brand']?></option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
-                                                <label for="vehicle-brand" class="col-form-label">Vehicle Model</label>
+                                                <label for="vehicle-model" class="col-form-label">Vehicle Model</label>
                                                 <select class="form-control" id="vehicle-model" size="1" name="vehicle-model" required>
-                                                <option value="" selected="selected" selected disabled><?php echo $row['vehicle_model']?></option>
+                                                <option value="<?php echo $row['vehicle_model']?>" selected readonly><?php echo $row['vehicle_model']?></option>
                                                 </select>
                                             </div>
                                         </div>
@@ -141,8 +151,6 @@ include "includes/db_vehicle_edit.php"
                     </div>
                 </div>
             </div>
-          
-
 
             <div class="container-fluid">
                 <!-- ============================================================== -->
@@ -153,7 +161,7 @@ include "includes/db_vehicle_edit.php"
                         <div class="white-box">
                             <h3 class="box-title">Vehicle Table</h3>
                             <div class="table-responsive">
-                                <table class="table text-center">
+                                <table class="table text-center vehicletable load table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th class="border-top-0">Vehicle Number</th>
@@ -173,9 +181,6 @@ include "includes/db_vehicle_edit.php"
                                                   </tr>';
                                                 }
                                             }
-                                            else{
-                                                echo '<tr><td colspan="5"> <div class="p-3 mb-2 bg-warning text-dark"> **** NO DATA AVAILABLE ****</div></td></tr>';
-                                            }
                                             $conn->close();
                                             ?>
                                     </tbody>
@@ -189,7 +194,7 @@ include "includes/db_vehicle_edit.php"
 
 <script>
 function redirectback(){
-window.location="Vehicle.php";
+window.location="vehicle.php";
 }
 </script>
 

@@ -122,6 +122,13 @@ include "includes/db_vehicle_edit.php"
                             </a>
                         </li>
                         <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="appoint.php"
+                                aria-expanded="false">
+                                <i class="fas fa-clipboard" aria-hidden="true"></i>
+                                <span class="hide-menu">Appoint Vehicle Driver</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="schedule.php"
                                 aria-expanded="false">
                                 <i class="fas fa-calendar-alt" aria-hidden="true"></i>

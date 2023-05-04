@@ -100,5 +100,9 @@ let errormsg = document.getElementById('errormsg');
     });
   }
 
+
+  
+  $('.vehicletable').DataTable();
+
   
 

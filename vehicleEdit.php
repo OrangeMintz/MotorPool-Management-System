@@ -203,6 +203,6 @@ window.location="Vehicle.php";
 }
 </script>
 
-<script src="js/vehicle.js"></script>
+<script src="js/vehicles.js"></script>
 <?php include "footer.php" ?>
 

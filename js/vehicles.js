@@ -62,9 +62,9 @@ let errormsg = document.getElementById('errormsg');
     }
 
     else if(vplate.value.length < 5){
-      messages.push('Vehicle Plate should contain 5 characters');
+        messages.push('Vehicle Plate should contain 5 characters');
 
-    }
+      }
 
     if(messages.length > 0){
       e.preventDefault()

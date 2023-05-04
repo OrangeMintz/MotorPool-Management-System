@@ -151,8 +151,6 @@ include "includes/db_vehicle_edit.php"
                     </div>
                 </div>
             </div>
-          
-
 
             <div class="container-fluid">
                 <!-- ============================================================== -->
@@ -163,7 +161,7 @@ include "includes/db_vehicle_edit.php"
                         <div class="white-box">
                             <h3 class="box-title">Vehicle Table</h3>
                             <div class="table-responsive">
-                                <table class="table text-center">
+                                <table class="table text-center vehicletable load table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th class="border-top-0">Vehicle Number</th>
@@ -183,9 +181,6 @@ include "includes/db_vehicle_edit.php"
                                                   </tr>';
                                                 }
                                             }
-                                            else{
-                                                echo '<tr><td colspan="5"> <div class="p-3 mb-2 bg-warning text-dark"> **** NO DATA AVAILABLE ****</div></td></tr>';
-                                            }
                                             $conn->close();
                                             ?>
                                     </tbody>
@@ -199,7 +194,7 @@ include "includes/db_vehicle_edit.php"
 
 <script>
 function redirectback(){
-window.location="Vehicle.php";
+window.location="vehicle.php";
 }
 </script>
 

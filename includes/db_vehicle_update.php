@@ -8,8 +8,8 @@ $vehicle_brand = $_POST['vehicle-brand'];
 $vehicle_model = $_POST['vehicle-model'];
 
 
-// Validate vehicle plate input
-if (strlen(trim($fname)) === 0) {
+// Validate vehicle inputs
+if (strlen(trim($vehicle_plate)) == 0) {
     $error = "Vehicle Plate cannot be empty or contain only whitespace characters";
     header("Location: ../vehicle.php?error=".urlencode($error));
     exit();

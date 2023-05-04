@@ -9,12 +9,6 @@ $vehicle_plate = $_POST['vehicle-plate'];
 
 
 // Validate vehicle plate input
-if (strlen(trim($fname)) === 0) {
-    $error = "Vehicle Plate cannot be empty or contain only whitespace characters";
-    header("Location: ../vehicle.php?error=".urlencode($error));
-    exit();
-}
-
 if (preg_match('/\s/', $vehicle_plate)) {
     $error = "Vehicle Plate cannot contain whitespace characters";
     header("Location: ../vehicle.php?error=".urlencode($error));
@@ -23,12 +17,19 @@ if (preg_match('/\s/', $vehicle_plate)) {
 
 
 $query = mysqli_query($conn, "SELECT * FROM `vehicle` WHERE vehicle_number = '$vehicle_number'");
+$query2 = mysqli_query($conn, "SELECT * FROM `vehicle` WHERE vehicle_plate = '$vehicle_plate'");
+
 
 if(mysqli_num_rows($query)>0){
-    $error = "Vehicle Number already existed";
+    $error = "Vehicle Number already exists ";
     header("Location: ../vehicle.php?error=".urlencode($error));
     exit();
-    // echo "<script>document.getElementById('error-message').innerHTML = '$error';</script>";
+}
+
+else if(mysqli_num_rows($query2)>0){
+    $error = "Vehicle Plate already exists ";
+    header("Location: ../vehicle.php?error=".urlencode($error));
+    exit();
 }
 
 else{

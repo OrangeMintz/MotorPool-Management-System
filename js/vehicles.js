@@ -1,22 +1,22 @@
 // Create a function that loads the Brand and Model
 var vehiclesselector = {
     Toyota: [
-        "Vios", "Hiace"
+        "Vios","Hiace"
     ],
     Honda: [
-        "ViosH", "HiaceH"
+        "ViosH","HiaceH"
     ],
     Nissan: [
-        "ViosN", "HiaceN"
+        "ViosN","HiaceN"
     ],
     Ford: [
-        "ViosF", "HiaceF"
+        "ViosF","HiaceF"
     ],
     Hyundai: [
-        "ViosH", "HiaceH"
+        "ViosH","HiaceH"
     ],
     Suburban: [
-        "ViosS", "HiaceS"
+        "ViosS","HiaceS"
     ],
     
     };
@@ -76,7 +76,7 @@ let errormsg = document.getElementById('errormsg');
 
   //EDIT VEHICLE
   function editVehicle(num){
-    window.location="vehicleEdit.php?vehiclenumber=" + num;
+    window.location="vehicleedit.php?vehiclenumber=" + num;
   }
 
   //DELETE VEHICLE
@@ -99,8 +99,6 @@ let errormsg = document.getElementById('errormsg');
       
     });
   }
-
-
   
   $('.vehicletable').DataTable();
 

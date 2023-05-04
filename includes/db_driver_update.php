@@ -45,10 +45,10 @@ if (preg_match('/^\s+|\s+$/', $lname)) {
     exit();
 }
 
-$query = mysqli_query($conn, "SELECT * FROM `driver` WHERE first_name = '$fname' AND middle_name = '$mname' AND last_name = '$lname'");
+$check_query = mysqli_query($conn, "SELECT * FROM `driver` WHERE first_name = '$fname' AND middle_name = '$mname' AND last_name = '$lname' AND driver_id != '$id'");
 
 
-if(mysqli_num_rows($query)>0){
+if(mysqli_num_rows($check_query) > 0){
     $error = "Driver with the same first name, middle name and last name already exists";
     header("Location: ../driver.php?error=".urlencode($error));
     exit();

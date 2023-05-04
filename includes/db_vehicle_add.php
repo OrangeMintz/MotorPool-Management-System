@@ -9,6 +9,12 @@ $vehicle_plate = $_POST['vehicle-plate'];
 
 
 // Validate vehicle plate input
+if (strlen(trim($fname)) === 0) {
+    $error = "Vehicle Plate cannot be empty or contain only whitespace characters";
+    header("Location: ../vehicle.php?error=".urlencode($error));
+    exit();
+}
+
 if (preg_match('/\s/', $vehicle_plate)) {
     $error = "Vehicle Plate cannot contain whitespace characters";
     header("Location: ../vehicle.php?error=".urlencode($error));
@@ -32,22 +38,15 @@ $stmt = $conn->prepare($add);
 $stmt -> bind_param("ssss",$vehicle_number, $vehicle_brand, $vehicle_model, $vehicle_plate);
 
 if($stmt->execute()){
+    $conn->close();
     header("Location: ../vehicle.php?added=successfully");
     exit();
 
 }
 else{
+    $conn->close();
     header("Location: ../vehicle.php?added=unsucessfully");}
     exit();
 }
-$conn->close();
+
 ?>
-
-
-<!-- $query = $pdo->prepare("SELECT * FROM `vehicle` WHERE vehicle_number = ?");
-$query-> execute([$vehicle_number]);
-$result = $query->rowCount();
-
-if($result > 0){
-    $error = "<span class='text-danger'>Vehicle Number already existed</span>";
-} -->

@@ -16,6 +16,9 @@ include "includes/db_driver_edit.php"
 <script>
     $(document).ready(function (){
         $("#editDriver").modal('show');
+
+
+    $('.appointTable').DataTable();
     })
 
 </script>

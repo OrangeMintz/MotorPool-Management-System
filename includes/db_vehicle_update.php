@@ -43,7 +43,7 @@ if($stmt->execute()){
 
 }
 else{
-    header("Location: ../vehicle.php?edited=unsucessfully");
+    header("Location: ../vehicle.php?edited=unsuccessfully");
 
 }
 

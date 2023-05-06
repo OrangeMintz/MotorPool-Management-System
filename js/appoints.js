@@ -26,10 +26,6 @@ let errormsg = document.getElementById('errormsg');
     }
   })
   
-  //EDIT VEHICLE
-  function editAppoint(num){
-    window.location="appointedit.php?appointed=" + num;
-  }
 
 
   //DELETE VEHICLE
@@ -50,7 +46,17 @@ let errormsg = document.getElementById('errormsg');
       
     });
   }
-  $('.appointTable').DataTable();
+
+    //EDIT VEHICLE
+    function editAppointment(num){
+      window.location="appointedit.php?appointed=" + num;
+    }
+
+$('.appointTable').DataTable();
+   
+  
+    
+  
 
   
 

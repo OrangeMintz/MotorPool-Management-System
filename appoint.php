@@ -13,13 +13,18 @@ $display = "SELECT appointed.appointed_vd,driver.driver_id, driver.first_name,dr
 $dis = $conn->query($display); 
 
 
+$display2 = "SELECT * FROM driver";
+$dis2 = $conn->query($display); 
 
-$displaydriver = "SELECT * FROM driver";
+
+$displaydriver = "SELECT * FROM driver
+WHERE driver_id NOT IN (SELECT driver_id FROM appointed)";
 $disdriver = $conn->query($displaydriver); 
 
-$displayvehicle = "SELECT * FROM vehicle";
-$disvehicle = $conn->query($displayvehicle); 
 
+$displayvehicle = "SELECT * FROM vehicle
+WHERE vehicle_number NOT IN (SELECT vehicle_number FROM appointed)";
+$disvehicle = $conn->query($displayvehicle); 
 
 //error for duplication
 $error_message = "";
@@ -51,13 +56,14 @@ if(isset($_GET['error'])){
                                                 <label for="driver-id" class="col-form-label">Driver</label>
                                                 <select class="form-control" id="driver-id" size="1" name ="driver-id" required>
                                                 <option value="" selected="selected" selected disabled value> -- Select Driver  -- </option>
-                                                <?php 
-                                                if ($disdriver->num_rows > 0) {
-                                                    while($row = $disdriver->fetch_assoc()) {
-                                                        echo "<option>" . $row['driver_id'] . "</option>"; 
+                                                <?php
+                                                    if ($disdriver->num_rows > 0) {
+                                                        $disdriver->data_seek(0);
+                                                    while($row2 = $disdriver->fetch_assoc()) {
+                                                        echo '<option value="'. $row2['driver_id'] .'">'. $row2['last_name'].', '. $row2['first_name'] .' '. $row2['middle_name'] .' '. $row2['suffix'] .'</option>';
                                                     }
                                                 }
-                                                ?>     
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -67,14 +73,15 @@ if(isset($_GET['error'])){
                                             <div class="form-group">
                                                 <label for="vehicle-number" class="col-form-label">Vehicle</label>
                                                 <select class="form-control" id="vehicle-number" size="1" name ="vehicle-number" required>
-                                                <option value="" selected="selected" selected disabled value> -- Select Vehicle  -- </option>
-                                                <?php 
-                                                if ($disvehicle->num_rows > 0) {
-                                                    while($row = $disvehicle->fetch_assoc()) {
-                                                        echo "<option>" . $row['vehicle_number'] . "</option>"; 
+                                                <option value="" selected="selected" selected disabled value> -- Select Driver  -- </option>
+                                                <?php
+                                                    if ($disvehicle->num_rows > 0) {
+                                                        $disvehicle->data_seek(0);
+                                                    while($row3 = $disvehicle->fetch_assoc()) {
+                                                        echo '<option value="'. $row3['vehicle_number'] .'">'. $row3['vehicle_brand'] . ' ' . $row3['vehicle_model'] .'</option>';
                                                     }
                                                 }
-                                                ?>  
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -90,6 +97,10 @@ if(isset($_GET['error'])){
                     </div>
                 </div>
         <!-- APPOINT VEHICLE DRIVER MODAL END-->
+
+
+
+        
 
      
         <!-- Left Sidebar  -->
@@ -200,7 +211,7 @@ if(isset($_GET['error'])){
                                             <?php 
                                             
                                             if ($dis->num_rows > 0) {
-                                            //     // output data of each row
+                                            // output data of each row
                                                 while($row = $dis->fetch_assoc()) {
                                                   echo '<tr>
                                                   <td>'. $row['driver_id'].'</td>
@@ -211,7 +222,7 @@ if(isset($_GET['error'])){
                                                   <td>'. $row['vehicle_model'].'</td>
                                                   <td>
                                                       <button type="button" id="edit-btn" class="btn btn-success" data-bs-toggle="modal" 
-                                                      data-bs-target="#editVehicle" onclick="editVehicle('. $row['vehicle_number'].')">EDIT</button>
+                                                      data-bs-target="#editAppoint" onclick="editAppointment('. $row['appointed_vd'].')">EDIT</button>
                                                       <button type="button" id="delete-btn" class="btn btn-danger" 
                                                       onclick="deleteAppointment('. $row['appointed_vd'].')">DELETE</button>
                                                   </td></tr>';
@@ -227,5 +238,5 @@ if(isset($_GET['error'])){
                 </div>
             </div>
 
-<script src="js/appoint.js"></script>
+<script src="js/appoints.js"></script>
 <?php include "footer.php" ?>

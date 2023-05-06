@@ -4,83 +4,91 @@ include "css/customcss.php";
 include "remove.php";
 include_once "includes/db_conn.php";
 
+
 //DISPLAY
-$display = "SELECT * FROM vehicle";
+$display = "SELECT appointed.appointed_vd,driver.driver_id, driver.first_name,driver.middle_name, driver.last_name, driver.suffix, 
+            vehicle.vehicle_number, vehicle.vehicle_plate, vehicle.vehicle_brand, vehicle.vehicle_model FROM appointed
+            JOIN driver ON appointed.driver_id = driver.driver_id
+            JOIN vehicle ON appointed.vehicle_number = vehicle.vehicle_number";
 $dis = $conn->query($display); 
 
-//error for duplication
-$error_message = "";
-if(isset($_GET['error'])){
-    $error_message = "<div class='alert alert-danger'>".$_GET['error']."</div>";
-}
 
+$displaydriver = "SELECT * FROM driver
+WHERE driver_id NOT IN (SELECT driver_id FROM appointed)";
+$disdriver = $conn->query($displaydriver); 
+
+
+$displayvehicle = "SELECT * FROM vehicle
+WHERE vehicle_number NOT IN (SELECT vehicle_number FROM appointed)";
+$disvehicle = $conn->query($displayvehicle); 
+
+
+//EDIT 
+include "includes/db_appoint_edit.php"
 ?>
 
-        <!-- ADD VEHICLE MODAL START-->
-        <div class="modal fade " id="addVehicle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
+<script>
+    $(document).ready(function (){
+        $("#editAppoint").modal('show');
+
+        $('.appointTable').DataTable();
+    })
+</script>
+
+<!-- EDIT APPOINTED VEHICLE DRIVER MODAL START-->
+<div class="modal fade " id="editAppoint" role="dialog" aria-hidden="true" data-bs-backdrop="static" data-keyboard="false">
+<div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">ADD VEHICLE</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">REAPPOINT</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="vehicle-add" action ="includes/db_vehicle_add.php" method="POST">
+                            <form id="appoint-edit" action ="includes/db_appoint_update.php" method="POST">
                             <div class="alert alert-warning error" role="alert">
                             <div id="errormsg"></div></div>
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-lg">
-                                            <div class="form-group">
-                                                <label for="vehicle-number" class="col-form-label">Vehicle Number:</label>
-                                                <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
-                                                <input type="number" class="form-control" id="vehicle-number" placeholder ="10000"
-                                                onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" name ="vehicle-number" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg">
-                                            <div class="form-group">
-                                                <label for="vehicle-number" class="col-form-label">Vehicle Plate</label>
-                                                <i class="fas fa-exclamation-triangle mandate" aria-hidden="true"></i>
-                                                <input type="text" class="form-control" id="vehicle-plate" placeholder ="A4M5D" maxlength="5" name ="vehicle-plate" required>
+                                        <div class="form-group">
+                                        <input type="hidden" name="appointed-vd" value="<?php echo $appointed_vd; ?>">
+                                                <label for="driver-id" class="col-form-label">Driver</label>
+                                                <select class="form-control" id="driver-id" size="1" name ="driver-id" required>
+                                                <option value="" selected="selected" selected disabled value> -- Select Driver  -- </option>
+                                                <?php
+                                                    if ($disdriver->num_rows > 0) {
+                                                        $disdriver->data_seek(0);
+                                                    while($row2 = $disdriver->fetch_assoc()) {
+                                                        echo '<option value="'. $row2['driver_id'] .'">'. $row2['last_name'].', '. $row2['first_name'] .' '. $row2['middle_name'] .' '. $row2['suffix'] .'</option>';
+                                                    }
+                                                }
+                                                    ?>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-
                                     <div class="col-sm">
                                             <div class="form-group">
-                                                <label for="vehicle-model" class="col-form-label">Vehicle Brand</label>
-                                                <select class="form-control" id="vehicle-brand" size="1" name ="vehicle-brand" required>
-                                                <option value="" selected="selected" selected disabled value> -- Vehicle Brand  -- </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm">
-                                            <div class="form-group">
-                                                <label for="vehicle-brand" class="col-form-label">Vehicle Model</label>
-                                                <select class="form-control" id="vehicle-model" size="1" name ="vehicle-model" required>
-                                                <option value="" selected="selected" selected disabled value> -- Vehicle Model  -- </option>
-                                                </select>
+                                                <label for="vehicle-number" class="col-form-label">Vehicle Number</label>
+                                                <input type="number" class="form-control" id="vehicle-number" name="vehicle-number" value="<?php echo $row['vehicle_number']?>" readonly>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                     <div class="modal-footer">
-                                    <button type="button" id="cancel-btn" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" id="add-btn" class="btn btn-success">Add Driver</button>
-                                    </div>
+                                    <button type="button" id="cancel-btn" onclick="redirectback()" class="btn btn-danger" data-bs-dismiss="modal" >Close</button>
+                                    <button type="submit" id="add-btn" class="btn btn-success">Appoint Driver</button>
+                                </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-        <!-- ADD VEHICLE MODAL END -->
-
-     
+        <!-- EDIT APPOINTED VEHICLE DRIVER MODAL END-->
+        
         <!-- Left Sidebar  -->
         <aside class="left-sidebar" data-sidebarbg="skin6">
             <!-- Sidebar scroll-->
@@ -151,19 +159,9 @@ if(isset($_GET['error'])){
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <h4 class="page-title">Vehicle Management</h4>
                     </div>
-                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                        <div class="d-md-flex">
-                            <ol class="breadcrumb ms-auto">
-                            <li><button type="button" class="btn btn-primary" data-bs-toggle="modal" 
-                                data-bs-target="#addVehicle" >ADD VEHICLE</button></li>
-                            </ol>
-                        </div>
-                    </div>
                 </div>
             </div>
-            
-            <div id="error-message"><?php echo $error_message; ?></div>
-            
+
             <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
@@ -171,34 +169,33 @@ if(isset($_GET['error'])){
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
-                            <h3 class="box-title">Vehicle Table</h3>
+                            <h3 class="box-title">Appointed Vehicle Drivers Table</h3>
                             <div class="table-responsive">
-                                <table class="table text-center vehicletable load table-bordered table-hover">
+                                <table class="table text-center appointTable load table-bordered table-hover">
                                     <thead class="thead-dark">
                                         <tr>
+                                            <th class="border-top-0">ID</th>
+                                            <th class="border-top-0">Driver Name</th>
                                             <th class="border-top-0">Vehicle Number</th>
                                             <th class="border-top-0">Vehicle Plate</th>
                                             <th class="border-top-0">Vehicle Brand</th>
                                             <th class="border-top-0">Vehicle Model</th>
-                                            <th class="border-top-0">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                             <?php 
+                                            
                                             if ($dis->num_rows > 0) {
-                                                // output data of each row
+                                            //     // output data of each row
                                                 while($row = $dis->fetch_assoc()) {
                                                   echo '<tr>
+                                                  <td>'. $row['driver_id'].'</td>
+                                                  <td>'. $row['last_name'].', '. $row['first_name'] .' '. $row['middle_name'] .' '. $row['suffix'] .'</td>
                                                   <td>'. $row['vehicle_number'].'</td>
                                                   <td>'. $row['vehicle_plate'].'</td>
                                                   <td>'. $row['vehicle_brand'].'</td>
                                                   <td>'. $row['vehicle_model'].'</td>
-                                                  <td>
-                                                      <button type="button" id="edit-btn" class="btn btn-success" data-bs-toggle="modal" 
-                                                      data-bs-target="#editVehicle" onclick="editVehicle('. $row['vehicle_number'].')">EDIT</button>
-                                                      <button type="button" id="delete-btn" class="btn btn-danger" 
-                                                      onclick="deleteVehicle('. $row['vehicle_number'].')">DELETE</button>
-                                                  </td></tr>';
+                                                  </tr>';
                                                 }
                                             }
                                             $conn->close();
@@ -211,5 +208,13 @@ if(isset($_GET['error'])){
                 </div>
             </div>
 
-<script src="js/vehicles.js"></script>
+
+<script>
+function redirectback(){
+window.location="appoint.php";
+}
+</script>
+
+<script src="js/appoints.js"></script>
 <?php include "footer.php" ?>
+

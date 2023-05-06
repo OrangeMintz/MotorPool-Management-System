@@ -46,7 +46,7 @@ if($stmt->execute()){
 }
 else{
     $conn->close();
-    header("Location: ../vehicle.php?added=unsucessfully");}
+    header("Location: ../vehicle.php?added=unsuccessfully");}
     exit();
 }
 

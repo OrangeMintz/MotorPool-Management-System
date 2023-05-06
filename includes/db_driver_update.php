@@ -45,11 +45,19 @@ if (preg_match('/^\s+|\s+$/', $lname)) {
     exit();
 }
 
-$query = mysqli_query($conn, "SELECT * FROM `driver` WHERE first_name = '$fname' AND middle_name = '$mname' AND last_name = '$lname'");
+$check_names_query = mysqli_query($conn, "SELECT * FROM `driver` WHERE first_name = '$fname' AND middle_name = '$mname' AND last_name = '$lname' AND driver_id != '$id'");
+$check_email_query = mysqli_query($conn, "SELECT * FROM `driver` WHERE email_address = '$email' AND driver_id != '$id'");
 
 
-if(mysqli_num_rows($query)>0){
+
+if(mysqli_num_rows($check_names_query) > 0){
     $error = "Driver with the same first name, middle name and last name already exists";
+    header("Location: ../driver.php?error=".urlencode($error));
+    exit();
+}
+
+if(mysqli_num_rows($check_email_query) > 0){
+    $error = "Driver with the same email address already exists";
     header("Location: ../driver.php?error=".urlencode($error));
     exit();
 }
@@ -69,7 +77,7 @@ if($stmt->execute()){
     header("Location: ../driver.php?edited=successfully");
 }
 else{
-    header("Location: ../driver.php?edited=unsucessfully");
+    header("Location: ../driver.php?edited=unsuccessfully");
 }
 $conn->close();
 

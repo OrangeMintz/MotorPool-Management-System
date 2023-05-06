@@ -24,7 +24,7 @@ if($stmt->execute()){
 
 }
 else{
-    header("Location: ../vehicle.php?created=unsucessfully");
+    header("Location: ../vehicle.php?created=unsuccessfully");
 }
 
 $conn->close();

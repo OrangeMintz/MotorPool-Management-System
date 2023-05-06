@@ -94,7 +94,7 @@ if($stmt->execute()){
 }
 else{
     $conn->close();
-    header("Location: ../driver.php?added=unsucessfully");}
+    header("Location: ../driver.php?added=unsuccessfully");}
     exit();
 }
 ?>

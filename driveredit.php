@@ -16,6 +16,9 @@ include "includes/db_driver_edit.php"
 <script>
     $(document).ready(function (){
         $("#editDriver").modal('show');
+
+
+    $('.appointTable').DataTable();
     })
 
 </script>
@@ -177,6 +180,13 @@ include "includes/db_driver_edit.php"
                                 aria-expanded="false">
                                 <i class="fa fa-car" aria-hidden="true"></i>
                                 <span class="hide-menu">Vehicle Management</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="appoint.php"
+                                aria-expanded="false">
+                                <i class="fas fa-clipboard" aria-hidden="true"></i>
+                                <span class="hide-menu">Appoint Vehicle Driver</span>
                             </a>
                         </li>
                         <li class="sidebar-item">

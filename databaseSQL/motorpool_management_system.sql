@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2023 at 05:25 PM
+-- Generation Time: May 04, 2023 at 09:27 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -38,15 +38,18 @@ CREATE TABLE `driver` (
   `city` varchar(255) NOT NULL,
   `province` varchar(255) NOT NULL,
   `phone_number` char(11) NOT NULL,
-  `email_address` varchar(255) DEFAULT NULL
+  `email_address` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `driver`
 --
 
-INSERT INTO `driver` (`driver_id`, `first_name`, `middle_name`, `last_name`, `suffix`, `birthday`, `barangay`, `city`, `province`, `phone_number`, `email_address`) VALUES
-(1241, '123', '', '123', '', '1234-12-31', 'Agusan', 'Norte', 'Agusan del Norte', '2423423432', 'example@gmail.com');
+INSERT INTO `driver` (`driver_id`, `first_name`, `middle_name`, `last_name`, `suffix`, `birthday`, `barangay`, `city`, `province`, `phone_number`, `email_address`, `created_at`, `updated_at`) VALUES
+(1000, 'Djeikuje Nickolai', 'Cordero', 'Gacus', NULL, '2002-09-10', 'Poblacion', 'Valencia City', 'Bukidnon', '9350050225', 'nickolaigacus@yahoo.com', '2023-05-04 14:39:57', '2023-05-04 18:49:32'),
+(1231, 'Jhon Kert', 'Jaguit', 'Talha', NULL, '2002-02-07', 'Poblacion', 'Valencia City', 'Bukidnon', '9324534534', 'talhajhonkert@gmail.com', '2023-05-04 11:26:13', '2023-05-04 14:40:58');
 
 -- --------------------------------------------------------
 
@@ -68,7 +71,9 @@ CREATE TABLE `vehicle` (
 --
 
 INSERT INTO `vehicle` (`vehicle_number`, `vehicle_brand`, `vehicle_model`, `vehicle_plate`, `created_at`, `updated_at`) VALUES
-(12315, 'Toyota', 'Vios', 'asdas', '2023-05-03 15:14:57', '2023-05-03 15:14:57');
+(12315, 'Nissan', 'Vios', '4567S', '2023-05-03 15:14:57', '2023-05-04 15:59:36'),
+(67786, 'Ford', 'ViosH', 'ILOVE', '2023-05-03 15:59:45', '2023-05-04 10:48:54'),
+(67867, 'Nissan', 'ViosN', 'SASF4', '2023-05-04 02:40:11', '2023-05-04 02:40:11');
 
 --
 -- Indexes for dumped tables
@@ -88,7 +93,8 @@ ALTER TABLE `driver`
 --
 ALTER TABLE `vehicle`
   ADD PRIMARY KEY (`vehicle_number`),
-  ADD UNIQUE KEY `vehicle_number` (`vehicle_number`);
+  ADD UNIQUE KEY `vehicle_number` (`vehicle_number`),
+  ADD UNIQUE KEY `vehicle_plate` (`vehicle_plate`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

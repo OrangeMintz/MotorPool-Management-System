@@ -211,7 +211,7 @@ $(document).ready(function (){
                                             <th class="border-top-0">Departure Datetime</th>
                                             <th class="border-top-0">Arrival Datetime</th>
                                             <th class="border-top-0">Status</th>
-                                            <th class="border-top-0">Options</th>
+                                            <th class="border-top-0">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>

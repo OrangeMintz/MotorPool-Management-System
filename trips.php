@@ -16,7 +16,27 @@ $display = "SELECT trips.trips_id, trips.schedule_id, trips.origin, trips.destin
 $dis = $conn->query($display);
 $dis2 = $conn->query($display);
 
+//SCHEDULE SELECTION
+$query = "SELECT schedule_id, departure_datetime, schedule_status FROM scheduling WHERE schedule_id NOT IN (SELECT schedule_id FROM trips)";
+$result = $conn->query($query);
 
+//message
+$message = "";
+if(isset($_GET['error'])){
+    $message = "<div class='alert alert-danger'>".$_GET['error']."</div>";
+}
+
+else if(isset($_GET['success'])){
+    $message = "<div class='alert alert-success'>".$_GET['success']."</div>";
+}
+
+else if(isset($_GET['success-edit'])){
+    $message = "<div class='alert alert-info'>".$_GET['success-edit']."</div>";
+}
+
+else if(isset($_GET['warning'])){
+    $message = "<div class='alert alert-warning'>".$_GET['warning']."</div>";
+}
 
 ?>
 
@@ -39,7 +59,7 @@ $(document).ready(function (){
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="trip-add" action ="#" method="POST">
+                            <form id="trip-add" action ="includes/db_trips_add.php" method="POST">
                             <div class="alert alert-warning error" role="alert">
                             <div id="errormsg"></div></div>
                                 <div class="container">
@@ -47,7 +67,7 @@ $(document).ready(function (){
                                     <div class="col-sm">
                                         <div class="form-group">
                                             <label for="schedule-departure" class="col-form-label">Origin</label>
-                                            <input type="text" class="form-control"  id="trips-origin" required>
+                                            <input type="text" class="form-control"  id="trips-origin" name="trips-origin" required>
                                         </div>
                                     </div>
                                 </div>
@@ -55,7 +75,7 @@ $(document).ready(function (){
                                         <div class="col-sm">
                                             <div class="form-group">
                                             <label for="schedule-arrival" class="col-form-label">Destination</label>
-                                            <input type="text" class="form-control" id="trips-destination" required>
+                                            <input type="text" class="form-control" id="trips-destination" name="trips-destination" required>
                                         </div>
                                     </div>
                                 </div>
@@ -63,11 +83,9 @@ $(document).ready(function (){
                                         <div class="col-sm">
                                         <div class="form-group">
                                             <label for="schedule-departure" class="col-form-label">Schedule</label>
-                                            <select class="form-control" id="schedule-departure" size="1" name ="departure" required>
+                                            <select class="form-control" id="schedule" size="1" name ="schedule" required>
                                             <option value="" selected="selected" selected disabled value> -- Select Schedule  -- </option>
                                             <?php
-                                                $query = "SELECT schedule_id, departure_datetime, schedule_status FROM scheduling WHERE schedule_id NOT IN (SELECT schedule_id FROM trips)";
-                                                $result = $conn->query($query);
                                                 if ($result->num_rows > 0) {
                                                 while($row = $result->fetch_assoc()) {
                                                     echo '<option value="'. $row['schedule_id'] .'">'. $row['departure_datetime'].' - '. $row['schedule_status'].'</option>';
@@ -81,7 +99,7 @@ $(document).ready(function (){
                                 </div>
                                     <div class="modal-footer">
                                     <button type="button" id="cancel-btn" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" id="add-btn" class="btn btn-success">Add Trips</button>
+                                    <button type="submit" id="add-btn" class="btn btn-success">Add Trip</button>
                                     </div>
                                 </form>
                             </div>
@@ -90,54 +108,6 @@ $(document).ready(function (){
                 </div>
         <!-- ADD TRIP MODAL END-->
 
-        <!-- VIEW SCHEDULE MODAL START-->
-        <div class="modal fade " id="viewSchedule" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">VIEW SCHEDULE</h5>
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="vehicle-edit" action ="#" method="POST">
-                            <div class="alert alert-warning error2" role="alert">
-                            <div id="errormsg2"></div></div>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-lg">
-                                            <div class="form-group">
-                                                <label for="schedule-departure" class="col-form-label">Departure Datetime:</label>
-                                                <h4><?php echo $row2['departure_datetime']; ?></h4>
-                                               
-                                            </div>
-                                        </div>
-                                        <div class="col-lg">
-                                            <div class="form-group">
-                                                <label for="schedule-departure" class="col-form-label">Arrival Datetime:</label>
-                                                <h4><?php echo $row2['arrival_datetime']; ?></h4>
-
-                                            </div>
-                                        </div>
-                                        <div class="col-lg">
-                                            <div class="form-group">
-                                                <label for="schedule-departure" class="col-form-label">Status</label>
-                                                <h4><?php echo $row2['schedule_status']; ?></h4>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div class="modal-footer">
-                                    <button type="button" id="view-btn" class="btn btn-info" data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        <!-- VIEW SCHEDULE MODAL END -->
 
 
 <!-- Left Sidebar  -->
@@ -224,6 +194,8 @@ $(document).ready(function (){
             </div>
         </div>
 
+        <div id="error-message"><?php echo $message; ?></div>
+
             <div class="container-fluid">
              <!-- ============================================================== -->
             <!-- Start Page Content -->
@@ -252,27 +224,26 @@ $(document).ready(function (){
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if ($dis->num_rows > 0) {
-                                    // Loop through each row and display the data in your table rows
-                                    while($row = $dis->fetch_assoc()) {
-                                     echo '<tr>
-                                    <td>'. $row['driver_id'].'</td>
-                                    <td>'. $row['last_name'].', '. $row['first_name'] .' '. $row['middle_name'] .' '. $row['suffix'] .'</td>
-                                    <td>'. $row['vehicle_plate'].'</td>
-                                    <td>'. $row['vehicle_brand'].' '. $row['vehicle_model'].'</td>
-                                    <td>'. $row['origin'].'</td>
-                                    <td>'. $row['destination'].'</td>
-                                    <td>'. $row['departure_datetime'].'</td>
-                                    <td>'. $row['arrival_datetime'].'</td>
-                                    <td>'. $row['schedule_status'].'</td>
-                                    <td>
-                                    <button type="button" id="edit-btn" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editTrip">EDIT</button>
-                                    <button type="button" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">DELETE</button>
-                                    </td>
+                                <?php if ($dis->num_rows > 0) {
+                                while($row = $dis->fetch_assoc()) {
+                                    echo '<tr>
+                                        <td>'. $row['driver_id'].'</td>
+                                        <td>'. $row['last_name'].', '. $row['first_name'] .' '. $row['middle_name'] .' '. $row['suffix'] .'</td>
+                                        <td>'. $row['vehicle_plate'].'</td>
+                                        <td>'. $row['vehicle_brand'].' '. $row['vehicle_model'].'</td>
+                                        <td>'. $row['origin'].'</td>
+                                        <td>'. $row['destination'].'</td>
+                                        <td>'. $row['departure_datetime'].'</td>
+                                        <td>'. $row['arrival_datetime'].'</td>
+                                        <td>'. $row['schedule_status'].'</td>
+                                        <td>
+                                            <button type="button" id="edit-btn" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editTrip">EDIT</button>
+                                            <button type="button" id="delete-btn" class="btn btn-danger" onclick="deleteTrip('. $row['trips_id'].')">DELETE</button>
+                                        </td>
                                     </tr>';
-                                        }
-                                    }
-                                    ?>
+                                }
+                            } ?>
+
                                     </tbody>
                             </table>
                         </div>
@@ -281,5 +252,5 @@ $(document).ready(function (){
             </div>
         </div>
 
-<script src="js/tripsssss.js"></script>
+<script src="js/tripsss.js"></script>
 <?php include "footer.php" ?>

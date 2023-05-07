@@ -8,7 +8,7 @@ include_once "includes/db_conn.php";
 $display = "SELECT * FROM driver";
 $dis = $conn->query($display); 
 
-//error for duplication
+//message
 $message = "";
 if(isset($_GET['error'])){
     $message = "<div class='alert alert-danger'>".$_GET['error']."</div>";
@@ -193,14 +193,14 @@ else if(isset($_GET['success-edit'])){
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="schedule.php"
                                 aria-expanded="false">
                                 <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                                <span class="hide-menu">Schedule</span>
+                                <span class="hide-menu">Schedule Management</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="trips.php"
                                 aria-expanded="false">
                                 <i class="fa fa-map" aria-hidden="true"></i>
-                                <span class="hide-menu">Trips</span>
+                                <span class="hide-menu">Trips Management</span>
                             </a>
                         </li>
                     </ul>
@@ -263,7 +263,6 @@ else if(isset($_GET['success-edit'])){
                                                   <td>'. $row['birthday'].'</td>
                                                   <td>'. $row['phone_number'].'</td>
                                                   <td>'. $row['email_address'].'</td>
-
                                                   <td>
                                                       <button type="button" id="edit-btn" class="btn btn-success" data-bs-toggle="modal" 
                                                       data-bs-target="#editVehicle" onclick="editDriver('. $row['driver_id'].')">EDIT</button>
@@ -283,5 +282,5 @@ else if(isset($_GET['success-edit'])){
         </div>
 
 
-<script src="js/driverssss.js"></script>
+<script src="js/driver.js"></script>
 <?php include "footer.php" ?>

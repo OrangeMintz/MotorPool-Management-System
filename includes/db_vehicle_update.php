@@ -39,7 +39,9 @@ $stmt -> bind_param("sssi", $vehicle_brand, $vehicle_model, $vehicle_plate, $veh
 
 
 if($stmt->execute()){
-    header("Location: ../vehicle.php?edited=successfully");
+    $msg = "Vehicle Edited Successfully";
+    $conn->close();
+    header("Location: ../driver.php?success-edit=".urlencode($msg));
 
 }
 else{

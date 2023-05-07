@@ -10,9 +10,9 @@ $stmt->bind_param("ii", $driver_id, $vehicle_number);
 
 
 if($stmt->execute()){
+    $msg = "Appointed Vehicle Driver Added Successfully";
     $conn->close();
-    header("Location: ../appoint.php?added=successfully");
-    
+    header("Location: ../appoint.php?success=".urlencode($msg));
     exit();
 
 }

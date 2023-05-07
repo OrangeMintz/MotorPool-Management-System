@@ -102,12 +102,12 @@ addform.addEventListener('submit', (e) =>{
 })
 
 
- //EDIT VEHICLE
+ //EDIT DRIVER
  function editDriver(num){
   window.location="driveredit.php?driver_id=" + num;
 }
 
- //DELETE VEHICLE
+ //DELETE DRIVER
  function deleteDriver(num){
 
   $('#delete').modal('show');
@@ -116,12 +116,13 @@ addform.addEventListener('submit', (e) =>{
     // Send the POST request to delete the vehicle
     $.post("includes/db_driver_delete.php",{num:num},function(data, status){
       if(status == "success"){
-        window.location="driver.php?success=Driver+Deleted+Successfully";
+        window.location="driver.php";
         // Hide the modal
         $('#delete').modal('hide');
       }
       else{
-        alert("Cannot delete Vehicle");
+        window.location="driver.php";
+
       }
     });
     

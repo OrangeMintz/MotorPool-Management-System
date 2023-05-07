@@ -41,7 +41,7 @@ include "includes/db_appoint_edit.php"
                 <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">REAPPOINT</h5>
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" onclick="redirectback()" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -80,7 +80,7 @@ include "includes/db_appoint_edit.php"
                                 </div>
                                     <div class="modal-footer">
                                     <button type="button" id="cancel-btn" onclick="redirectback()" class="btn btn-danger" data-bs-dismiss="modal" >Close</button>
-                                    <button type="submit" id="add-btn" class="btn btn-success">Appoint Driver</button>
+                                    <button type="submit" id="add-btn" class="btn btn-success">Update Driver</button>
                                 </div>
                                 </form>
                             </div>
@@ -135,14 +135,14 @@ include "includes/db_appoint_edit.php"
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="schedule.php"
                                 aria-expanded="false">
                                 <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                                <span class="hide-menu">Schedule</span>
+                                <span class="hide-menu">Schedule Management</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="trips.php"
                                 aria-expanded="false">
                                 <i class="fa fa-map" aria-hidden="true"></i>
-                                <span class="hide-menu">Trips</span>
+                                <span class="hide-menu">Trips Management</span>
                             </a>
                         </li>
                     </ul>
@@ -175,6 +175,7 @@ include "includes/db_appoint_edit.php"
                                     <thead class="thead-dark">
                                         <tr>
                                             <th class="border-top-0">ID</th>
+                                            <th class="border-top-0">Driver ID</th>
                                             <th class="border-top-0">Driver Name</th>
                                             <th class="border-top-0">Vehicle Number</th>
                                             <th class="border-top-0">Vehicle Plate</th>
@@ -189,6 +190,7 @@ include "includes/db_appoint_edit.php"
                                             //     // output data of each row
                                                 while($row = $dis->fetch_assoc()) {
                                                   echo '<tr>
+                                                  <td>'. $row['appointed_vd'].'</td>
                                                   <td>'. $row['driver_id'].'</td>
                                                   <td>'. $row['last_name'].', '. $row['first_name'] .' '. $row['middle_name'] .' '. $row['suffix'] .'</td>
                                                   <td>'. $row['vehicle_number'].'</td>

@@ -12,7 +12,7 @@ $email = $_POST['email'];
 
 $vehicle_model = $_POST['vehicle-model'];
 
-$add = "INSERT INTO `users`(`username`, `user_password`, `full_name`, `birthday`, `location`, `phone_number`, `email_address`) 
+$add = "INSERT INTO `users`(`username`, `user_password`, `full_name`, `birthday`, `address`, `phone_number`, `email_address`) 
 VALUES (?,?,?,?,?,?,?)";
 
 

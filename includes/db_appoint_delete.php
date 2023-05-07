@@ -8,7 +8,9 @@ $stmt = $conn->prepare($delete);
 $stmt -> bind_param("s",$appointed);
 
 if($stmt->execute()){
+    $conn->close();
 }
 else{
+    $conn->close();
 }
 ?>

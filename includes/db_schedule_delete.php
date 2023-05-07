@@ -8,8 +8,9 @@ $stmt = $conn->prepare($delete);
 $stmt -> bind_param("s",$schedule);
 
 if($stmt->execute()){
-    
+    $conn->close();
 }
 else{
+    $conn->close();
 }
 ?>

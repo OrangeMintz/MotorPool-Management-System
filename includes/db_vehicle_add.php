@@ -33,15 +33,16 @@ else if(mysqli_num_rows($query2)>0){
 }
 
 else{
-$add = "INSERT INTO `vehicle`(`vehicle_number`, `vehicle_brand`, `vehicle_model`, `vehicle_plate`, `created_at`) VALUES (?, ?, ?, ?, NOW())";
+$add = "INSERT INTO `vehicle`(`vehicle_number`, `vehicle_brand`, `vehicle_model`, `vehicle_plate`, `created_at`)
+VALUES (?, ?, ?, ?, NOW())";
 
 $stmt = $conn->prepare($add);
 $stmt -> bind_param("ssss",$vehicle_number, $vehicle_brand, $vehicle_model, $vehicle_plate);
 
 if($stmt->execute()){
+    $msg = "Vehicle Added Successfully";
     $conn->close();
-    header("Location: ../vehicle.php?added=successfully");
-    exit();
+    header("Location: ../vehicle.php?success=".urlencode($msg));
 
 }
 else{

@@ -12,16 +12,6 @@ $display = "SELECT scheduling.*, driver.first_name, driver.middle_name, driver.l
             JOIN vehicle ON appointed.vehicle_number = vehicle.vehicle_number";
 $dis = $conn->query($display); 
 
-
-
-// $display2 = "SELECT appointed.appointed_vd,driver.driver_id, driver.first_name,driver.middle_name, driver.last_name, driver.suffix, 
-//             vehicle.vehicle_number, vehicle.vehicle_plate, vehicle.vehicle_brand, vehicle.vehicle_model 
-//             FROM appointed
-//             JOIN driver ON appointed.driver_id = driver.driver_id
-//             JOIN vehicle ON appointed.vehicle_number = vehicle.vehicle_number";
-// $dis2 = $conn->query($display2); 
-
-
 $display2 = "SELECT appointed.appointed_vd,driver.driver_id, driver.first_name,driver.middle_name, driver.last_name, driver.suffix, 
             vehicle.vehicle_number, vehicle.vehicle_plate, vehicle.vehicle_brand, vehicle.vehicle_model 
             FROM appointed
@@ -33,6 +23,23 @@ $dis2 = $conn->query($display2);
 
 
 
+//message
+$message = "";
+if(isset($_GET['error'])){
+    $message = "<div class='alert alert-danger'>".$_GET['error']."</div>";
+}
+
+else if(isset($_GET['success'])){
+    $message = "<div class='alert alert-success'>".$_GET['success']."</div>";
+}
+
+else if(isset($_GET['success-edit'])){
+    $message = "<div class='alert alert-info'>".$_GET['success-edit']."</div>";
+}
+
+else if(isset($_GET['warning'])){
+    $message = "<div class='alert alert-warning'>".$_GET['warning']."</div>";
+}
 
 ?>
 
@@ -146,14 +153,14 @@ $(document).ready(function (){
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
                                 aria-expanded="false">
                                 <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                                <span class="hide-menu">Schedule</span>
+                                <span class="hide-menu">Schedule Management</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="trips.php"
                                 aria-expanded="false">
                                 <i class="fa fa-map" aria-hidden="true"></i>
-                                <span class="hide-menu">Trips</span>
+                                <span class="hide-menu">Trips Management</span>
                             </a>
                         </li>
                     </ul>
@@ -182,6 +189,8 @@ $(document).ready(function (){
                 </div>
             </div>
         </div>
+
+        <div id="error-message"><?php echo $message; ?></div>
 
         <div class="container-fluid">
                 <!-- ============================================================== -->
@@ -219,9 +228,9 @@ $(document).ready(function (){
                                                     <td>'. $row['schedule_status'].'</td>
                                                     <td>
                                                         <button type="button" id="edit-btn" class="btn btn-success" data-bs-toggle="modal" 
-                                                        data-bs-target="#editAppoint" onclick="editAppointment('. $row['appointed_vd'].')">EDIT</button>
+                                                        data-bs-target="#editAppoint" onclick="editSchedule('. $row['schedule_id'].')">EDIT</button>
                                                         <button type="button" id="delete-btn" class="btn btn-danger" 
-                                                        onclick="deleteAppointment('. $row['appointed_vd'].')">DELETE</button>
+                                                        onclick="deleteSchedule('. $row['schedule_id'].')">DELETE</button>
                                                     </td></tr>';
                                                 }
                                             }
@@ -235,5 +244,5 @@ $(document).ready(function (){
             </div>
 
 
-<scrip src="js/scheduled.js"></scrip>
+<script src="js/schedules.js"></script>
 <?php include "footer.php" ?>

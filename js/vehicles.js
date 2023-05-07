@@ -88,12 +88,12 @@ let errormsg = document.getElementById('errormsg');
       // Send the POST request to delete the vehicle
       $.post("includes/db_vehicle_delete.php",{num:num},function(data, status){
         if(status == "success"){
-          window.location="vehicle.php?vehicle_deleted_successfully";
+          window.location="vehicle.php"
           // Hide the modal
           $('#delete').modal('hide');
         }
         else{
-          alert("Cannot delete Vehicle");
+          window.location="vehicle.php"
         }
       });
       

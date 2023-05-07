@@ -17,37 +17,38 @@ if (preg_match('/\s/', $vehicle_plate)) {
 
 
 $query = mysqli_query($conn, "SELECT * FROM `vehicle` WHERE vehicle_number = '$vehicle_number'");
+$query2 = mysqli_query($conn, "SELECT * FROM `vehicle` WHERE vehicle_plate = '$vehicle_plate'");
+
 
 if(mysqli_num_rows($query)>0){
-    $error = "Vehicle Number already existed";
+    $error = "Vehicle Number already exists ";
     header("Location: ../vehicle.php?error=".urlencode($error));
     exit();
-    // echo "<script>document.getElementById('error-message').innerHTML = '$error';</script>";
+}
+
+else if(mysqli_num_rows($query2)>0){
+    $error = "Vehicle Plate already exists ";
+    header("Location: ../vehicle.php?error=".urlencode($error));
+    exit();
 }
 
 else{
-$add = "INSERT INTO `vehicle`(`vehicle_number`, `vehicle_brand`, `vehicle_model`, `vehicle_plate`, `created_at`) VALUES (?, ?, ?, ?, NOW())";
+$add = "INSERT INTO `vehicle`(`vehicle_number`, `vehicle_brand`, `vehicle_model`, `vehicle_plate`, `created_at`)
+VALUES (?, ?, ?, ?, NOW())";
 
 $stmt = $conn->prepare($add);
 $stmt -> bind_param("ssss",$vehicle_number, $vehicle_brand, $vehicle_model, $vehicle_plate);
 
 if($stmt->execute()){
-    header("Location: ../vehicle.php?added=successfully");
-    exit();
+    $msg = "Vehicle Added Successfully";
+    $conn->close();
+    header("Location: ../vehicle.php?success=".urlencode($msg));
 
 }
 else{
-    header("Location: ../vehicle.php?added=unsucessfully");}
+    $conn->close();
+    header("Location: ../vehicle.php?added=unsuccessfully");}
     exit();
 }
-$conn->close();
+
 ?>
-
-
-<!-- $query = $pdo->prepare("SELECT * FROM `vehicle` WHERE vehicle_number = ?");
-$query-> execute([$vehicle_number]);
-$result = $query->rowCount();
-
-if($result > 0){
-    $error = "<span class='text-danger'>Vehicle Number already existed</span>";
-} -->

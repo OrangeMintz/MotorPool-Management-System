@@ -8,14 +8,10 @@ $stmt = $conn->prepare($delete);
 $stmt -> bind_param("s",$vehicle_number);
 
 if($stmt->execute()){
+    $conn->close();
     
 }
 else{
-
-
-
+    $conn->close();
 }
-
-
-
 ?>

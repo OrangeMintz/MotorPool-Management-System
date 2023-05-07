@@ -8,10 +8,18 @@ include_once "includes/db_conn.php";
 $display = "SELECT * FROM vehicle";
 $dis = $conn->query($display); 
 
-//error for duplication
-$error_message = "";
+//message
+$message = "";
 if(isset($_GET['error'])){
-    $error_message = "<div class='alert alert-danger'>".$_GET['error']."</div>";
+    $message = "<div class='alert alert-danger'>".$_GET['error']."</div>";
+}
+
+else if(isset($_GET['success'])){
+    $message = "<div class='alert alert-success'>".$_GET['success']."</div>";
+}
+
+else if(isset($_GET['success-edit'])){
+    $message = "<div class='alert alert-info'>".$_GET['success-edit']."</div>";
 }
 
 ?>
@@ -117,17 +125,24 @@ if(isset($_GET['error'])){
                             </a>
                         </li>
                         <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="appoint.php"
+                                aria-expanded="false">
+                                <i class="fas fa-clipboard" aria-hidden="true"></i>
+                                <span class="hide-menu">Appoint Vehicle Driver</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="schedule.php"
                                 aria-expanded="false">
                                 <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                                <span class="hide-menu">Schedule</span>
+                                <span class="hide-menu">Schedule Management</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="trips.php"
                                 aria-expanded="false">
                                 <i class="fa fa-map" aria-hidden="true"></i>
-                                <span class="hide-menu">Trips</span>
+                                <span class="hide-menu">Trips Management</span>
                             </a>
                         </li>
                     </ul>
@@ -154,9 +169,9 @@ if(isset($_GET['error'])){
                     </div>
                 </div>
             </div>
-
             
-            <div id="error-message"><?php echo $error_message; ?></div>
+            <div id="error-message"><?php echo $message; ?></div>
+            
             <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->

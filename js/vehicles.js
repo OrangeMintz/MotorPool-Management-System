@@ -1,22 +1,22 @@
 // Create a function that loads the Brand and Model
 var vehiclesselector = {
     Toyota: [
-        "Vios", "Hiace"
+        "Vios","Hiace"
     ],
     Honda: [
-        "ViosH", "HiaceH"
+        "ViosH","HiaceH"
     ],
     Nissan: [
-        "ViosN", "HiaceN"
+        "ViosN","HiaceN"
     ],
     Ford: [
-        "ViosF", "HiaceF"
+        "ViosF","HiaceF"
     ],
     Hyundai: [
-        "ViosH", "HiaceH"
+        "ViosH","HiaceH"
     ],
     Suburban: [
-        "ViosS", "HiaceS"
+        "ViosS","HiaceS"
     ],
     
     };
@@ -76,11 +76,10 @@ let errormsg = document.getElementById('errormsg');
 
   //EDIT VEHICLE
   function editVehicle(num){
-    window.location="vehicleEdit.php?vehiclenumber=" + num;
+    window.location="vehicleedit.php?vehiclenumber=" + num;
   }
 
   //DELETE VEHICLE
-
   function deleteVehicle(num){
 
     $('#delete').modal('show');
@@ -89,16 +88,19 @@ let errormsg = document.getElementById('errormsg');
       // Send the POST request to delete the vehicle
       $.post("includes/db_vehicle_delete.php",{num:num},function(data, status){
         if(status == "success"){
-          window.location="vehicle.php?vehicle_deleted_successfully";
+          window.location="vehicle.php"
           // Hide the modal
           $('#delete').modal('hide');
         }
         else{
-          alert("Cannot delete Vehicle");
+          window.location="vehicle.php"
         }
       });
       
     });
   }
+  
   $('.vehicletable').DataTable();
+
+  
 

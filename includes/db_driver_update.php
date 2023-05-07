@@ -1,5 +1,5 @@
 <?php 
-include_once "db_conn.php"; 
+include_once "db_conn.php";
 
 // ADD DATABASE INPUTS
 $id = $_POST['id'];
@@ -13,7 +13,6 @@ $city = $_POST['city'];
 $barangay = $_POST['barangay'];
 $pnumber = $_POST['pnumber'];
 $email = $_POST['email'];
-
 
 // Validate driver inputs input
 if (strlen(trim($fname)) === 0) {
@@ -46,57 +45,43 @@ if (preg_match('/^\s+|\s+$/', $lname)) {
     exit();
 }
 
-
-$query = mysqli_query($conn, "SELECT * FROM `driver` WHERE driver_id = '$id'");
-$query2 = mysqli_query($conn, "SELECT * FROM `driver` WHERE email_address = '$email'");
-$query3 = mysqli_query($conn, "SELECT * FROM `driver` WHERE phone_number = '$pnumber'");
-$query4 = mysqli_query($conn, "SELECT * FROM `driver` WHERE first_name = '$fname' AND middle_name = '$mname' AND last_name = '$lname'");
+$check_names_query = mysqli_query($conn, "SELECT * FROM `driver` WHERE first_name = '$fname' AND middle_name = '$mname' AND last_name = '$lname' AND driver_id != '$id'");
+$check_email_query = mysqli_query($conn, "SELECT * FROM `driver` WHERE email_address = '$email' AND driver_id != '$id'");
 
 
-if(mysqli_num_rows($query)>0){
-    $error = "Driver ID already exists";
-    header("Location: ../driver.php?error=".urlencode($error));
-    exit();
-}
 
-else if(mysqli_num_rows($query2)>0){
-    $error = "Driver Email already exists";
-    header("Location: ../driver.php?error=".urlencode($error));
-    exit();
-}
-
-else if(mysqli_num_rows($query3)>0){
-    $error = "Driver Phone Number already exists";
-    header("Location: ../driver.php?error=".urlencode($error));
-    exit();
-}
-
-else if(mysqli_num_rows($query4)>0){
+if(mysqli_num_rows($check_names_query) > 0){
     $error = "Driver with the same first name, middle name and last name already exists";
     header("Location: ../driver.php?error=".urlencode($error));
     exit();
 }
 
+if(mysqli_num_rows($check_email_query) > 0){
+    $error = "Driver with the same email address already exists";
+    header("Location: ../driver.php?error=".urlencode($error));
+    exit();
+}
+
 else{
 
 
-$add = "INSERT INTO `driver`(`driver_id`, `first_name`, `middle_name`, `last_name`, `suffix`, `birthday`, `province`, `city`, `barangay`, `phone_number`, `email_address`, `created_at`) 
-VALUES (?,?,?,?,?,?,?,?,?,?,?,NOW())";
+$update = "UPDATE `driver` SET `first_name`= ?,`middle_name`= ?,`last_name`= ?,`suffix`= ?,`birthday`= ?,`barangay`= ?, 
+`city`= ?,`province`= ?,`phone_number`= ?,`email_address`= ?,`updated_at`=  CURRENT_TIMESTAMP WHERE `driver`.`driver_id` = ?;";
 
-$stmt = $conn->prepare($add);
-$stmt -> bind_param("sssssssssss",$id, $fname, $mname, $lname, $sname, $birthday, $province, $city, $barangay, $pnumber, $email);
+$stmt = $conn->prepare($update);
+$stmt -> bind_param("ssssssssssi", $fname, $mname, $lname, $suffix, $birthday, $barangay, $city, $province, $pnumber, $email, $id);
+
+
 
 if($stmt->execute()){
-    $msg = "Driver Added Successfully";
+    $msg = "Driver Edited Successfully";
     $conn->close();
-    header("Location: ../driver.php?success=".urlencode($msg));
-
-    exit();
-
+    header("Location: ../driver.php?success-edit=".urlencode($msg));
 }
 else{
-    $conn->close();
-    header("Location: ../driver.php?added=unsuccessfully");}
-    exit();
+    header("Location: ../driver.php?edited=unsuccessfully");
+}
+$conn->close();
+
 }
 ?>

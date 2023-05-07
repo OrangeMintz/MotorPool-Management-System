@@ -12,6 +12,8 @@ $display = "SELECT scheduling.*, driver.first_name, driver.middle_name, driver.l
             JOIN vehicle ON appointed.vehicle_number = vehicle.vehicle_number";
 $dis = $conn->query($display); 
 
+
+
 $display2 = "SELECT appointed.appointed_vd,driver.driver_id, driver.first_name,driver.middle_name, driver.last_name, driver.suffix, 
             vehicle.vehicle_number, vehicle.vehicle_plate, vehicle.vehicle_brand, vehicle.vehicle_model 
             FROM appointed
@@ -37,47 +39,51 @@ else if(isset($_GET['success-edit'])){
     $message = "<div class='alert alert-info'>".$_GET['success-edit']."</div>";
 }
 
-else if(isset($_GET['warning'])){
-    $message = "<div class='alert alert-warning'>".$_GET['warning']."</div>";
+
+// $schedule = $_GET['schedule'] get schedule to display schedule data row based from schedule_id;
+if(isset($_GET['schedule'])) {
+    $schedule_id = $_GET['schedule'];
+    $display3 = "SELECT scheduling.*, driver.first_name, driver.middle_name, driver.last_name, driver.suffix, vehicle.vehicle_number, vehicle.vehicle_plate, vehicle.vehicle_brand, vehicle.vehicle_model 
+                FROM scheduling 
+                JOIN appointed ON scheduling.appointed_vd = appointed.appointed_vd 
+                JOIN driver ON appointed.driver_id = driver.driver_id 
+                JOIN vehicle ON appointed.vehicle_number = vehicle.vehicle_number 
+                WHERE scheduling.schedule_id = $schedule_id";
+    $dis3 = $conn->query($display3); 
+    $row3 = $dis3->fetch_assoc();
 }
 
 ?>
-
 <script>
-$(document).ready(function (){
-    $('.scheduleTable').DataTable();
-});
+    $(document).ready(function (){
+        $("#editSchedule").modal('show');
 
+        $('.scheduleTable').DataTable();
+    })
 </script>
 
         <!-- ADD SCHEDULE MODAL START-->
-        <div class="modal fade " id="addSchedule" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade " id="editSchedule" role="dialog" aria-hidden="true" data-bs-backdrop="static" data-keyboard="false">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">ADD SCHEDULE</h5>
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <h5 class="modal-title" id="exampleModalLabel">RESCHEDULE</h5>
+                            <button type="button" class="close" onclick="redirectback()" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="schedule-add" action ="includes/db_schedule_add.php" method="POST">
+                            <form id="schedule-add" action ="includes/db_schedule_update.php" method="POST">
                                 <div class="container">
                                 <div class="row">
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="driver-id" class="col-form-label">Appointed Driver:</label>
-                                                <select class="form-control" id="appointed-vd" size="1" name ="appointed-vd" required>
-                                                <option value="" selected="selected" selected disabled value> -- Select Vehicle Driver  -- </option>
-                                                <?php
-                                                    if ($dis2->num_rows > 0) {
-                                                        $dis2->data_seek(0);
-                                                    while($row = $dis2->fetch_assoc()) {
-                                                        echo '<option value="'. $row['appointed_vd'] .'">'. $row['last_name'].', '. $row['first_name'] .' '. $row['middle_name'] .' '. $row['suffix'] .'</option>';
-                                                        }
-                                                    }
-                                                    ?>
-                                                </select>
+                                                <?php 
+                                                    echo '<input type="text" class="form-control" id="appointed-vd" name="appointed-vd" value="'. $row3['appointed_vd'] .'" hidden readonly>';
+                                                    echo '<input type="text" class="form-control" id="driver-id" name="driver-id" value="' . $row3['last_name'] . ', ' . $row3['first_name'] . ' ' . $row3['middle_name'] . ' ' . $row3['suffix'] . '" readonly>';
+                                                ?>
+
                                             </div>
                                         </div>
                                     </div>
@@ -85,20 +91,20 @@ $(document).ready(function (){
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="schedule-departure" class="col-form-label">Departure Datetime</label>
-                                                <input type="datetime-local" class="form-control" id="schedule-departure" name="departure-datetime" required>
+                                                <input type="datetime-local" class="form-control" id="departure-datetime" name="departure-datetime" value="<?php  echo $row3['departure_datetime'] ?>" required>
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="schedule-arrival" class="col-form-label">Arrival Datetime</label>
-                                                <input type="datetime-local" class="form-control" id="schedule-arrival" name="arrival-datetime">
+                                                <input type="datetime-local" class="form-control" id="arrival-datetime" name="arrival-datetime" value="<?php echo $row3['arrival_datetime'] ?>">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                     <div class="modal-footer">
-                                    <button type="button" id="cancel-btn" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" id="add-btn" class="btn btn-success">Add Schedule</button>
+                                    <button type="button" id="cancel-btn" onclick="redirectback()" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" id="add-btn" class="btn btn-success">Update Schedule</button>
                                     </div>
                                 </form>
                             </div>
@@ -178,14 +184,7 @@ $(document).ready(function (){
                     <h4 class="page-title">Schedule Management</h4>
                 </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                    <div class="d-md-flex">
-                        <ol class="breadcrumb ms-auto">
-                            <li>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" 
-                            data-bs-target="#addSchedule">ADD SCHEDULE</button> 
-                            </li>
-                        </ol>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -211,7 +210,6 @@ $(document).ready(function (){
                                             <th class="border-top-0">Departure Datetime</th>
                                             <th class="border-top-0">Arrival Datetime</th>
                                             <th class="border-top-0">Status</th>
-                                            <th class="border-top-0">Options</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -226,12 +224,7 @@ $(document).ready(function (){
                                                     <td>'. $row['departure_datetime'].'</td>
                                                     <td>'. $row['arrival_datetime'].'</td>
                                                     <td>'. $row['schedule_status'].'</td>
-                                                    <td>
-                                                        <button type="button" id="edit-btn" class="btn btn-success" data-bs-toggle="modal" 
-                                                        data-bs-target="#editAppoint" onclick="editSchedule('. $row['schedule_id'].')">EDIT</button>
-                                                        <button type="button" id="delete-btn" class="btn btn-danger" 
-                                                        onclick="deleteSchedule('. $row['schedule_id'].')">DELETE</button>
-                                                    </td></tr>';
+                                                    </tr>';
                                                 }
                                             }
                                             ?>
@@ -243,6 +236,10 @@ $(document).ready(function (){
                 </div>
             </div>
 
-
+<script>
+function redirectback(){
+window.location="schedule.php";
+}
+</script>
 <script src="js/schedules.js"></script>
 <?php include "footer.php" ?>

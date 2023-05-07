@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2023 at 09:11 PM
+-- Generation Time: May 07, 2023 at 01:20 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -48,9 +48,10 @@ CREATE TABLE `driver` (
 --
 
 INSERT INTO `driver` (`driver_id`, `first_name`, `middle_name`, `last_name`, `suffix`, `birthday`, `barangay`, `city`, `province`, `phone_number`, `email_address`, `created_at`, `updated_at`) VALUES
-(1000, 'Djeikuje Nickolai', '', 'Gacus', NULL, '2002-09-10', 'Poblacion', 'Valencia City', 'Bukidnon', '9350050225', 'nickolaigacus@yahoo.com', '2023-05-04 14:39:57', '2023-05-07 09:31:15'),
-(1001, 'Jhon Kert', '', 'Talha', NULL, '2002-02-07', 'Poblacion', 'Valencia City', 'Bukidnon', '9564566454', 'talhajhonkert@gmail.com', '2023-05-07 00:36:07', '2023-05-07 09:15:32'),
-(1002, 'Jeffrey', '', 'Sedoro', NULL, '2023-05-04', 'Bagontaas', 'Valencia City', 'Bukidnon', '9566756756', 'example@gmail.com', '2023-05-07 04:22:50', '2023-05-07 04:46:51');
+(1000, 'Djeikuje Nickolai', 'Cordero', 'Gacus', NULL, '2002-09-10', 'Poblacion', 'Valencia City', 'Bukidnon', '9350050225', 'nickolaigacus@yahoo.com', '2023-05-04 14:39:57', '2023-05-06 19:01:42'),
+(1001, 'Jeffrey', '', 'Sedoro', NULL, '2023-06-07', 'Poblacion', 'Valencia City', 'Bukidnon', '9845534224', 'example@gmail.com', '2023-05-05 03:32:43', '2023-05-06 09:14:00'),
+(1231, 'Jhon Kert', '', 'Talha', NULL, '2002-02-07', 'Poblacion', 'Valencia City', 'Bukidnon', '9324534534', 'talhajhonkert@gmail.com', '2023-05-04 11:26:13', '2023-05-06 09:25:10'),
+(6789, 'John', '', 'Doe', '', '2023-06-03', 'Poblacion', 'Valencia City', 'Bukidnon', '9675756565', 'nickz59134@gmail.com', '2023-05-06 16:58:22', '2023-05-06 16:58:22');
 
 -- --------------------------------------------------------
 
@@ -63,19 +64,16 @@ CREATE TABLE `scheduling` (
   `appointed_vd` int(20) NOT NULL,
   `departure_datetime` datetime NOT NULL,
   `arrival_datetime` datetime DEFAULT NULL,
-  `schedule_status` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `schedule_status` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `scheduling`
 --
 
-INSERT INTO `scheduling` (`schedule_id`, `appointed_vd`, `departure_datetime`, `arrival_datetime`, `schedule_status`, `created_at`, `updated_at`) VALUES
-(109, 9, '2023-06-09 00:58:00', '0000-00-00 00:00:00', 'Traveling ', '2023-05-07 09:41:22', '2023-05-07 16:58:26'),
-(110, 7, '2023-05-07 19:50:00', '0000-00-00 00:00:00', 'Traveling ', '2023-05-07 11:50:52', '2023-05-07 18:48:36'),
-(111, 8, '2023-05-08 02:48:00', '2023-05-08 02:48:00', 'Arrived', '2023-05-07 18:48:44', '2023-05-07 18:48:44');
+INSERT INTO `scheduling` (`schedule_id`, `appointed_vd`, `departure_datetime`, `arrival_datetime`, `schedule_status`) VALUES
+(110, 13, '2023-05-30 07:17:00', '0000-00-00 00:00:00', 'Traveling '),
+(111, 21, '2023-05-19 07:17:00', '2023-05-24 07:17:00', 'Arrived');
 
 -- --------------------------------------------------------
 
@@ -97,10 +95,11 @@ CREATE TABLE `vehicle` (
 --
 
 INSERT INTO `vehicle` (`vehicle_number`, `vehicle_brand`, `vehicle_model`, `vehicle_plate`, `created_at`, `updated_at`) VALUES
-(12312, 'Nissan', 'ViosN', '67867', '2023-05-07 04:32:10', '2023-05-07 04:32:10'),
 (12315, 'Nissan', 'Vios', '4567S', '2023-05-03 15:14:57', '2023-05-04 15:59:36'),
-(67786, 'Ford', 'ViosH', 'zUwUz', '2023-05-03 15:59:45', '2023-05-07 09:16:36'),
-(67867, 'Nissan', 'ViosN', 'SASF4', '2023-05-04 02:40:11', '2023-05-07 04:36:15');
+(24564, 'Hyundai', 'ViosH', 'GDFFL', '2023-05-06 17:39:06', '2023-05-06 17:39:06'),
+(67786, 'Ford', 'ViosH', 'ILOVE', '2023-05-03 15:59:45', '2023-05-04 10:48:54'),
+(67867, 'Nissan', 'ViosN', 'SASF4', '2023-05-04 02:40:11', '2023-05-04 02:40:11'),
+(89980, 'Toyota', 'Vios', '67575', '2023-05-06 19:09:37', '2023-05-06 19:09:37');
 
 --
 -- Indexes for dumped tables
@@ -121,7 +120,9 @@ ALTER TABLE `driver`
 ALTER TABLE `scheduling`
   ADD PRIMARY KEY (`schedule_id`),
   ADD UNIQUE KEY `schedule_id` (`schedule_id`),
-  ADD UNIQUE KEY `appointed_vd` (`appointed_vd`);
+  ADD UNIQUE KEY `appointed_vd` (`appointed_vd`),
+  ADD UNIQUE KEY `appointed_vd_2` (`appointed_vd`),
+  ADD UNIQUE KEY `appointed_vd_3` (`appointed_vd`);
 
 --
 -- Indexes for table `vehicle`
@@ -139,7 +140,7 @@ ALTER TABLE `vehicle`
 -- AUTO_INCREMENT for table `scheduling`
 --
 ALTER TABLE `scheduling`
-  MODIFY `schedule_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `schedule_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- Constraints for dumped tables

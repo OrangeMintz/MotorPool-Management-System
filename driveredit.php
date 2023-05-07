@@ -10,18 +10,18 @@ $display = "SELECT * FROM driver";
 $dis = $conn->query($display); 
 
 //EDIT 
-include "includes/db_driver_edit.php"
+include "includes/db_driver_edit.php";
 ?>
 
 <script>
     $(document).ready(function (){
         $("#editDriver").modal('show');
 
-
     $('.appointTable').DataTable();
     })
 
 </script>
+
 
 <!-- EDIT DRIVER MODAL START -->
         <div class="modal fade " id="editDriver" role="dialog" aria-hidden="true" data-bs-backdrop="static" data-keyboard="false">
@@ -219,7 +219,7 @@ include "includes/db_driver_edit.php"
                     </div>
                 </div>
             </div>
-            
+
              <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->

@@ -116,7 +116,7 @@ addform.addEventListener('submit', (e) =>{
     // Send the POST request to delete the vehicle
     $.post("includes/db_driver_delete.php",{num:num},function(data, status){
       if(status == "success"){
-        window.location="driver.php?driver_deleted_successfully";
+        window.location="driver.php?success=Driver+Deleted+Successfully";
         // Hide the modal
         $('#delete').modal('hide');
       }

@@ -1,31 +1,4 @@
-let vnumber = document.getElementById('vehicle-number');
-let vplate = document.getElementById('vehicle-plate');
-let addform = document.getElementById('vehicle-add');
-let errormsg = document.getElementById('errormsg');
-
-  $(".error").hide();
-
-  addform.addEventListener('submit', (e) =>{
-    let messages = [];
-
-    if(vnumber.value.length < 5){
-      messages.push('Vehicle Number should be equal to 5 numbers');
-
-    }
-
-    else if(vplate.value.length < 5){
-        messages.push('Vehicle Plate should contain 5 characters');
-
-      }
-
-    if(messages.length > 0){
-      e.preventDefault()
-      $(".error").show();
-      errormsg.innerText = messages.join(', ')
-
-    }
-  })
-  
+$(".error").hide();
 
 
   //DELETE VEHICLE

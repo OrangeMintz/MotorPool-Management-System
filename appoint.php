@@ -199,6 +199,7 @@ if(isset($_GET['error'])){
                                     <thead class="thead-dark">
                                         <tr>
                                             <th class="border-top-0">ID</th>
+                                            <th class="border-top-0">Driver ID</th>
                                             <th class="border-top-0">Driver Name</th>
                                             <th class="border-top-0">Vehicle Number</th>
                                             <th class="border-top-0">Vehicle Plate</th>
@@ -214,6 +215,7 @@ if(isset($_GET['error'])){
                                             // output data of each row
                                                 while($row = $dis->fetch_assoc()) {
                                                   echo '<tr>
+                                                  <td>'. $row['appointed_vd'].'</td>
                                                   <td>'. $row['driver_id'].'</td>
                                                   <td>'. $row['last_name'].', '. $row['first_name'] .' '. $row['middle_name'] .' '. $row['suffix'] .'</td>
                                                   <td>'. $row['vehicle_number'].'</td>

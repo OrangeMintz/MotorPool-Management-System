@@ -74,7 +74,9 @@ $stmt -> bind_param("ssssssssssi", $fname, $mname, $lname, $suffix, $birthday, $
 
 
 if($stmt->execute()){
-    header("Location: ../driver.php?edited=successfully");
+    $msg = "Driver Edited Successfully";
+    $conn->close();
+    header("Location: ../driver.php?success-edit=".urlencode($msg));
 }
 else{
     header("Location: ../driver.php?edited=unsuccessfully");

@@ -1,8 +1,47 @@
-<?php include "header.php";
+<?php 
+include "header.php";
 include "css/customcss.php";
 include "remove.php";
+include_once "includes/db_conn.php";
+
+
+$display = "SELECT scheduling.*, driver.first_name, driver.middle_name, driver.last_name, driver.suffix, vehicle.vehicle_number, vehicle.vehicle_plate, vehicle.vehicle_brand, vehicle.vehicle_model 
+            FROM scheduling 
+            JOIN appointed ON scheduling.appointed_vd = appointed.appointed_vd 
+            JOIN driver ON appointed.driver_id = driver.driver_id 
+            JOIN vehicle ON appointed.vehicle_number = vehicle.vehicle_number";
+$dis = $conn->query($display); 
+
+
+
+// $display2 = "SELECT appointed.appointed_vd,driver.driver_id, driver.first_name,driver.middle_name, driver.last_name, driver.suffix, 
+//             vehicle.vehicle_number, vehicle.vehicle_plate, vehicle.vehicle_brand, vehicle.vehicle_model 
+//             FROM appointed
+//             JOIN driver ON appointed.driver_id = driver.driver_id
+//             JOIN vehicle ON appointed.vehicle_number = vehicle.vehicle_number";
+// $dis2 = $conn->query($display2); 
+
+
+$display2 = "SELECT appointed.appointed_vd,driver.driver_id, driver.first_name,driver.middle_name, driver.last_name, driver.suffix, 
+            vehicle.vehicle_number, vehicle.vehicle_plate, vehicle.vehicle_brand, vehicle.vehicle_model 
+            FROM appointed
+            JOIN driver ON appointed.driver_id = driver.driver_id
+            JOIN vehicle ON appointed.vehicle_number = vehicle.vehicle_number
+            LEFT JOIN scheduling ON appointed.appointed_vd = scheduling.appointed_vd
+            WHERE scheduling.schedule_status != 'traveling' OR scheduling.schedule_status IS NULL";
+$dis2 = $conn->query($display2);
+
+
+
+
 ?>
 
+<script>
+$(document).ready(function (){
+    $('.scheduleTable').DataTable();
+});
+
+</script>
 
         <!-- ADD SCHEDULE MODAL START-->
         <div class="modal fade " id="addSchedule" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -15,23 +54,23 @@ include "remove.php";
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="schedule-add" action ="#" method="POST">
-                            <div class="alert alert-warning error" role="alert">
-                            <div id="errormsg"></div></div>
+                            <form id="schedule-add" action ="includes/db_schedule_add.php" method="POST">
                                 <div class="container">
                                 <div class="row">
                                         <div class="col-sm">
                                             <div class="form-group">
-                                                <label for="driver-id" class="col-form-label">Driver ID:</label>
-                                                <input type="number" class="form-control" id="driver-id" required  
-                                                onKeyDown="if(this.value.length==4 && event.keyCode>47 && event.keyCode < 58) return false;">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm">
-                                            <div class="form-group">
-                                                <label for="vehicle-number" class="col-form-label">Vehicle Number</label>
-                                                <input type="text" class="form-control" id="vehicle-number" requried  
-                                                onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;">
+                                                <label for="driver-id" class="col-form-label">Appointed Driver:</label>
+                                                <select class="form-control" id="appointed-vd" size="1" name ="appointed-vd" required>
+                                                <option value="" selected="selected" selected disabled value> -- Select Vehicle Driver  -- </option>
+                                                <?php
+                                                    if ($dis2->num_rows > 0) {
+                                                        $dis2->data_seek(0);
+                                                    while($row = $dis2->fetch_assoc()) {
+                                                        echo '<option value="'. $row['appointed_vd'] .'">'. $row['last_name'].', '. $row['first_name'] .' '. $row['middle_name'] .' '. $row['suffix'] .'</option>';
+                                                        }
+                                                    }
+                                                    ?>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -39,13 +78,13 @@ include "remove.php";
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="schedule-departure" class="col-form-label">Departure Datetime</label>
-                                                <input type="datetime-local" class="form-control" id="schedule-departure" required>
+                                                <input type="datetime-local" class="form-control" id="schedule-departure" name="departure-datetime" required>
                                             </div>
                                         </div>
                                         <div class="col-sm">
                                             <div class="form-group">
                                                 <label for="schedule-arrival" class="col-form-label">Arrival Datetime</label>
-                                                <input type="datetime-local" class="form-control" id="schedule-arrival">
+                                                <input type="datetime-local" class="form-control" id="schedule-arrival" name="arrival-datetime">
                                             </div>
                                         </div>
                                     </div>
@@ -60,65 +99,6 @@ include "remove.php";
                     </div>
                 </div>
         <!-- ADD SCHEDULE MODAL END-->
-
-
-        <!-- EDIT SCHEDULE MODAL START-->
-        <div class="modal fade " id="editSchedule" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">EDIT SCHEDULE</h5>
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="schedule-edit" action ="#" method="POST">
-                            <div class="alert alert-warning error2" role="alert">
-                            <div id="errormsg2"></div></div>
-                                <div class="container">
-                                <div class="row">
-                                        <div class="col-sm">
-                                            <div class="form-group">
-                                                <label for="driver-id" class="col-form-label">Driver ID:</label>
-                                                <input type="number" class="form-control" id="driver-id2" required  
-                                                onKeyDown="if(this.value.length==4 && event.keyCode>47 && event.keyCode < 58) return false;">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm">
-                                            <div class="form-group">
-                                                <label for="vehicle-number" class="col-form-label">Vehicle Number</label>
-                                                <input type="text" class="form-control" id="vehicle-number2" requried  
-                                                onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm">
-                                            <div class="form-group">
-                                                <label for="schedule-departure" class="col-form-label">Departure Datetime</label>
-                                                <input type="datetime-local" class="form-control" id="schedule-departure2" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm">
-                                            <div class="form-group">
-                                                <label for="schedule-arrival" class="col-form-label">Arrival Datetime</label>
-                                                <input type="datetime-local" class="form-control" id="schedule-arrival2">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div class="modal-footer">
-                                    <button type="button" id="cancel-btn" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" id="add-btn" class="btn btn-success">Add Schedule</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        <!-- EDIT SCHEDULE MODAL END-->
-
 
 <!-- Left Sidebar  -->
 <aside class="left-sidebar" data-sidebarbg="skin6">
@@ -184,7 +164,6 @@ include "remove.php";
 
         <!-- Page wrapper  -->
         <div class="page-wrapper" style="min-height: 250px;">
-
         <!-- Bread crumb and right sidebar toggle -->
         <div class="page-breadcrumb bg-white">
             <div class="row align-items-center">
@@ -213,29 +192,40 @@ include "remove.php";
                         <div class="white-box">
                             <h3 class="box-title">Schedules</h3>
                             <div class="table-responsive">
-                                <table class="table text-center">
+                                <table class="table text-center scheduleTable load table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th class="border-top-0">ID</th>
+                                            <th class="border-top-0">Appointed ID</th>
                                             <th class="border-top-0">Driver</th>
-                                            <th class="border-top-0">Vehicle Number</th>
+                                            <th class="border-top-0">Vehicle Plate</th>
+                                            <th class="border-top-0">Vehicle</th>
                                             <th class="border-top-0">Departure Datetime</th>
                                             <th class="border-top-0">Arrival Datetime</th>
+                                            <th class="border-top-0">Status</th>
                                             <th class="border-top-0">Options</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Oshino Shinobu</td>
-                                            <td>10253</td>
-                                            <td>04/23/2023, 11:37 AM</td>
-                                            <td>04/23/2023, 01:15 PM</td>
-                                            <td>
-                                            <button type="button" id="edit-btn" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editSchedule">EDIT</button>
-                                            <button type="button" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">DELETE</button>
-                                            </td> 
-                                        </tr>
+                                            <?php if ($dis->num_rows > 0) {
+                                                // Loop through each row and display the data in your table rows
+                                                while($row = $dis->fetch_assoc()) {
+                                                    echo '<tr>
+                                                    <td>'. $row['appointed_vd'].'</td>
+                                                    <td>'. $row['last_name'].', '. $row['first_name'] .' '. $row['middle_name'] .' '. $row['suffix'] .'</td>
+                                                    <td>'. $row['vehicle_plate'].'</td>
+                                                    <td>'. $row['vehicle_brand'].' '. $row['vehicle_model'].'</td>
+                                                    <td>'. $row['departure_datetime'].'</td>
+                                                    <td>'. $row['arrival_datetime'].'</td>
+                                                    <td>'. $row['schedule_status'].'</td>
+                                                    <td>
+                                                        <button type="button" id="edit-btn" class="btn btn-success" data-bs-toggle="modal" 
+                                                        data-bs-target="#editAppoint" onclick="editAppointment('. $row['appointed_vd'].')">EDIT</button>
+                                                        <button type="button" id="delete-btn" class="btn btn-danger" 
+                                                        onclick="deleteAppointment('. $row['appointed_vd'].')">DELETE</button>
+                                                    </td></tr>';
+                                                }
+                                            }
+                                            ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -245,5 +235,5 @@ include "remove.php";
             </div>
 
 
-<script src="js/schedule.js"></script>
+<scrip src="js/scheduled.js"></scrip>
 <?php include "footer.php" ?>

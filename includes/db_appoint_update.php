@@ -10,8 +10,9 @@ $stmt = $conn->prepare($update);
 $stmt->bind_param("iii", $driver_id, $vehicle_number, $appointed_vd);
 
 if($stmt->execute()){
+    $msg = "Driver Edited Successfully";
     $conn->close();
-    header("Location: ../appoint.php?edited=successfully");
+    header("Location: ../driver.php?success=".urlencode($msg));
     exit();
 }
 else{

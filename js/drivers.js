@@ -2,23 +2,23 @@
 // Create a function that loads the Province, City, Barangay
 var locationSelector = {
   "Agusan del Norte": {
-      Agusan: ["Agusan","del Norte"],
-      Norte: ["Agusan","del Norte"],
+      Butuan: ["Poblacion","Anticala"],
+      Cabadbaran: ["Bay-ang","Calamba"],
     },
 
     Bukidnon: {
       "Valencia City": ["Poblacion", "Bagontaas"],
-      "Malaybalay City": ["Aglayan","Casisang"]
+      "Malaybalay City": ["Casisang","San Jose", "Sumpong"]
     },
 
     Camiguin: {
-      Cami: ["Cami","Guin"],
-      Guin: ["Cami","Guin"],
+      Guinsiliban: ["Butay","Cabuan"],
+      Mambajao: ["Tupsan","Benhaan"],
     },
 
     "Davao de Oro": {
-      Davao: ["Davao","de Oro"],
-      "de Oro": ["Davao","de Oro"],
+      "New Bataan": ["Andap","Bantacan"],
+      Tagum: ["Cuambogan","Busaon"],
     },
 
   };

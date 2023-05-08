@@ -1,22 +1,22 @@
 // Create a function that loads the Brand and Model
 var vehiclesselector = {
     Toyota: [
-        "Vios","Hiace"
+        "Vios","RAV4"
     ],
     Honda: [
-        "ViosH","HiaceH"
+        "Accord","Odyssey"
     ],
     Nissan: [
-        "ViosN","HiaceN"
+        "Caravan","Altima"
     ],
     Ford: [
-        "ViosF","HiaceF"
+        "Next-Gen Everest","Next-Gen Ranger"
     ],
     Hyundai: [
-        "ViosH","HiaceH"
+        "Veloster","Creta"
     ],
-    Suburban: [
-        "ViosS","HiaceS"
+    Chevrolet: [
+        "Spark","Suburban"
     ],
     
     };

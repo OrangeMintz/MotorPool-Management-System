@@ -40,7 +40,7 @@ else{
     if($stmt->execute()){
         $msg = "Trip Rebooked Successfully";
         $conn->close();
-        header("Location: ../trips.php?success=".urlencode($msg));
+        header("Location: ../trips.php?success-edit=".urlencode($msg));
         exit();
     }
     else{

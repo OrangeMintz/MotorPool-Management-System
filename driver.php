@@ -275,5 +275,5 @@ else if(isset($_GET['success-edit'])){
         </div>
 
 
-<script src="js/driver.js"></script>
+<script src="js/drivers.js"></script>
 <?php include "footer.php" ?>

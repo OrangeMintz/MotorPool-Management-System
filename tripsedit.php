@@ -67,7 +67,8 @@ else if(isset($_GET['warning'])){
                                     <div class="col-sm">
                                         <div class="form-group">
                                             <label for="schedule-departure" class="col-form-label">Origin</label>
-                                            <input type="text" class="form-control"  id="trips-origin" name="trips-origin" value="" required>
+                                            <?php  echo '<input type="text" class="form-control" id="trips-origin" name="trips-origin" value="' . $row['origin'] . '" required>';?>
+
                                         </div>
                                     </div>
                                 </div>
@@ -75,7 +76,7 @@ else if(isset($_GET['warning'])){
                                         <div class="col-sm">
                                             <div class="form-group">
                                             <label for="schedule-arrival" class="col-form-label">Destination</label>
-                                            <input type="text" class="form-control" id="trips-destination" name="trips-destination" required>
+                                            <?php  echo '<input type="text" class="form-control" id="trips-destination" name="trips-destination" value="' . $row['destination'] . '" required>';?>
                                         </div>
                                     </div>
                                 </div>

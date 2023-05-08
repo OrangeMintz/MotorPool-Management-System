@@ -67,10 +67,12 @@
                 </div>
             </div>
             <div class="container-fluid">
+
+
                 <!-- ============================================================== -->
                 <!-- Three charts -->
                 <!-- ============================================================== -->
-                <div class="row justify-content-center">
+                <!-- <div class="row justify-content-center">
                     <div class="col-lg-3 col-md-12">
                         <div class="white-box analytics-info">
                             <h3 class="box-title">Current Schedule</h3>
@@ -125,8 +127,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
-            
 <?php include "footer.php" ?>

@@ -10,14 +10,6 @@
     <script src="js/jquery/jquery.js"></script>
     <script src="DataTables/datatables.min.js"></script>
     <link href="DataTables/datatables.min.css" rel="stylesheet">
-
-
-
-
-    
-
-    
-
 </head>
 
 <body>

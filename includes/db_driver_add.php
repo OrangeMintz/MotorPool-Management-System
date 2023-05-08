@@ -87,14 +87,16 @@ $stmt = $conn->prepare($add);
 $stmt -> bind_param("sssssssssss",$id, $fname, $mname, $lname, $sname, $birthday, $province, $city, $barangay, $pnumber, $email);
 
 if($stmt->execute()){
+    $msg = "Driver Added Successfully";
     $conn->close();
-    header("Location: ../driver.php?added=successfully");
+    header("Location: ../driver.php?success=".urlencode($msg));
+
     exit();
 
 }
 else{
     $conn->close();
-    header("Location: ../driver.php?added=unsucessfully");}
+    header("Location: ../driver.php?added=unsuccessfully");}
     exit();
 }
 ?>

@@ -10,15 +10,18 @@ $display = "SELECT * FROM driver";
 $dis = $conn->query($display); 
 
 //EDIT 
-include "includes/db_driver_edit.php"
+include "includes/db_driver_edit.php";
 ?>
 
 <script>
     $(document).ready(function (){
         $("#editDriver").modal('show');
+
+    $('.appointTable').DataTable();
     })
 
 </script>
+
 
 <!-- EDIT DRIVER MODAL START -->
         <div class="modal fade " id="editDriver" role="dialog" aria-hidden="true" data-bs-backdrop="static" data-keyboard="false">
@@ -190,14 +193,14 @@ include "includes/db_driver_edit.php"
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="schedule.php"
                                 aria-expanded="false">
                                 <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                                <span class="hide-menu">Schedule</span>
+                                <span class="hide-menu">Schedule Management</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="trips.php"
                                 aria-expanded="false">
                                 <i class="fa fa-map" aria-hidden="true"></i>
-                                <span class="hide-menu">Trips</span>
+                                <span class="hide-menu">Trips Management</span>
                             </a>
                         </li>
                     </ul>
@@ -216,7 +219,7 @@ include "includes/db_driver_edit.php"
                     </div>
                 </div>
             </div>
-            
+
              <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->

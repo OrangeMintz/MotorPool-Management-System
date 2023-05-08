@@ -1,11 +1,11 @@
 <?php
 include_once "db_conn.php"; 
 
-$appointed = $_POST['num'];
+$schedule = $_POST['num'];
 
-$delete = "DELETE FROM appointed WHERE `appointed`.`appointed_vd` = ?";
+$delete = "DELETE FROM scheduling WHERE `scheduling`.`schedule_id` = ?";
 $stmt = $conn->prepare($delete);
-$stmt -> bind_param("s",$appointed);
+$stmt -> bind_param("s",$schedule);
 
 if($stmt->execute()){
     $conn->close();

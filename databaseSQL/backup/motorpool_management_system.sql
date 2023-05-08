@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2023 at 09:20 PM
+-- Generation Time: May 08, 2023 at 07:10 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `testfordatabase`
+-- Database: `newinsertion`
 --
 
 -- --------------------------------------------------------
@@ -110,15 +110,19 @@ CREATE TABLE `trips` (
   `trips_id` int(20) NOT NULL,
   `schedule_id` int(20) NOT NULL,
   `origin` varchar(255) NOT NULL,
-  `destination` varchar(255) NOT NULL
+  `destination` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `trips`
 --
 
-INSERT INTO `trips` (`trips_id`, `schedule_id`, `origin`, `destination`) VALUES
-(1, 109, 'Valencia', 'Cagayan');
+INSERT INTO `trips` (`trips_id`, `schedule_id`, `origin`, `destination`, `created_at`, `updated_at`) VALUES
+(1, 109, 'Valencia', 'Malaybalay', '2023-05-08 04:55:27', '2023-05-08 04:57:08'),
+(7, 111, 'Valencia', 'Buksu Malaybalay City', '2023-05-08 04:55:27', '2023-05-08 04:58:05'),
+(8, 110, 'Libona', 'Davao', '2023-05-08 04:55:27', '2023-05-08 04:57:08');
 
 -- --------------------------------------------------------
 
@@ -244,7 +248,7 @@ ALTER TABLE `scheduling`
 -- AUTO_INCREMENT for table `trips`
 --
 ALTER TABLE `trips`
-  MODIFY `trips_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `trips_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables

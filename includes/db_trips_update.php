@@ -1,10 +1,10 @@
 <?php 
 include_once "db_conn.php"; 
 
+$schedule = $_POST['schedule-id'];
 $origin = $_POST['trips-origin'];
 $destination = $_POST['trips-destination'];
-$schedule = $_POST['schedule'];
-
+$status = ($arrival) ? 'Arrived' : 'Traveling ';
 
 // Validate driver inputs input
 if (strlen(trim($origin)) === 0) {
@@ -33,12 +33,12 @@ if (preg_match('/^\s+|\s+$/', $destination)) {
 
 else{
     // Insert the new schedule
-    $add = "INSERT INTO `trips`(`schedule_id`, `origin`, `destination`, `created_at`) VALUES (?, ?, ?, NOW())";
-    $stmt = $conn->prepare($add);
-    $stmt->bind_param("iss", $schedule, $origin, $destination);
+    $update = "UPDATE `trips` SET `schedule_id`= ?, `origin`= ?,`destination`= ?, `updated_at` = CURRENT_TIMESTAMP WHERE `schedule_id` = ?";
+    $stmt = $conn->prepare($update);
+    $stmt->bind_param("issi", $schedule, $origin, $destination, $schedule);
 
     if($stmt->execute()){
-        $msg = "Trip Booked Successfully";
+        $msg = "Trip Rebooked Successfully";
         $conn->close();
         header("Location: ../trips.php?success=".urlencode($msg));
         exit();
@@ -49,5 +49,8 @@ else{
         exit();
     }
 }
+
+
+
 
 ?>

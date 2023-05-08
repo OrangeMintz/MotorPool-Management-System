@@ -25,7 +25,6 @@ include "includes/db_driver_edit.php";
 
 <!-- EDIT DRIVER MODAL START -->
         <div class="modal fade " id="editDriver" role="dialog" aria-hidden="true" data-bs-backdrop="static" data-keyboard="false">
-
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                         <div class="modal-header">
@@ -159,13 +158,6 @@ include "includes/db_driver_edit.php";
                                 aria-expanded="false">
                                 <i class="far fa-clock" aria-hidden="true"></i>
                                 <span class="hide-menu">Dashboard</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="profile.php"
-                                aria-expanded="false">
-                                <i class="fa fa-user" aria-hidden="true"></i>
-                                <span class="hide-menu">Profile</span>
                             </a>
                         </li>
                         <li class="sidebar-item">

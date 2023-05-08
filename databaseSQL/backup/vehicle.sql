@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2023 at 09:17 PM
+-- Generation Time: May 08, 2023 at 07:02 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -42,9 +42,9 @@ CREATE TABLE `vehicle` (
 
 INSERT INTO `vehicle` (`vehicle_number`, `vehicle_brand`, `vehicle_model`, `vehicle_plate`, `created_at`, `updated_at`) VALUES
 (12312, 'Nissan', 'ViosN', '67867', '2023-05-07 04:32:10', '2023-05-07 04:32:10'),
-(12315, 'Nissan', 'Vios', '4567S', '2023-05-03 15:14:57', '2023-05-04 15:59:36'),
-(67786, 'Ford', 'ViosH', 'zUwUz', '2023-05-03 15:59:45', '2023-05-07 09:16:36'),
-(67867, 'Nissan', 'ViosN', 'SASF4', '2023-05-04 02:40:11', '2023-05-07 04:36:15');
+(12315, 'Hyundai', 'ViosH', '4567S', '2023-05-03 15:14:57', '2023-05-07 20:38:33'),
+(67786, 'Suburban', 'ViosS', 'zUwUz', '2023-05-03 15:59:45', '2023-05-07 20:38:12'),
+(67867, 'Toyota', 'Vios', 'SASF4', '2023-05-04 02:40:11', '2023-05-07 20:39:13');
 
 --
 -- Indexes for dumped tables

@@ -33,6 +33,11 @@ addform.addEventListener('submit', (e) =>{
     }
 })
 
+  //EDIT VEHICLE
+  function editTrips(num){
+    window.location="tripsedit.php?trip=" + num;
+    }
+
 
  //DELETE SCHEDULE
  function deleteTrip(num){
@@ -54,6 +59,8 @@ addform.addEventListener('submit', (e) =>{
       
     });
   }
+
+
 
 
 

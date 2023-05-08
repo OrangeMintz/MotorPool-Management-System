@@ -14,11 +14,9 @@ $display = "SELECT trips.trips_id, trips.schedule_id, trips.origin, trips.destin
                 JOIN driver ON appointed.driver_id = driver.driver_id 
                 JOIN vehicle ON appointed.vehicle_number = vehicle.vehicle_number";
 $dis = $conn->query($display);
-$dis2 = $conn->query($display);
 
-//SCHEDULE SELECTION
-$query = "SELECT schedule_id, departure_datetime, schedule_status FROM scheduling WHERE schedule_id NOT IN (SELECT schedule_id FROM trips)";
-$result = $conn->query($query);
+//EDIT 
+include "includes/db_trips_edit.php";
 
 //message
 $message = "";
@@ -38,28 +36,30 @@ else if(isset($_GET['warning'])){
     $message = "<div class='alert alert-warning'>".$_GET['warning']."</div>";
 }
 
+
 ?>
 
 
 <script>
-$(document).ready(function (){
-    $('.tripTable').DataTable();
-});
+    $(document).ready(function (){
+        $("#editTrip").modal('show');
 
+        $('.tripTable').DataTable();
+    })
 </script>
 
     <!-- ADD TRIP MODAL START-->
-        <div class="modal fade " id="addTrip" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade " id="editTrip" role="dialog" aria-hidden="true" data-bs-backdrop="static" data-keyboard="false">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">ADD A TRIP</h5>
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <h5 class="modal-title" id="exampleModalLabel">EDIT A TRIP</h5>
+                            <button type="button" class="close" onclick="redirectback()" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="trip-add" action ="includes/db_trips_add.php" method="POST">
+                            <form id="trip-add" action ="includes/db_trips_update.php" method="POST">
                             <div class="alert alert-warning error" role="alert">
                             <div id="errormsg"></div></div>
                                 <div class="container">
@@ -67,7 +67,7 @@ $(document).ready(function (){
                                     <div class="col-sm">
                                         <div class="form-group">
                                             <label for="schedule-departure" class="col-form-label">Origin</label>
-                                            <input type="text" class="form-control"  id="trips-origin" name="trips-origin" required>
+                                            <input type="text" class="form-control"  id="trips-origin" name="trips-origin" value="" required>
                                         </div>
                                     </div>
                                 </div>
@@ -83,23 +83,16 @@ $(document).ready(function (){
                                         <div class="col-sm">
                                         <div class="form-group">
                                             <label for="schedule-departure" class="col-form-label">Schedule</label>
-                                            <select class="form-control" id="schedule" size="1" name ="schedule" required>
-                                            <option value="" selected="selected" selected disabled value> -- Select Schedule  -- </option>
-                                            <?php
-                                                if ($result->num_rows > 0) {
-                                                while($row = $result->fetch_assoc()) {
-                                                    echo '<option value="'. $row['schedule_id'] .'">'. $row['departure_datetime'].' - '. $row['schedule_status'].'</option>';
-                                                }
-                                                }
+                                            <?php  echo '<input type="text" class="form-control" id="schedule-id" name="schedule-id" value="'. $row['schedule_id'] .'" hidden readonly>';
+                                                    echo '<input type="text" class="form-control" id="departure-id" name="departure-id" value="' . $row['departure_datetime'] . ', ' . $row['schedule_status'] . '" readonly>';
                                             ?>
-                                            </select>
                                         </div>
                                         </div>
                                 </div>
                                 </div>
                                     <div class="modal-footer">
-                                    <button type="button" id="cancel-btn" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" id="add-btn" class="btn btn-success">Add Trip</button>
+                                    <button type="button" id="cancel-btn" onclick="redirectback()" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" id="add-btn" class="btn btn-success">Rebook Trip</button>
                                     </div>
                                 </form>
                             </div>
@@ -211,8 +204,6 @@ $(document).ready(function (){
                                         <th class="border-top-0">Departure</th>
                                         <th class="border-top-0">Arrival</th>
                                         <th class="border-top-0">Status</th>
-                                        <th class="border-top-0">Actions</th>
-
                                         
                                     </tr>
                                 </thead>
@@ -229,10 +220,6 @@ $(document).ready(function (){
                                         <td>'. $row['departure_datetime'].'</td>
                                         <td>'. $row['arrival_datetime'].'</td>
                                         <td>'. $row['schedule_status'].'</td>
-                                        <td>
-                                            <button type="button" id="edit-btn" class="btn btn-success"onclick="editTrips('. $row['trips_id'].')">EDIT</button>
-                                            <button type="button" id="delete-btn" class="btn btn-danger" onclick="deleteTrip('. $row['trips_id'].')">DELETE</button>
-                                        </td>
                                     </tr>';
                                 }
                             } ?>
@@ -245,5 +232,10 @@ $(document).ready(function (){
             </div>
         </div>
 
+<script>
+function redirectback(){
+window.location="trips.php";
+}
+</script>
 <script src="js/tripss.js"></script>
 <?php include "footer.php" ?>

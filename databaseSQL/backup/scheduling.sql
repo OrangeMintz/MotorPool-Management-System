@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2023 at 09:17 PM
+-- Generation Time: May 08, 2023 at 07:02 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -43,7 +43,7 @@ CREATE TABLE `scheduling` (
 
 INSERT INTO `scheduling` (`schedule_id`, `appointed_vd`, `departure_datetime`, `arrival_datetime`, `schedule_status`, `created_at`, `updated_at`) VALUES
 (109, 9, '2023-06-09 00:58:00', '0000-00-00 00:00:00', 'Traveling ', '2023-05-07 09:41:22', '2023-05-07 16:58:26'),
-(110, 7, '2023-05-07 19:50:00', '0000-00-00 00:00:00', 'Traveling ', '2023-05-07 11:50:52', '2023-05-07 18:48:36'),
+(110, 7, '2023-05-07 19:50:00', '2023-05-08 03:45:00', 'Arrived', '2023-05-07 11:50:52', '2023-05-07 19:45:19'),
 (111, 8, '2023-05-08 02:48:00', '2023-05-08 02:48:00', 'Arrived', '2023-05-07 18:48:44', '2023-05-07 18:48:44');
 
 --

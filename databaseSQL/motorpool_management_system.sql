@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2023 at 09:11 PM
+-- Generation Time: May 08, 2023 at 07:10 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -18,8 +18,31 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `motorpool_management_system`
+-- Database: `newinsertion`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `appointed`
+--
+
+CREATE TABLE `appointed` (
+  `appointed_vd` int(20) NOT NULL,
+  `driver_id` int(20) NOT NULL,
+  `vehicle_number` int(20) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `appointed`
+--
+
+INSERT INTO `appointed` (`appointed_vd`, `driver_id`, `vehicle_number`, `created_at`, `updated_at`) VALUES
+(7, 1001, 67867, '2023-05-07 04:44:08', '2023-05-07 04:44:08'),
+(8, 1002, 12312, '2023-05-07 08:18:38', '2023-05-07 09:14:11'),
+(9, 1000, 67786, '2023-05-07 09:15:04', '2023-05-07 09:15:04');
 
 -- --------------------------------------------------------
 
@@ -80,6 +103,54 @@ INSERT INTO `scheduling` (`schedule_id`, `appointed_vd`, `departure_datetime`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `trips`
+--
+
+CREATE TABLE `trips` (
+  `trips_id` int(20) NOT NULL,
+  `schedule_id` int(20) NOT NULL,
+  `origin` varchar(255) NOT NULL,
+  `destination` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `trips`
+--
+
+INSERT INTO `trips` (`trips_id`, `schedule_id`, `origin`, `destination`, `created_at`, `updated_at`) VALUES
+(1, 109, 'Valencia', 'Malaybalay', '2023-05-08 04:55:27', '2023-05-08 04:57:08'),
+(7, 111, 'Valencia', 'Buksu Malaybalay City', '2023-05-08 04:55:27', '2023-05-08 04:58:05'),
+(8, 110, 'Libona', 'Davao', '2023-05-08 04:55:27', '2023-05-08 04:57:08');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` int(20) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `user_password` varchar(20) NOT NULL,
+  `full_name` varchar(255) NOT NULL,
+  `birthday` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `phone_number` varchar(11) NOT NULL,
+  `email_address` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `username`, `user_password`, `full_name`, `birthday`, `address`, `phone_number`, `email_address`) VALUES
+(0, 'admin', 'adminlogin', 'Djeikuje Nickolai C. Gacus', '2002-09-10', 'Purok 6-A Dayyo Sub, Poblacion Valencia City', '9350050225', 'nickzgacus@gmail.com');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `vehicle`
 --
 
@@ -107,6 +178,15 @@ INSERT INTO `vehicle` (`vehicle_number`, `vehicle_brand`, `vehicle_model`, `vehi
 --
 
 --
+-- Indexes for table `appointed`
+--
+ALTER TABLE `appointed`
+  ADD PRIMARY KEY (`appointed_vd`),
+  ADD UNIQUE KEY `appointed_vd` (`appointed_vd`),
+  ADD UNIQUE KEY `driver_id` (`driver_id`),
+  ADD UNIQUE KEY `vehicle_number` (`vehicle_number`);
+
+--
 -- Indexes for table `driver`
 --
 ALTER TABLE `driver`
@@ -124,6 +204,23 @@ ALTER TABLE `scheduling`
   ADD UNIQUE KEY `appointed_vd` (`appointed_vd`);
 
 --
+-- Indexes for table `trips`
+--
+ALTER TABLE `trips`
+  ADD PRIMARY KEY (`trips_id`),
+  ADD UNIQUE KEY `trips_id` (`trips_id`),
+  ADD UNIQUE KEY `schedule_id` (`schedule_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `user_id` (`user_id`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `user_password` (`user_password`);
+
+--
 -- Indexes for table `vehicle`
 --
 ALTER TABLE `vehicle`
@@ -136,20 +233,45 @@ ALTER TABLE `vehicle`
 --
 
 --
+-- AUTO_INCREMENT for table `appointed`
+--
+ALTER TABLE `appointed`
+  MODIFY `appointed_vd` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `scheduling`
 --
 ALTER TABLE `scheduling`
   MODIFY `schedule_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
+-- AUTO_INCREMENT for table `trips`
+--
+ALTER TABLE `trips`
+  MODIFY `trips_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `appointed`
+--
+ALTER TABLE `appointed`
+  ADD CONSTRAINT `appointed_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `driver` (`driver_id`),
+  ADD CONSTRAINT `appointed_ibfk_2` FOREIGN KEY (`vehicle_number`) REFERENCES `vehicle` (`vehicle_number`);
 
 --
 -- Constraints for table `scheduling`
 --
 ALTER TABLE `scheduling`
   ADD CONSTRAINT `scheduling_ibfk_1` FOREIGN KEY (`appointed_vd`) REFERENCES `appointed` (`appointed_vd`);
+
+--
+-- Constraints for table `trips`
+--
+ALTER TABLE `trips`
+  ADD CONSTRAINT `trips_ibfk_1` FOREIGN KEY (`schedule_id`) REFERENCES `scheduling` (`schedule_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

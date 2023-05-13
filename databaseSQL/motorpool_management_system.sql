@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 08, 2023 at 11:36 AM
+-- Generation Time: May 13, 2023 at 11:32 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `datastorage`
+-- Database: `motorpool_management_system`
 --
 
 -- --------------------------------------------------------
@@ -71,7 +71,8 @@ CREATE TABLE `driver` (
 
 INSERT INTO `driver` (`driver_id`, `first_name`, `middle_name`, `last_name`, `suffix`, `birthday`, `barangay`, `city`, `province`, `phone_number`, `email_address`, `created_at`, `updated_at`) VALUES
 (1000, 'Djeikuje Nickolai', '', 'Gacus', '', '2002-09-10', 'Poblacion', 'Valencia City', 'Bukidnon', '9350050225', 'example@gmail.com', '2023-05-08 08:40:04', '2023-05-08 08:40:04'),
-(1001, 'Jhon Kert', '', 'Talha', '', '2002-02-07', 'Poblacion', 'Valencia City', 'Bukidnon', '9823684743', 'example2@gmail.com', '2023-05-08 08:41:01', '2023-05-08 08:41:01');
+(1001, 'Jhon Kert', '', 'Talha', '', '2002-02-07', 'Poblacion', 'Valencia City', 'Bukidnon', '9823684743', 'example2@gmail.com', '2023-05-08 08:41:01', '2023-05-08 08:41:01'),
+(1012, 'Jeffrey', '', 'Sedoro', '', '2023-05-24', 'Poblacion', 'Valencia City', 'Bukidnon', '9252412312', 'example3@gmail.com', '2023-05-13 18:00:12', '2023-05-13 18:00:12');
 
 -- --------------------------------------------------------
 
@@ -94,7 +95,7 @@ CREATE TABLE `scheduling` (
 --
 
 INSERT INTO `scheduling` (`schedule_id`, `appointed_vd`, `departure_datetime`, `arrival_datetime`, `schedule_status`, `created_at`, `updated_at`) VALUES
-(112, 10, '2023-05-08 16:41:00', '0000-00-00 00:00:00', 'Traveling ', '2023-05-08 08:41:50', '2023-05-08 08:41:50'),
+(112, 10, '2023-05-08 16:41:00', '0000-00-00 00:00:00', 'Traveling ', '2023-05-08 08:41:50', '2023-05-13 20:10:16'),
 (113, 11, '2023-05-08 17:17:00', '2023-05-09 17:17:00', 'Arrived', '2023-05-08 09:17:40', '2023-05-08 09:17:40');
 
 -- --------------------------------------------------------
@@ -129,7 +130,7 @@ INSERT INTO `trips` (`trips_id`, `schedule_id`, `origin`, `destination`, `create
 CREATE TABLE `users` (
   `user_id` int(20) NOT NULL,
   `username` varchar(20) NOT NULL,
-  `user_password` varchar(20) NOT NULL,
+  `user_password` varchar(255) NOT NULL,
   `full_name` varchar(255) NOT NULL,
   `birthday` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
@@ -142,7 +143,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `user_password`, `full_name`, `birthday`, `address`, `phone_number`, `email_address`) VALUES
-(0, 'admin', 'adminlogin', 'Djeikuje Nickolai C. Gacus', '2002-09-10', 'Purok 6-A Dayyo Sub, Poblacion Valencia City', '9350050225', 'nickzgacus@gmail.com');
+(1, 'admin', 'adminlogin', 'Djeikuje Nickolai C. Gacus', '2002-09-10', 'Purok 6-A Dayyo Sub, Poblacion Valencia City', '9350050225', 'nickzgacus@gmail.com'),
+(7, 'admin2', 'adminlogin', 'Anthony Clark Caniamo', '2023-05-30', 'IDK234234', '9463535234', 'lol@gmail.com'),
+(11, 'OshinoShinobu', 'oshinoshinobu', 'Kiss Shot Acerola Heart-UnderBlade', '2002-09-10', 'Monogatari Palace', '9350050225', 'shinobu@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -211,8 +214,7 @@ ALTER TABLE `trips`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `user_id` (`user_id`),
-  ADD UNIQUE KEY `username` (`username`),
-  ADD UNIQUE KEY `user_password` (`user_password`);
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Indexes for table `vehicle`
@@ -243,6 +245,12 @@ ALTER TABLE `scheduling`
 --
 ALTER TABLE `trips`
   MODIFY `trips_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables

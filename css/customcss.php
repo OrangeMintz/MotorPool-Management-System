@@ -64,4 +64,13 @@ i.delete {
 #refresh{
     margin-left: 3px;
 }
+
+
+.logo{
+    text-align: center;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+  }
+
 </style>

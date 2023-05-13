@@ -80,3 +80,10 @@
     font-size: 15px;
 
 }
+
+  .text{
+    text-align: center;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+  }

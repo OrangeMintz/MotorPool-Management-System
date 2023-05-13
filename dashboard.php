@@ -1,4 +1,32 @@
-<?php include "header.php" ?>
+<?php include "header.php" ;
+include_once "includes/db_conn.php";
+
+//DISPLAY
+$display = "SELECT * FROM driver";
+$display = "SELECT appointed.appointed_vd,driver.driver_id, driver.first_name,driver.middle_name, driver.last_name, driver.suffix, 
+            vehicle.vehicle_number, vehicle.vehicle_plate, vehicle.vehicle_brand, vehicle.vehicle_model FROM appointed
+            JOIN driver ON appointed.driver_id = driver.driver_id
+            JOIN vehicle ON appointed.vehicle_number = vehicle.vehicle_number";
+$dis = $conn->query($display); 
+
+
+$schedquery = "SELECT schedule_id FROM scheduling ORDER BY schedule_id"; 
+$sched_run = mysqli_query($conn,$schedquery);
+$schedule = mysqli_num_rows($sched_run);
+
+$tripsquery = "SELECT trips_id FROM trips ORDER BY trips_id"; 
+$trips_run = mysqli_query($conn,$tripsquery);
+$trips = mysqli_num_rows($trips_run);
+
+$driverquery = "SELECT driver_id FROM driver ORDER BY driver_id"; 
+$driver_run = mysqli_query($conn,$driverquery);
+$driver = mysqli_num_rows($driver_run);
+
+$vehicle_query = "SELECT vehicle_number FROM vehicle ORDER BY vehicle_number"; 
+$vehicle_run = mysqli_query($conn,$vehicle_query);
+$vehicle = mysqli_num_rows($vehicle_run);
+?>
+
 
 <!-- Left Sidebar  -->
 <aside class="left-sidebar" data-sidebarbg="skin6">
@@ -54,7 +82,6 @@
             </div>
         </aside>
 
-
         <!-- Page wrapper  -->
         <div class="page-wrapper" style="min-height: 250px;">
 
@@ -66,111 +93,110 @@
                     </div>
                 </div>
             </div>
-            <div class="container-fluid">
-
-
-                <!-- ============================================================== -->
-                <!-- Three charts -->
-                <!-- ============================================================== -->
-                <div class="row justify-content-center">
-                    <div class="col-lg-3 col-md-12">
-                        <div class="white-box analytics-info">
-                            <h3  style="color:blue;" class="box-title">Current Schedule</h3>
-                            <ul class="list-inline two-part d-flex align-items-center mb-0">
-                                <li>
-                                    <div id="sparklinedash"><canvas width="67" height="30"
-                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
-                                    </div>
-                                </li>
-
-
-
-                                <?php require "includes/db_conn.php";
-
-                                $query = "SELECT schedule_id FROM scheduling ORDER BY schedule_id"; 
-                                $query_run = mysqli_query($conn,$query);
-                                $row = mysqli_num_rows($query_run);
-
-                                  Echo '<li class="ms-auto"><span class="counter text-success">' .$row. '</li>';
-                                ?>
-
-
-                            </ul>
+            
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                    <!-- Small boxes (Stat box) -->
+                    <div class="row">
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                <?php Echo '<h3>' .$schedule. '<h3>';?>
+                                <p>Current Schedule</p>
+                                </div>
+                                <div class="icon">
+                                 <i class="fas fa-calendar"></i> 
+                                </div>
+                            <a href="schedule.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
                         </div>
+                    <!-- ./col -->
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-success">
+                            <div class="inner">
+                                <?php Echo '<h3>' .$trips. '<h3>';?>
+                                <p>Current Trips</p>
+                            </div>
+                            <div class="icon">
+                                    <i class="fa fa-map"></i>
+                                </div>
+                            <a href="trips.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                    <!-- ./col -->
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-warning">
+                            <div class="inner">
+                                <?php Echo '<h3>' .$driver. '<h3>';?>
+
+                                <p>Total Drivers</p>
+                            </div>
+                            <div class="icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                            <a href="driver.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <!-- ./col -->
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-danger">
+                            <div class="inner">
+                                <?php Echo '<h3>' .$vehicle. '<h3>';?>
+
+                                <p>Total Vehicles</p>
+                            </div>
+                            <div class="icon">
+                                    <i class="fas fa-car"></i>
+                                </div>
+                            <a href="vehicle.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
                     </div>
-                    <div class="col-lg-3 col-md-12">
-                        <div class="white-box analytics-info">
-                            <h3 style="color:red;" class="box-title">Current Trips</h3>
-                            <ul class="list-inline two-part d-flex align-items-center mb-0">
-                                <li>
-                                    <div id="sparklinedash2"><canvas width="67" height="30"
-                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
-                                    </div>
-                                </li>
-
-
-                                    <?php require "includes/db_conn.php";
-
-                                        $query = "SELECT trips_id FROM trips ORDER BY trips_id"; 
-                                        $query_run = mysqli_query($conn,$query);
-                                         $row = mysqli_num_rows($query_run);
-
-                                         Echo '<li class="ms-auto"><span class="counter text-purple">' .$row. '</span></li>';
+                    <!-- ./col -->
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title">Appointed Drivers</h3>
+                            <div class="table-responsive">
+                                <table class="table text-center load table-bordered table-hover">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th class="border-top-0">Driver ID</th>
+                                            <th class="border-top-0">Driver Name</th>
+                                            <th class="border-top-0">Vehicle Number</th>
+                                            <th class="border-top-0">Vehicle Plate</th>
+                                            <th class="border-top-0">Vehicle Brand</th>
+                                            <th class="border-top-0">Vehicle Model</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <?php 
+                                            
+                                            if ($dis->num_rows > 0) {
+                                            // output data of each row
+                                                while($row = $dis->fetch_assoc()) {
+                                                  echo '<tr>
+                                                  <td>'. $row['driver_id'].'</td>
+                                                  <td>'. $row['last_name'].', '. $row['first_name'] .' '. $row['middle_name'] .' '. $row['suffix'] .'</td>
+                                                  <td>'. $row['vehicle_number'].'</td>
+                                                  <td>'. $row['vehicle_plate'].'</td>
+                                                  <td>'. $row['vehicle_brand'].'</td>
+                                                  <td>'. $row['vehicle_model'].'</td>
+                                                  <td>
+                                                  </tr>';
+                                                }
+                                            }
+                                            $conn->close();
                                             ?>
-
-
-                    
-                            </ul>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-12">
-                        <div class="white-box analytics-info">
-                            <h3 style="color:black;" class="box-title">Total Drivers</h3>
-                            <ul class="list-inline two-part d-flex align-items-center mb-0">
-                                <li>
-                                    <div id="sparklinedash3"><canvas width="67" height="30"
-                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
-                                    </div>
-                                </li>
-
-                                <?php require "includes/db_conn.php";
-
-                                $query = "SELECT driver_id FROM driver ORDER BY driver_id"; 
-                                $query_run = mysqli_query($conn,$query);
-                                $row = mysqli_num_rows($query_run);
-
-                                  Echo '<li class="ms-auto"><span class="counter text-info">' .$row. '</span>';
-                                ?>
-
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-12">
-                        <div class="white-box analytics-info">
-                            <h3 style="color:green;" class="box-title">Total Available Vehicle</h3>
-                            <ul class="list-inline two-part d-flex align-items-center mb-0">
-                                <li>
-                                    <div id="sparklinedash3"><canvas width="67" height="30"
-                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
-                                    </div>
-                                </li>
-
-                                <?php require "includes/db_conn.php";
-
-                                $query = "SELECT vehicle_number FROM vehicle ORDER BY vehicle_number"; 
-                                $query_run = mysqli_query($conn,$query);
-                                $row = mysqli_num_rows($query_run);
-
-                                  Echo '<li class="ms-auto"><span class="counter text-info">' .$row. '</span>';
-                                ?>
-
-
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    </div>  
                 </div>
             </div>
 
+            
+
+                
 <?php include "footer.php" ?>

@@ -9,7 +9,7 @@
     <link href="css/style.min.css" rel="stylesheet">
     <link href="css/signup.css" rel="stylesheet">
     <script src="js/jquery/jquery.js"></script>
-    <?php include "css/customcss.php" ?>
+    <?php include "css/customcss.php"?>
 </head>
 
     <div class="preloader">
@@ -18,6 +18,21 @@
             <div class="lds-pos"></div>
         </div>
     </div>
+
+    <?php //message
+    $message = "";
+    if(isset($_GET['error'])){
+        $message = "<div class='alert alert-danger'>".$_GET['error']."</div>";
+    }
+
+    else if(isset($_GET['success'])){
+        $message = "<div class='alert alert-success'>".$_GET['success']."</div>";
+    }
+
+    else if(isset($_GET['success-edit'])){
+        $message = "<div class='alert alert-info'>".$_GET['success-edit']."</div>";
+    }
+    ?>
 
 <div id="mainBgn">
     <div class="d-flex vh-100 justify-content-center align-items-center" >
@@ -31,11 +46,13 @@
                         <div class="d-flex flex-column" style="height:100%;">
                             <div class="my-auto p-5">
                             <div class="text-center">
+                            <div id="error-message"><?php echo $message; ?></div>
                                 <div class="alert alert-warning error" role="alert">
                                     <div id="errormsg"></div></div>
                             </div>
                             <form action ="includes/db_user_handler.php" method="POST" id="createacc">
                                 <div class="row">
+
                                     <div class="col-sm">
                                         <div class="form-group">
                                             
@@ -107,7 +124,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between pt-2">
-                                <a class="linkFlare" href="login.php"><small>Login Account</small></a>
+                                <a class="linkFlare" href="index.php"><small>Login Account</small></a>
                                     <button class="btn btn-accent px-4 rounded-pill">SIGN UP</button>
                                 </div>
                             </form>

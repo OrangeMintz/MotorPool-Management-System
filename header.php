@@ -65,7 +65,7 @@
             <!-- User profile -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="icon/users/d1.jpg" alt="user-img" width="36" class="img-circle">
+                    <img src="icon/users/d1.jpg" alt="user-img" width="36" style="border-radius: 50%;">
                     <span class="text-white font-medium">ADMIN</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">

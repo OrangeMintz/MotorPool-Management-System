@@ -80,7 +80,7 @@ else if(isset($_GET['success-edit'])){
                                             <div class="form-group">
                                                 <label for="vehicle-number" class="col-form-label">Vehicle</label>
                                                 <select class="form-control" id="vehicle-number" size="1" name ="vehicle-number" required>
-                                                <option value="" selected="selected" selected disabled value> -- Select Driver  -- </option>
+                                                <option value="" selected="selected" selected disabled value> -- Select Vehicle  -- </option>
                                                 <?php
                                                     if ($disvehicle->num_rows > 0) {
                                                         $disvehicle->data_seek(0);
@@ -171,7 +171,7 @@ else if(isset($_GET['success-edit'])){
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Appoint Vehicle Driver</h4>
+                        <h4 class="page-title">Appointment Management</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
@@ -193,7 +193,7 @@ else if(isset($_GET['success-edit'])){
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
-                            <h3 class="box-title">Appointed Vehicle Drivers Table</h3>
+                            <h3 class="box-title">Appointed Vehicle Drivers</h3>
                             <div class="table-responsive">
                                 <table class="table text-center appointTable load table-bordered table-hover">
                                     <thead class="thead-dark">

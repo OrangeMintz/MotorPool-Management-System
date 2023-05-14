@@ -39,16 +39,24 @@ if (preg_match('/^\s+|\s+$/', $address)) {
 
 $query = mysqli_query($conn, "SELECT * FROM `users` WHERE username = '$username'");
 $query2 = mysqli_query($conn, "SELECT * FROM `users` WHERE email_address = '$email'");
+$query3 = mysqli_query($conn, "SELECT * FROM `users` WHERE full_name = '$fullname'");
+
 
 
 if(mysqli_num_rows($query)>0){
-    $error = "Username already exists ";
+    $error = "Username already exists";
     header("Location: ../signup.php?error=".urlencode($error));
     exit();
 }
 
 else if(mysqli_num_rows($query2)>0){
-    $error = "Email already exists ";
+    $error = "Email already exists";
+    header("Location: ../signup.php?error=".urlencode($error));
+    exit();
+}
+
+else if(mysqli_num_rows($query3)>0){
+    $error = "User already exists";
     header("Location: ../signup.php?error=".urlencode($error));
     exit();
 }

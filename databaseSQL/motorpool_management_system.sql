@@ -70,7 +70,7 @@ CREATE TABLE `driver` (
 --
 
 INSERT INTO `driver` (`driver_id`, `first_name`, `middle_name`, `last_name`, `suffix`, `birthday`, `barangay`, `city`, `province`, `phone_number`, `email_address`, `created_at`, `updated_at`) VALUES
-(1000, 'Djeikuje Nickolai', '', 'Gacus', '', '2002-09-10', 'Poblacion', 'Valencia City', 'Bukidnon', '9350050225', 'example@gmail.com', '2023-05-08 08:40:04', '2023-05-08 08:40:04'),
+(1000, 'Djeikuje Nickolai', '', 'Gacus', '', '2002-09-10', 'Poblacion', 'Valencia City', 'Bukidnon', '9212350125', 'example@gmail.com', '2023-05-08 08:40:04', '2023-05-08 08:40:04'),
 (1001, 'Jhon Kert', '', 'Talha', '', '2002-02-07', 'Poblacion', 'Valencia City', 'Bukidnon', '9823684743', 'example2@gmail.com', '2023-05-08 08:41:01', '2023-05-08 08:41:01'),
 (1012, 'Jeffrey', '', 'Sedoro', '', '2023-05-24', 'Poblacion', 'Valencia City', 'Bukidnon', '9252412312', 'example3@gmail.com', '2023-05-13 18:00:12', '2023-05-13 18:00:12');
 

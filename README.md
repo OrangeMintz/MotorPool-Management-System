@@ -2,11 +2,11 @@
 MotorPool Mangement System - IPT Project
 
 Group Members:
-Caniamo, Anthony
-Dehay, Brigitte
-Gacus, Djeikuje Nickolai
-Oliveros, Sharmain
-Talha, Jhon Kert
+Caniamo Anthony.,
+Deehay Brigitte.,
+Gacus Djeikuje Nickolai.,
+Oliveros Sharmain.,
+Talha Jhon Kert.,
 
 
 MotorPool Managment System
